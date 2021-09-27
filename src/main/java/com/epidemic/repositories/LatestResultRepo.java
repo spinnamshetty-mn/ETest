@@ -1,0 +1,48 @@
+package com.epidemic.repositories;
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+
+import com.epidemic.model.LatestResult;
+
+public interface LatestResultRepo extends CrudRepository<LatestResult,Integer>{
+	
+//------------------------------------count current active by type--------------------
+	@Query(value="select count(*) from latestresult lr where lr.state= :str and lr.status='positive' ",nativeQuery=true)
+	int getCountByState(@Param("str") String str);
+	
+	@Query(value="select count(*) from latestresult lr where lr.city= :str and lr.status='positive' ",nativeQuery=true)
+	int getCountByCity(@Param("str") String str);
+	
+	@Query(value="select count(*) from latestresult lr where lr.pincode= :str and lr.status='positive' ",nativeQuery=true)
+	int getCountByPincode(@Param("str") int str);
+	
+	@Query(value="select count(*) from latestresult lr where lr.hw_id= :hwid and lr.status='positive' ",nativeQuery=true)
+	int getCountByHwId(@Param("hwid") int hwid);
+	
+	@Query(value="select count(*) from latestresult lr where lr.status='positive' ",nativeQuery=true)
+	int countAllActive();
+//------------------------------------find latest result of patient by type----------------------------------------
+	@Query(value="select distinct(tr.state) from latestresult tr",nativeQuery=true)
+	List<String> findByState();
+	
+	@Query(value="select lr.status from latestresult lr where lr.patient_id= :id",nativeQuery=true)
+	String findLatestResult(@Param("id") int id);
+
+	@Query(value="select lr.result_date from latestresult lr where lr.patient_id= :id",nativeQuery=true)
+	Date findLatestDate(@Param("id")int id);
+	
+	@Query(value="select * from latestresult lr where lr.patient_id= :id",nativeQuery=true)
+	LatestResult findLatestResultPatient(@Param("id") int id);
+	
+	@Query(value="select * from latestresult lr where lr.status='positive' ",nativeQuery=true)
+	List<LatestResult> findAllActiveCases();
+
+	
+	
+	
+}

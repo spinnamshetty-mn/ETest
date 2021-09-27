@@ -1,0 +1,51 @@
+@charset "ISO-8859-1";
+.row.content {height: 1500px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+    #head,#body {
+  	width: 100%;
+	}
+	#head th,#body th {
+    text-align: left;
+    font-size: 200%;
+	}
+	#head td,#body td {
+    height: 50px;
+    vertical-align: bottom;
+    font-size: 200%;
+}
+
+.blank_row
+{
+    height: 10px !important; /* overwrites any other rules */
+    background-color: #FFFFFF;
+}
+body
+{
+overflow: hidden;
+}
+#logout
+{
+	font-size:medium;
+	border-radius:5%;
+}

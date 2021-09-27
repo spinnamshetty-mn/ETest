@@ -1,0 +1,81 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
+  background-image:url('https://wallpaperaccess.com/full/1282794.jpg');
+     background-size: 100% 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit button */
+
+.button {
+  background-color: #0088cc;
+  border: 1px solid #0088cc;
+  border-radius: 1px;
+  color: #ffffff;
+  display: inline-block;
+  font-size: 0.9375em;
+  font-weight: normal;
+  line-height: 1.2;
+  margin-right: 0.3125em;
+  margin-bottom: 0.3125em;
+  padding: 0.5em 0.6875em;
+  width: auto;
+}
+
+.button:active,
+.button:focus,
+.button:hover {
+  background-color: #005580;
+  border-color: #005580;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.button:active {
+  box-shadow: inset 0 0.15625em 0.25em rgba(0, 0, 0, 0.15), 0 1px 0.15625em rgba(0, 0, 0, 0.05);
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+form {
+    margin: 5% 20% 10% 20%;
+}

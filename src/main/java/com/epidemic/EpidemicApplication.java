@@ -9,8 +9,7 @@ import com.epidemic.*;
 @SpringBootApplication
 @ComponentScan(basePackages ={ "com.epidemic, com.epidemic.controller, com.epidemic.models, com.epidemic.repositories, com.epidemic.services"} )
 public class EpidemicApplication {
-//done
-//parimal new local
+
 	public static void main(String[] args) {
 		SpringApplication.run(EpidemicApplication.class, args);
 	}

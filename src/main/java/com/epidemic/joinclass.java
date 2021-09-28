@@ -6,8 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 @ToString
 
 // Join tables of Test Request and Patient Table.

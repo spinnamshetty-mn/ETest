@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 @ToString
 
 // used by hw.UploadedResult() to display store all the details of patients who have chosen a particular HW. 

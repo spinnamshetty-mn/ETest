@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import com.epidemic.*;
 
 @SpringBootApplication
-@ComponentScan(basePackages ={ "com.epidemic, com.epidemic.controller, com.epidemic.models, com.epidemic.repositories, com.epidemic.services"} )
+@ComponentScan(basePackages ={ "com.epidemic, com.epidemic.controller, com.epidemic.models, com.epidemic.repositories, com.epidemic.services ,com.example.demo"} )
 public class EpidemicApplication {
 
 

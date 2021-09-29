@@ -16,6 +16,9 @@ public class Government {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int govId;
 	
+	public void setGovId(int govId) {
+		this.govId = govId;
+	}
 	private String email;
 	private String password;
 	private String status;

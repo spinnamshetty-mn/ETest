@@ -12,6 +12,9 @@ public class HealthWorker {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	
 	private int id;
+	public void setId(int id) {
+		this.id = id;
+	}
 	private	String name;
 	private	String address;
 	private	String email;

@@ -91,16 +91,23 @@
     <tr class ="blank_row"></tr>
     <tr class ="blank_row"></tr>
     <tr>
+    	<td><b>Epidemic Name:</b> - </td>
         <td><b>Current health Status:</b><%= result %> </td>
-        <td><b>Current Recommendations:</b> N/A </td>
     </tr>
     <tr class ="blank_row"></tr>
     <tr class ="blank_row"></tr>
     <tr class ="blank_row"></tr>
     <tr class ="blank_row"></tr>
     <tr>
+    	<td><b>Current Recommendations:</b> N/A </td>
         <td><b>Latest Health Worker Chosen :</b><%= hwname%> </td>
-        <td><b>Last Tested on :</b> <%= date%> </td>
+    </tr>
+    <tr class ="blank_row"></tr>
+    <tr class ="blank_row"></tr>
+    <tr class ="blank_row"></tr>
+    <tr class ="blank_row"></tr>
+    <tr>
+    	<td><b>Last Tested on :</b> <%= date%> </td>
     </tr>
 </table>
       </div>

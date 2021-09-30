@@ -53,8 +53,6 @@ public class joinclass {
 		this.report_id = report_id;
 	}
 
-	
-
 	public int getHw_id() {
 		return hw_id;
 	}

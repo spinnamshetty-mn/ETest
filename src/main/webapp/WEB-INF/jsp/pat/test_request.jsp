@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />" >
   <link href="<c:url value="/resources/css/pdash_new.css" />" rel="stylesheet"> 
   <script src="<c:url value="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" />" ></script>
+  <script src="<c:url value="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"/>"></script>
   <script src="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" />" ></script>
   <link href="<c:url value="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 </head>
@@ -63,9 +64,7 @@ String name=(String)request.getAttribute("name");
       <hr>
       
       <div> 
-      
-
-		
+      <h4>
       <label for="hw">Choose a health worker:</label>
       <select name="hw" id="hw">
       <option disabled selected value> -- select an option -- </option>
@@ -73,6 +72,7 @@ String name=(String)request.getAttribute("name");
         <option value="${hw.id}">HW name: ${hw.name} and HW id : ${hw.id}</option>
     </c:forEach>
       </select>
+      
       <!-- 
        <label for="hw">Choose a health worker:</label>
       <select name="hw" id="hw">
@@ -82,14 +82,65 @@ String name=(String)request.getAttribute("name");
 			  <option value="1">1</option>
 			  <option value="6">6</option>
 			</select> -->	
-
-			
-      <button id="testrequest" style="float:right; margin-right:30%" >Submit Test Request</button>
-      </div>
+	
       
+      </h4>
+      </div>
+      <br>
+      <br>
+      <div>
+      <h4>
+      <label for="disease">Disease Type:     </label>
+      <select id="disease">
+  	<option value="" disabled selected>Select an option</option>
+  	<option value="CORONA">CORONA</option>
+  	<option value="EBOLA">EBOLA</option>
+  	<option value="NIPAH">NIPAH</option>
+	</select>
+	</h4>
+	</div>
+	<br>
+	<br>
+	<div>
+	<h4>
+	<label for="test">Test To Conduct:  </label>
+	<select id="test">
+  	<option value="" disabled selected>Please select an option</option>
+	</select>
+	</h4>
+	</div>
+	<br>
+	<br>
+	<div>
+	<h4>
+	<button id="testrequest" style="float:right; margin-right:50%" >Submit Test Request</button>
+	</h4>
+	</div>
     </div>
   </div>
 </div>
+<script>
+var lookup = {
+		   "CORONA": ["RTPCR", "ANTIBODY"],
+		   "EBOLA": ["PCR", "CBP"],
+		   "NIPAH": ["PCR","CBP","ANTIBODY"],
+		};
 
-</body>
+		// When an option is changed, search the above for matching test
+		$('#disease').on('change', function() {
+		   // Set selected option as variable
+		   var selectValue = $(this).val();
+
+		   // Empty the target field
+		   $('#test').empty();
+		   
+		   // For each chocie in the selected option
+		   for (i = 0; i < lookup[selectValue].length; i++) {
+		      // Output choice in the target field
+		      $('#test').append("<option value='" + lookup[selectValue][i] + "'>" + lookup[selectValue][i] + "</option>");
+		   }
+		});
+</script>
+</body> 
+
 </html>

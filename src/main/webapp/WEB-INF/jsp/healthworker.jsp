@@ -28,7 +28,13 @@
     <label for="password-repeat"><b>Confirm Password</b></label>
     <input type="password" placeholder="Confirm Password" name="password-repeat" id="password-repeat" minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="Please include at least 1 uppercase character, 1 lowercase character, and 1 number." required>
     <label for="name"><b>Name</b></label>
-    <input type="text" placeholder="Enter Name/Organisation" name="name" id="name" pattern="[a-zA-Z]+" required>
+    <input type="text" placeholder="Enter Name" name="name" id="name" pattern="[a-zA-Z]+" required>
+    <label for="city"><b>City</b></label>
+    <input type="text" placeholder="Enter City" name="city" id="city" required>
+    <label for="state"><b>State</b></label>
+    <input type="text" placeholder="Enter State" name="state" id="state" required>
+    <label for="pincode"><b>Pincode</b></label>
+    <input type="text" placeholder="Enter Pincode" name="pincode" id="pincode" required>
 	<label for="type"><b> Type : </b></label>
     <select name="type" id="type">
   	<option value="Doctor">Doctor</option>

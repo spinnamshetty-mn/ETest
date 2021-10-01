@@ -91,7 +91,7 @@ String name=(String)request.getAttribute("name");
       <div>
       <h4>
       <label for="disease">Disease Type:     </label>
-      <select id="disease">
+      <select name="disease" id="disease">
   	<option value="" disabled selected>Select an option</option>
   	<option value="CORONA">CORONA</option>
   	<option value="EBOLA">EBOLA</option>
@@ -104,7 +104,7 @@ String name=(String)request.getAttribute("name");
 	<div>
 	<h4>
 	<label for="test">Test To Conduct:  </label>
-	<select id="test">
+	<select name="test" id="test">
   	<option value="" disabled selected>Please select an option</option>
 	</select>
 	</h4>

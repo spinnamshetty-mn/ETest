@@ -31,7 +31,7 @@ public class Government {
 		super();
 		this.email = email;
 		this.password = passsword;
-		this.state=state;
+		this.state=state.toUpperCase();
 	}
 	public int getGovId() {
 		return govId;

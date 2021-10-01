@@ -315,9 +315,10 @@ public class GovernmentController {
 	@RequestMapping("/{id}/test_requests")  //  Test Request tab-----display all current test requests by all patients
 	public String displayAllRequest(@PathVariable("id") int id,Model model) {
 		model.addAttribute("id",id+"");
-		List<TestRequest> request_list=test_request_service.diplayAllRequest(); // from test request table
 		Government gov=gov_service.searchGov(id);
 		model.addAttribute("State",gov.getState()); 
+		List<joinclass> request_list=test_request_service.diplayAllRequest(gov.getState()); // from test request table
+		
 		model.addAttribute("request_list",request_list);
 		return "g_entity/test_requests";
 	}

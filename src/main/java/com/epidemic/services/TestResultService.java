@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
-
+import com.epidemic.joinclass;
 import com.epidemic.model.LatestResult;
 import com.epidemic.model.Patient;
 import com.epidemic.model.TestRequest;
@@ -47,11 +47,13 @@ public class TestResultService {
 		int patientId=test_request.getPatientId();
 		int hwId=test_request.getHwId();
 		// get city and state from patient and put on test result
+		String disease=test_request.getDiseaseType();
+		String test=test_request.getTestType();
 		
 		Patient p=patient_service.searchPatient(patientId);
 		int pincode=p.getPincode();
 	
-		TestResult tr=new TestResult(patientId,report_id,hwId,result,p.getCity(),p.getState(),p.getPincode());
+		TestResult tr=new TestResult(patientId,report_id,hwId,result,p.getCity(),p.getState(),p.getPincode(),disease,test);
 		
 		test_result_repo.save(tr);
 		test_request_repo.delete(test_request);
@@ -153,6 +155,7 @@ public class TestResultService {
 	public int countAllPositive() {
 		return test_result_repo.countAllPositive();
 	}
+	
 
 
 }

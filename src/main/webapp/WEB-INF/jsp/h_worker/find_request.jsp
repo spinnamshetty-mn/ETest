@@ -62,23 +62,27 @@ String name=(String)request.getAttribute("name");
     <table id="find_and_update_request">
     
     	<tr>
-    	<th>Patient_Id</th>
-    	<th>Report_Id</th>
-    	<th>Patient_First_Name</th>
-    	<th>Patient_Last_Name</th>
+    	<th>Patient Id</th>
+    	<th>Report Id</th>
+    	<th>Patient First Name</th>
+    	<th>Patient Last Name</th>
+    	<th>Disease Type </th>
+    	<th> Test Type </th>
     	<th>Result Status</th>
     	<th> Update Result </th>
     	</tr>
     	
     	<c:forEach items="${request_list}" var="request_list">
 		
-		<form action="/hw/${request_list.hw_id}/find_request" method=post>
+		<form action="/hw/${request_list.hwId}/find_request" method=post>
 		
     	<tr>    	
-    	<td>${request_list.patient_id} </td>
-    	<td>${request_list.report_id} </td>
-    	<td>${request_list.first_name}  </td>
-    	<td>${request_list.last_name} </td>
+    	<td>${request_list.patientId} </td>
+    	<td>${request_list.reportId} </td>
+    	<td>${request_list.firstName}  </td>
+    	<td>${request_list.lastName} </td>
+    	<td>${request_list.diseaseType} </td>
+    	<td>${request_list.testType} </td>
     	<td>
     	
 			
@@ -89,7 +93,7 @@ String name=(String)request.getAttribute("name");
 			 
 			</select>
     	</td>
-    	<td> <button name="getbutton" type="submit" id="getbutton" value= ${request_list.report_id} > Update </button></td>
+    	<td> <button name="getbutton" type="submit" id="getbutton" value= ${request_list.reportId} > Update </button></td>
     	
     	</tr></form>
     	</c:forEach>

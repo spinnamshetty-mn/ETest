@@ -34,8 +34,48 @@
     <input type="password" placeholder="Confirm Password" name="password-repeat" id="password-repeat" minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="Please include at least 1 uppercase character, 1 lowercase character, and 1 number." required>
     <label for="city"><b>City</b></label>
     <input type="text" placeholder="Enter City" name="city" id="city" required>
-    <label for="state"><b>State</b></label>
-    <input type="text" placeholder="Enter State" name="state" id="state" required>
+    <label for="state"><b> State &emsp;</b></label>
+    <select name="state" id="state">
+  	<option value="andhra_pradesh">Andhra Pradesh</option>
+  	<option value="arunachal_pradesh">Arunachal Pradesh</option>
+  	<option value="assam">Assam</option>
+  	<option value="bihar">Bihar</option>
+  	<option value="chhattisgarh">Chhattisgarh</option>
+  	<option value="goa">Goa</option>
+  	<option value="gujarat">Gujarat</option>
+  	<option value="haryana">Haryana</option>
+  	<option value="himachal_Pradesh">Himachal Pradesh</option>
+  	<option value="jammu_and_kashmir">Jammu and Kashmir</option>
+  	<option value="jharkhand">Jharkhand</option>
+  	<option value="karnataka">Karnataka</option>
+  	<option value="kerala">Kerala</option>
+  	<option value="madhya_pradesh">Madhya Pradesh</option>
+  	<option value="maharashtra">Maharashtra</option>
+  	<option value="manipur">Manipur</option>
+  	<option value="meghalaya">Meghalaya</option>
+  	<option value="mizoram">Mizoram</option>
+  	<option value="nagaland">Nagaland</option>
+  	<option value="odisha">Odisha (Orissa)</option>
+  	<option value="punjab">Punjab</option>
+  	<option value="rajasthan">Rajasthan</option>
+  	<option value="sikkim">Sikkim</option>
+  	<option value="tamil_nadu">Tamil Nadu</option>
+  	<option value="telangana">Telangana</option>
+  	<option value="tripura">Tripura</option>
+  	<option value="uttar_pradesh">Uttar Pradesh</option>
+  	<option value="uttarakhand">Uttarakhand</option>
+  	<option value="west_bengal">West Bengal</option>
+  	<option value="andaman_and_nicobar">Andaman and Nicobar Islands</option>
+  	<option value="chandigarh">Chandigarh</option>
+  	<option value="dadra_and_nagar">Dadra and Nagar Haveli</option>
+  	<option value="daman_and_diu">Daman and Diu</option>
+  	<option value="lakshadweep">Lakshadweep</option>
+  	<option value="delhi">Delhi</option>
+  	<option value="puducherry">Puducherry</option>
+	</select>
+	<br>
+	<br>
+	<br>
     <label for="pincode"><b>Pincode</b></label>
     <input type="text" placeholder="Enter Pincode" name="pincode" id="pincode" required>
 	<label for="mobile"><b>Mobile Number</b></label>
@@ -49,7 +89,7 @@
   	</div>
   	<div class="container signin">
     <p>Already have an account? <a href="signin">Sign in</a>.</p>
-  	</div>>
+  	</div>
 </form>
 
 </body>

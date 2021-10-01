@@ -8,7 +8,7 @@
 
     <meta charset="utf-8">
 
-    <title>َRegistration</title>
+    <title>َRegistration Form</title>
 
     <link href="<c:url value="/resources/css/first.css" />" rel="stylesheet">
 

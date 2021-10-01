@@ -16,13 +16,18 @@
    
 </head>
 <body id="settings">
-<%
-String name=(String)request.getAttribute("name");
-				response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
-				if(session.getAttribute("username")==null){
+<%			
+
+			String id=(String)request.getAttribute("id");
+		response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
+		if(session.getAttribute("username")==null){
+			response.sendRedirect("/signin"); 
+			}
+		else if(!session.getAttribute("username").equals(id)){
 					response.sendRedirect("/signin");
 				}
 	%>
+
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-3 sidenav">

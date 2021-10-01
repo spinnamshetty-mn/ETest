@@ -42,11 +42,17 @@ public class TestResult {
 	@Column(name="pincode")
 	private int pincode;
 	
+	@Column(name="disease_type")
+	private String diseaseType;
+	
+	@Column(name="test_type")
+	private String testType;
+	
 	public TestResult() {
 		
 	}
 	
-	public TestResult(int patientId, long reportId, int hwId, String status, Date date,String city,String state,int pincode) {
+	public TestResult(int patientId, long reportId, int hwId, String status, Date date,String city,String state,int pincode,String diseaseType,String testType) {
 		super();
 		this.patientId = patientId;
 		this.reportId = reportId;
@@ -56,11 +62,13 @@ public class TestResult {
 		this.city=city;
 		this.state=state;
 		this.pincode=pincode;
+		this.diseaseType=diseaseType;
+		this.testType=testType;
 	}
 	
 	
 
-	public TestResult(int patientId, long report_id, int hwId, String status,String city,String state,int pincode) {
+	public TestResult(int patientId, long report_id, int hwId, String status,String city,String state,int pincode,String diseaseType,String testType) {
 		super();
 		this.patientId = patientId;
 		this.reportId = report_id;
@@ -69,6 +77,8 @@ public class TestResult {
 		this.city=city;
 		this.state=state;
 		this.pincode=pincode;
+		this.diseaseType=diseaseType;
+		this.testType=testType;
 	}
 
 	public int getResultId() {
@@ -141,6 +151,22 @@ public class TestResult {
 
 	public void setPincode(int pincode) {
 		this.pincode = pincode;
+	}
+
+	public String getDiseaseType() {
+		return diseaseType;
+	}
+
+	public void setDiseaseType(String diseaseType) {
+		this.diseaseType = diseaseType;
+	}
+
+	public String getTestType() {
+		return testType;
+	}
+
+	public void setTestType(String testType) {
+		this.testType = testType;
 	}
 	
 	

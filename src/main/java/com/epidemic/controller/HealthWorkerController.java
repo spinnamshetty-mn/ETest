@@ -107,8 +107,8 @@ public class HealthWorkerController {
 			Patient p=patient_service.searchPatient(result_list.get(i).getPatientId()); // get EACH patientId and search for fname and lname in patient table
 			int pid=p.getId();
 			long rid=tr.getReportId();
-			String fname=p.getFirst_Name();
-			String lname=p.getLast_Name();
+			String fname=p.getFirstName();
+			String lname=p.getLastName();
 			String result=tr.getStatus();
 			int pincode=tr.getPincode();
 			UpdatedResult ur=new UpdatedResult(pid,rid,fname,lname,result,tr.getDate(),pincode); // store in updatedResult list and send to JSP

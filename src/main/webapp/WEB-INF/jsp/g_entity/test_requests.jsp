@@ -68,13 +68,18 @@ else if(!session.getAttribute("username").equals(id1)){
     	<th>Report Id</th>
     	<th>Patient Id</th>
     	<th>HW Id</th>
+    	<th> Disease </th>
+    	<th> Test Type</th>
     	</tr>
     	<c:forEach items="${request_list}" var="request_list">
 		
     	<tr>    	
-    	<td>${request_list.id} </td>
+    	<td>${request_list.reportId} </td>
     	<td>${request_list.patientId} </td>
     	<td>${request_list.hwId} </td>
+    	<td>${request_list.diseaseType} </td>
+    	<td>${request_list.testType} </td>
+    	
     	</tr>
     	</c:forEach>
    

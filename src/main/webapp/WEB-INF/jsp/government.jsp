@@ -25,42 +25,44 @@
     <input type="text" placeholder="Enter Email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
      <label for="state"><b> State &emsp;</b></label>
     <select name="state" id="state">
-  	<option value="Andhra Pradesh">Andhra Pradesh</option>
-  	<option value="Arunachal Pradesh">Arunachal Pradesh</option>
-  	<option value="Assam">Assam</option>
-  	<option value="Bihar">Bihar</option>
-  	<option value="Chhattisgarh">Chhattisgarh</option>
-  	<option value="Goa">Goa</option>
-  	<option value="Gujarat">Gujarat</option>
-  	<option value="Haryana">Haryana</option>
-  	<option value="Himachal Pradesh">Himachal Pradesh</option>
-  	<option value="Jammu and Kashmir">Jammu and Kashmir</option>
-  	<option value="Jharkhand">Jharkhand</option>
-  	<option value="Karnataka">Karnataka</option>
-  	<option value="Kerala">Kerala</option>
-  	<option value="Madhya Pradesh">Madhya Pradesh</option>
-  	<option value="Maharashtra">Maharashtra</option>
-  	<option value="Manipur">Manipur</option>
-  	<option value="Meghalaya">Meghalaya</option>
-  	<option value="Mizoram">Mizoram</option>
-  	<option value="Nagaland">Nagaland</option>
-  	<option value="Odisha">Odisha (Orissa)</option>
-  	<option value="Punjab">Punjab</option>
-  	<option value="Rajasthan">Rajasthan</option>
-  	<option value="Sikkim">Sikkim</option>
-  	<option value="Tamil Nadu">Tamil Nadu</option>
-  	<option value="Telangana">Telangana</option>
-  	<option value="Tripura">Tripura</option>
-  	<option value="Uttar Pradesh">Uttar Pradesh</option>
-  	<option value="Uttarakhand">Uttarakhand</option>
-  	<option value="West Bengal">West Bengal</option>
-  	<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-  	<option value="Chandigarh">Chandigarh</option>
-  	<option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
-  	<option value="Daman and Diu">Daman and Diu</option>
-  	<option value="Lakshadweep">Lakshadweep</option>
-  	<option value="Delhi">Delhi</option>
-  	<option value="Puducherry">Puducherry</option>
+
+  	<option value="ANDHRA PRADESH">Andhra Pradesh</option>
+  	<option value="ARUNACHAL PRADESH">Arunachal Pradesh</option>
+  	<option value="ASSAM">Assam</option>
+  	<option value="BIHAR">Bihar</option>
+  	<option value="CHHATTISGARH">Chhattisgarh</option>
+  	<option value="GOA">Goa</option>
+  	<option value="GUJARAT">Gujarat</option>
+  	<option value="HARYANA">Haryana</option>
+  	<option value="HIMACHAL PRADESH">Himachal Pradesh</option>
+  	<option value="JAMMU AND KASHMIR">Jammu and Kashmir</option>
+  	<option value="JHARKHAND">Jharkhand</option>
+  	<option value="KARNATAKA">Karnataka</option>
+  	<option value="KERALA">Kerala</option>
+  	<option value="MADHYA PRADESH">Madhya Pradesh</option>
+  	<option value="MAHARASHTRA">Maharashtra</option>
+  	<option value="MANIPUR">Manipur</option>
+  	<option value="MEGHALAYA">Meghalaya</option>
+  	<option value="MIZORAM">Mizoram</option>
+  	<option value="NAGALAND">Nagaland</option>
+  	<option value="ODISHA">Odisha (Orissa)</option>
+  	<option value="PUNJAB">Punjab</option>
+  	<option value="RAJASTHAN">Rajasthan</option>
+  	<option value="SIKKIM">Sikkim</option>
+  	<option value="TAMIL NADU">Tamil Nadu</option>
+  	<option value="TELANGANA">Telangana</option>
+  	<option value="TRIPURA">Tripura</option>
+  	<option value="UTTAR PRADESH">Uttar Pradesh</option>
+  	<option value="UTTARAKHAND">Uttarakhand</option>
+  	<option value="WEST BENGAL">West Bengal</option>
+  	<option value="ANDAMAN AND NICOBAR ISLANDS">Andaman and Nicobar Islands</option>
+  	<option value="CHANDIGARH">Chandigarh</option>
+  	<option value="DADRA AND NAGAR HAVELI">Dadra and Nagar Haveli</option>
+  	<option value="DAMAN AND DIU">Daman and Diu</option>
+  	<option value="lAKSHADWEEP">Lakshadweep</option>
+  	<option value="DELHI">Delhi</option>
+  	<option value="PUDUCHERRY">Puducherry</option>
+
 	</select>
 	<br>
 	<br>

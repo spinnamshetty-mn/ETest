@@ -1,5 +1,5 @@
 package com.example.demo;
-
+/*
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -85,7 +85,7 @@ class EpidemicTestResultTests {
 		testResultService.findByPatient(11);
 		verify(testResultRepo,times(1)).findByPatient(pat_id);
 	}
-	*/
+	
 	@Test
 	public void findAllResultsByHWTest() {
 		int hwId=21;
@@ -178,4 +178,6 @@ class EpidemicTestResultTests {
 		when(testResultRepo.totalTestByHwId(hwid)).thenReturn(2);
 		assertEquals(2,testResultService.totalTestsByHw(hwid));
 	}
+
 }
+*/

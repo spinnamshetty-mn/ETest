@@ -17,13 +17,17 @@ public interface TestRequestRepo extends CrudRepository<TestRequest,Long> {
 	//@Query(value="select * from testrequest tr where tr.patient_id=7",nativeQuery=true)
 	TestRequest findByPatientId(int patientId);
 	
+	@Query
+	(value="select * from testrequest where patient_id=:id and disease_type=:diseaseType and test_type=:testType",nativeQuery=true)
+	TestRequest findIfPresent(@Param("id") int id,@Param("diseaseType") String diseaseType, @Param("testType") String testType);
+	
 	//@Query(" select new com.epidemic.joinclass(t.patient_id, t.report_id, p.name) from testrequest t join t.Patient p ")
 	List<TestRequest> findByHwId(int hwId); 
 	
-	@Query(" SELECT new com.epidemic.joinclass(t.patientId, t.id, p.first_name ,p.last_name , t.hwId) FROM TestRequest t JOIN t.patient p WHERE t.hwId= :id  ")
+	@Query(" SELECT new com.epidemic.joinclass(t.patientId, t.id, p.firstName ,p.lastName , t.hwId,t.diseaseType, t.testType) FROM TestRequest t JOIN t.patient p WHERE t.hwId= :id  ")
 	public List<joinclass> getInfo(@Param("id") int id);
 	
-	@Query(" SELECT new com.epidemic.joinclass(t.patientId, t.id, p.first_name ,p.last_name ,t.hwId) FROM TestRequest t JOIN t.patient p")
+	@Query(" SELECT new com.epidemic.joinclass(t.patientId, t.id, p.firstName ,p.lastName ,t.hwId,t.diseaseType, t.testType) FROM TestRequest t JOIN t.patient p")
 	public List<joinclass> getInfo();
 	
 	void deleteByHwId(int hw_id);
@@ -35,5 +39,8 @@ public interface TestRequestRepo extends CrudRepository<TestRequest,Long> {
 
 	@Query(value="select * from testrequest tq ",nativeQuery=true)
 	List<TestRequest> displayAllRequest();
+
+	@Query(" SELECT new com.epidemic.joinclass(t.patientId, t.id,t.hwId,t.diseaseType, t.testType) FROM TestRequest t JOIN t.patient p where p.state=:state ")
+	List<joinclass> displayAllRequest(@Param("state") String state);
 	
 }

@@ -15,10 +15,10 @@ public class Patient {
 	private int id;
 	
 	@Column(name="first_name")
-	private	String first_name;
+	private	String firstName;
 	
 	@Column(name="last_name")
-	private String last_name;
+	private String lastName;
 	
 	@Column(name="email")
 	private	String email;
@@ -44,21 +44,21 @@ public class Patient {
 	
 	public Patient(String firstname,String lastname, String email, String password,String mobile,String city,String state,int pincode) {
 		super();
-		this.first_name = firstname.toUpperCase();
-		this.last_name=lastname.toUpperCase();
-		this.email = email.toUpperCase();
-		this.password = password.toUpperCase();
+		this.firstName = firstname.toUpperCase();
+		this.lastName=lastname.toUpperCase();
+		this.email = email;
+		this.password = password;
 		this.mobile=Long.parseLong(mobile);
 		this.city=city.toUpperCase();
 		this.state=state.toUpperCase();
 		this.pincode=pincode;
 	}
 	
-	public String getFirst_Name() {
-		return first_name;
+	public String getFirstName() {
+		return firstName;
 	}
-	public String getLast_Name() {
-		return last_name;
+	public String getLastName() {
+		return lastName;
 	}
 	
 	public long getMobile() {
@@ -91,11 +91,11 @@ public class Patient {
 	}
 
 	public void setFirstname(String firstname) {
-		this.first_name = firstname;
+		this.firstName = firstname;
 	}
 
 	public void setLastname(String lastname) {
-		this.last_name = lastname;
+		this.lastName = lastname;
 	}
 
 	public void setEmail(String email) {

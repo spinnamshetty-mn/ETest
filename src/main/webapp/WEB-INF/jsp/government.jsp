@@ -23,8 +23,9 @@
     <hr>
 	<label for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
-   	<label for="state"><b> State &emsp;</b></label>
+     <label for="state"><b> State &emsp;</b></label>
     <select name="state" id="state">
+
   	<option value="ANDHRA PRADESH">Andhra Pradesh</option>
   	<option value="ARUNACHAL PRADESH">Arunachal Pradesh</option>
   	<option value="ASSAM">Assam</option>
@@ -61,6 +62,7 @@
   	<option value="lAKSHADWEEP">Lakshadweep</option>
   	<option value="DELHI">Delhi</option>
   	<option value="PUDUCHERRY">Puducherry</option>
+
 	</select>
 	<br>
 	<br>

@@ -47,43 +47,53 @@ public class TestResultService {
 		int patientId=test_request.getPatientId();
 		int hwId=test_request.getHwId();
 		// get city and state from patient and put on test result
-		String disease=test_request.getDiseaseType();
-		String test=test_request.getTestType();
+		String diseaseNew=test_request.getDiseaseType();
+		String testNew=test_request.getTestType();
 		
 		Patient p=patient_service.searchPatient(patientId);
 		int pincode=p.getPincode();
 	
-		TestResult tr=new TestResult(patientId,report_id,hwId,result,p.getCity(),p.getState(),p.getPincode(),disease,test);
+		TestResult tr=new TestResult(patientId,report_id,hwId,result,p.getCity(),p.getState(),p.getPincode(),diseaseNew,testNew);
 		
 		test_result_repo.save(tr);
+		
 		test_request_repo.delete(test_request);
 		
 		//find remaninig details from result table and save in latest result
 		
 		TestResult t=test_result_repo.findByReportId(report_id);
+		
 		int resultId=t.getResultId();
+		
+		
 		String state=t.getState();
 		String city=t.getCity();
 		String status=t.getStatus();
 		Date date=test_result_repo.findByDate(report_id);
 		t.setDate(date);
+	
 		
-		LatestResult lr =latest_result_service.getLatestResultPatient(patientId);
+		LatestResult lr =latest_result_service.getLatestResultPatient(patientId,diseaseNew);
+		
+		
 		if(lr!=null){
 			//update
 			
+			System.out.println(lr.getPatientId() +" "+ lr.getDiseaseType());
 			lr.setResultId(resultId);
 			lr.setStatus(status);
 			lr.setHwId(hwId);
 			lr.setDate(date);
 			lr.setReportId(report_id);
+			lr.setTestType(testNew);
 			latest_result_repo.save(lr);
 			return;
 		}
 		//add new in latestresult
 		
-		LatestResult latestResult=new LatestResult(resultId,patientId,report_id,hwId,status,date,city,state,pincode);
+		LatestResult latestResult=new LatestResult(resultId,patientId,report_id,hwId,status,date,city,state,pincode,diseaseNew,testNew);
 		latest_result_repo.save(latestResult);
+		
 	}
 	 //for displaying all result for a single patient
 	public List<TestResult> findAllPatientResult(int patientId){

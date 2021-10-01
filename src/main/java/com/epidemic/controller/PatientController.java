@@ -76,6 +76,7 @@ public class PatientController {
 		model.addAttribute("state",p.getState());
 		model.addAttribute("city",p.getCity());
 		model.addAttribute("pincode",p.getPincode());
+		/*
 		LatestResult lr=latest_result_service.getLatestResultPatient(id);
 		if(lr==null) {
 			return "pat/p_home";
@@ -90,8 +91,10 @@ public class PatientController {
 			hwname="N/A";
 		}
 		String result=lr.getStatus();
+		
 		model.addAttribute("result",result);
 		model.addAttribute("hwname",hwname);
+		*/
 	
 
 		return "pat/p_home";
@@ -110,7 +113,8 @@ public class PatientController {
 		model.addAttribute("id",p.getId()+"");
 		String disease=(String)request.getParameter("disease");
 		String test=(String)request.getParameter("test");
-		if(disease!=null && test!=null && test_request_service.findTest(id,disease,test) !=null) {
+		
+		if(disease!=null && test!=null && test_request_service.findTest(id,disease) !=null) {
 			
 			model.addAttribute("msg1","Oops, Looks Like You Have Already Requested. Try Again Later");
 			}

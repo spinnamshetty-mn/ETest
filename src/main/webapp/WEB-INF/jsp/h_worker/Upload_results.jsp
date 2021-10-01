@@ -64,6 +64,8 @@ else if(!session.getAttribute("username").equals(id1)){
     	<th>Report Id</th>
     	<th>Patient First Name</th>
     	<th>Patient Last Name</th>
+    	<th>Disease </th> 
+    	<th> Test Type </th>
     	<th>Result Status</th>
     	<th>Date</th>
     	</tr>
@@ -75,12 +77,13 @@ else if(!session.getAttribute("username").equals(id1)){
         <td>${ur.reportId}</td>
         <td>${ur.firstName}</td>
         <td>${ur.lastName}</td>
-        <td>${ur.result}</td>
-         <td>${ur.contactDate}</td>
+         <td>${ur.diseaseType}</td>
+         <td>${ur.testType}</td>
+         <td>${ur.result}</td>
+          <td>${ur.contactDate}</td> 
         
     </tr>
 		
-    	
     	</c:forEach>
    
     </table></div>

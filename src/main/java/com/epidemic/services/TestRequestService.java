@@ -22,8 +22,8 @@ public class TestRequestService {
 		return test_request_repo.findByPatientId(patient_id);
 	}
 	
-	public TestRequest findTest(int patient_id,String diseaseType,String testType) {
-		return test_request_repo.findIfPresent(patient_id,diseaseType,testType);
+	public TestRequest findTest(int patient_id,String diseaseType) {
+		return test_request_repo.findIfPresent(patient_id,diseaseType);
 	}
 //-----------------------------------------------------------------------------------------------
 	public void add(TestRequest test) { // add test request to db

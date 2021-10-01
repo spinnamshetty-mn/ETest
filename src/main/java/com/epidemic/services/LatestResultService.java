@@ -34,8 +34,8 @@ public class LatestResultService {
 	public LatestResult getLatestResultPatient(int id) {  
 		return latestresult_repo.findLatestResultPatient(id);
 	}
-	public List<LatestResult> displayActiveCases() {
-		return latestresult_repo.findAllActiveCases();
+	public List<LatestResult> displayActiveCases(String state) {
+		return latestresult_repo.findAllActiveCases(state);
 	}
 //------------------------ get Count of latest result by some condition-----------------------
 	
@@ -54,5 +54,11 @@ public class LatestResultService {
 	}
 	public int CountActiveByPincode(int pincode) {
 		return latestresult_repo.getCountByPincode(pincode);
+	}
+	public LatestResult getLatestResultPatient(int patientId, String diseaseType) {
+		// TODO Auto-generated method stub
+		
+		
+		return latestresult_repo.findLatestResultPatient(patientId,diseaseType);
 	}
 }

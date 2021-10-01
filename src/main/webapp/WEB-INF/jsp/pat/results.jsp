@@ -58,19 +58,21 @@ String name=(String)request.getAttribute("name");
     	<tr>
     	<th>HW Id</th>
     	<th>Report Id</th>
+    	<th> Disease </th>
+    	<th> Test Type </th>
     	<th>Result Status</th>
     	<th>Result Date</th>
     	</tr>
     	
     	<c:forEach items="${result_list}" var="result_list">
     	
-		
-		
     	<tr>    	
     	<td>${result_list.hwId} </td>
     	<td>${result_list.reportId} </td>
     	<td>${result_list.status}</td>
     	<td>${result_list.date }</td>
+    	<td>${result_list.diseaseType}</td>
+    	<td>${result_list.testType}</td>
     	
     	</tr>
     	</c:forEach>

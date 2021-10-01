@@ -67,6 +67,8 @@ else if(!session.getAttribute("username").equals(id1)){
     	<th>Patient Id</th>
     	<th>Report Id</th>
     	<th>HW Id</th>
+    	<th> Disease</th>
+    	<th> Test Type</th>
     	<th>Result</th>
     	<th>Result Date</th>
     	<th>City</th>
@@ -80,6 +82,8 @@ else if(!session.getAttribute("username").equals(id1)){
         <td>${result_list.patientId}</td>
         <td>${result_list.reportId}</td>
           <td>${result_list.hwId}</td>
+           <td>${result_list.diseaseType}</td>
+            <td>${result_list.testType}</td>
         <td>${result_list.status}</td>
          <td>${result_list.date}</td>
           <td>${result_list.city}</td>

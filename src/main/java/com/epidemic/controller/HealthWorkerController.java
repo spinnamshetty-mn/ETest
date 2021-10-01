@@ -111,7 +111,7 @@ public class HealthWorkerController {
 			String lname=p.getLastName();
 			String result=tr.getStatus();
 			int pincode=tr.getPincode();
-			UpdatedResult ur=new UpdatedResult(pid,rid,fname,lname,result,tr.getDate(),pincode); // store in updatedResult list and send to JSP
+			UpdatedResult ur=new UpdatedResult(pid,rid,fname,lname,result,tr.getDate(),pincode,tr.getDiseaseType(),tr.getTestType()); // store in updatedResult list and send to JSP
 			ur_list.add(ur);
 			
 		}

@@ -13,15 +13,14 @@ import javax.persistence.Table;
 public class LatestResult {
 	
 	@Id
-	@Column(name="patient_id")
-	private int patientId;
+	@Column(name="report_id")
+	private long reportId;
 	
 	@Column(name="result_id")
 	private int resultId;
 	
-	
-	@Column(name="report_id")
-	private long reportId;
+	@Column(name="patient_id")
+	private int patientId;
 	
 	@Column(name="hw_id")
 	private int hwId;
@@ -41,12 +40,18 @@ public class LatestResult {
 	@Column(name="pincode")
 	private int pincode;
 	
+	@Column(name="disease_type")
+	private String diseaseType;
+	
+	@Column(name="test_type")
+	private String testType;
+	
 	public LatestResult() {
 		
 	}
 	
 	public LatestResult(int resultId, int patientId, long reportId, int hwId, String status,Date date2, String city,
-			String state, int pincode) {
+			String state, int pincode,String diseaseType,String testType) {
 		super();
 		this.resultId = resultId;
 		this.patientId = patientId;
@@ -57,6 +62,8 @@ public class LatestResult {
 		this.city = city;
 		this.state = state;
 		this.pincode = pincode;
+		this.diseaseType=diseaseType;
+		this.testType=testType;
 	}
 
 	public int getResultId() {
@@ -130,6 +137,24 @@ public class LatestResult {
 	public void setPincode(int pincode) {
 		this.pincode = pincode;
 	}
+
+	public String getDiseaseType() {
+		return diseaseType;
+	}
+
+	public void setDiseaseType(String diseaseType) {
+		this.diseaseType = diseaseType;
+	}
+
+	public String getTestType() {
+		return testType;
+	}
+
+	public void setTestType(String testType) {
+		this.testType = testType;
+	}
+	
+	
 	
 	
 	

@@ -307,7 +307,7 @@ public class GovernmentController {
 		model.addAttribute("id",id+"");
 		Government gov=gov_service.searchGov(id);
 		model.addAttribute("State",gov.getState());  // for displaying state name
-		List<LatestResult> result_list=latest_result_service.displayActiveCases(); // from latest result table
+		List<LatestResult> result_list=latest_result_service.displayActiveCases(gov.getState()); // from latest result table
 		model.addAttribute("result_list",result_list);
 		return "g_entity/active_cases";
 	}

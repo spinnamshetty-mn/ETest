@@ -18,8 +18,8 @@ public interface TestRequestRepo extends CrudRepository<TestRequest,Long> {
 	TestRequest findByPatientId(int patientId);
 	
 	@Query
-	(value="select * from testrequest where patient_id=:id and disease_type=:diseaseType and test_type=:testType",nativeQuery=true)
-	TestRequest findIfPresent(@Param("id") int id,@Param("diseaseType") String diseaseType, @Param("testType") String testType);
+	(value="select * from testrequest where patient_id=:id and disease_type=:diseaseType",nativeQuery=true)
+	TestRequest findIfPresent(@Param("id") int id,@Param("diseaseType") String diseaseType);
 	
 	//@Query(" select new com.epidemic.joinclass(t.patient_id, t.report_id, p.name) from testrequest t join t.Patient p ")
 	List<TestRequest> findByHwId(int hwId); 

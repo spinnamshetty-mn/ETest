@@ -118,6 +118,7 @@ public class HealthWorkerController {
 			
 		}
 		model.addAttribute("ur",ur_list);
+		
 		return "h_worker/Upload_results";
 	}
 //----------------------------------------------------------------------------------------------------------------------------------

@@ -269,6 +269,7 @@ public class GovernmentController {
 		
 		model.addAttribute("id",id+"");
 		List<ContactList> cl=contact_service.displayAll();
+		model.addAttribute("size",cl.size());
 			   // from contactlist table
 		model.addAttribute("state",gov_service.searchGov(id).getState());
 		model.addAttribute("contact_list",cl);
@@ -300,6 +301,7 @@ public class GovernmentController {
 		Government gov=gov_service.searchGov(id);
 		model.addAttribute("State",gov.getState()); 
 		model.addAttribute("result_list",result_list);
+		model.addAttribute("size",result_list.size());
 		return "g_entity/test_results";
 	}
 //---------------------------------------------------------------------------------------------------------------------------------
@@ -310,6 +312,7 @@ public class GovernmentController {
 		model.addAttribute("State",gov.getState());  // for displaying state name
 		List<LatestResult> result_list=latest_result_service.displayActiveCases(gov.getState()); // from latest result table
 		model.addAttribute("result_list",result_list);
+		model.addAttribute("size",result_list.size());
 		return "g_entity/active_cases";
 	}
 //---------------------------------------------------------------------------------------------------------------------------------
@@ -319,7 +322,7 @@ public class GovernmentController {
 		Government gov=gov_service.searchGov(id);
 		model.addAttribute("State",gov.getState()); 
 		List<joinclass> request_list=test_request_service.diplayAllRequest(gov.getState()); // from test request table
-		
+		model.addAttribute("size",request_list.size());
 		model.addAttribute("request_list",request_list);
 		return "g_entity/test_requests";
 	}

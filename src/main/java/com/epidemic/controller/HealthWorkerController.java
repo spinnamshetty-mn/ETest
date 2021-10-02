@@ -102,8 +102,10 @@ public class HealthWorkerController {
 		HealthWorker hw=hw_service.searchWorker(id);    
 		model.addAttribute("name", hw.getName());
 		model.addAttribute("id",id+"");
+
 		List<UpdatedResult> result_list=test_result_service.findAllResultsByHW(id); // get all uploaded result from result table sorted by newest resultId on top
 		model.addAttribute("ur",result_list);
+
 		
 		return "h_worker/Upload_results";
 	}

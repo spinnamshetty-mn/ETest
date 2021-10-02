@@ -29,12 +29,18 @@
     text-align: left;
     font-size: 150%;
 	}
-	#head td,#body td {
+	#head td{
     height: 50px;
     vertical-align: bottom;
     font-size: 150%;
 }
-
+#body td {
+    height: 50px;
+    vertical-align: bottom;
+    font-size: 120%;
+    text-align: center;
+   
+}
 .blank_row
 {
     height: 10px !important; /* overwrites any other rules */

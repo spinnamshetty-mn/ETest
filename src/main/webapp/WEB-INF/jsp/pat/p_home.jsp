@@ -15,7 +15,6 @@
 </head>
 <body>
 	<%			
-
 			String id=(String)request.getAttribute("id");
 		response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
 		if(session.getAttribute("username")==null){
@@ -86,35 +85,28 @@
         <td><b>Patient Id:</b> ${id} </td>
         <td><b>Location:</b> ${state} , ${city} , ${pincode} </td>
     </tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr>
-    	<td><b>Epidemic Name:</b> - </td>
-        <td><b>Current health Status:</b><%= result %> </td>
-    </tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr>
-    	<td><b>Current Recommendations:</b> N/A </td>
-        <td><b>Latest Health Worker Chosen :</b><%= hwname%> </td>
-    </tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr>
-    	<td><b>Last Tested on :</b> <%= date%> </td>
-    </tr>
 </table>
       </div>
+      
     </div>
+     <div class="ex1">
+    
+     <table id="find_and_update_request">
+    
+    	<tr>
+    	<th>Epidemic Name</th>
+    	<th>Status</th>
+    	<th> Current Recommendations </th>
+    	<th> Health Worker </th>
+    	<th>Tested on</th>
+    	
+    	</tr>
+    	
+    
+   
+    </table></div>
   </div>
 </div>
 
 </body>
-</html>
-    
+</html>    

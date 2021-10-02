@@ -16,7 +16,9 @@ public class HealthWorker {
 		this.id = id;
 	}
 	private	String name;
-	private	String address;
+	private	String city;
+	private String state;
+	private int pincode;
 	private	String email;
 	private	String password;
 	private	Long mobile;
@@ -27,11 +29,13 @@ public class HealthWorker {
 		
 	}
 	
-	public HealthWorker(String name, String address, String email, String password, String mobile, String type,
-			String approved_status) {
+	public HealthWorker(String name, String email, String password, String mobile, String type,
+			String approved_status,String city,String state,int pincode) {
 		super();
 		this.name = name;
-		this.address = address;
+		this.city=city;
+		this.state=state;
+		this.pincode=pincode;
 		this.email = email;
 		this.password = password;
 		this.mobile = Long.parseLong(mobile);
@@ -49,12 +53,6 @@ public class HealthWorker {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
 	}
 	public String getEmail() {
 		return email;
@@ -85,6 +83,30 @@ public class HealthWorker {
 	}
 	public void setApproved_status(String approved_status) {
 		this.approved_status = approved_status;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public int getPincode() {
+		return pincode;
+	}
+
+	public void setPincode(int pincode) {
+		this.pincode = pincode;
 	}
 	
 	

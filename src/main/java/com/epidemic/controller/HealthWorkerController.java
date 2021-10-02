@@ -58,7 +58,9 @@ public class HealthWorkerController {
 		HealthWorker hw=hw_service.searchWorker(id);    // get all details to display in home page
 		model.addAttribute("name", hw.getName());		
 		model.addAttribute("id",hw.getId()+"");
-		model.addAttribute("address",hw.getAddress());
+		model.addAttribute("city",hw.getCity());
+		model.addAttribute("state",hw.getState());
+		model.addAttribute("pincode",hw.getPincode());
 		model.addAttribute("type",hw.getType());
 		
 		int active=latest_result_service.getCountByHwId(id); //total active cases-->  count positive in latestresult by hwId

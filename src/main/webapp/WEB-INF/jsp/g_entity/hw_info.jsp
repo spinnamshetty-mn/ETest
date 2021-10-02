@@ -67,14 +67,18 @@ else if(!session.getAttribute("username").equals(id1)){
     	<th>HW_Id</th>
     	<th>Name</th>
     	<th>Email</th>
-    	<th>Address</th>
+    	<th>City</th>
     	<th> Mobile </th>
     	<th>Type</th>
     	<th>Request status</th>
     	<th>Submit</th>
     	</tr>
     	
+    	
+    	
     	<c:forEach items="${request_list}" var="request_list">
+		
+		
 		
 		<form action="/gov/${govId}/hw_info" method=post>
 		
@@ -82,7 +86,7 @@ else if(!session.getAttribute("username").equals(id1)){
     	<td>${request_list.id} </td>
     	<td>${request_list.name} </td>
     	<td>${request_list.email}</td>
-    	<td>${request_list.address}</td>
+    	<td>${request_list.city}</td>
     	<td>${request_list.mobile}</td>
     	<td>${request_list.type}</td>
     	<td>
@@ -99,8 +103,18 @@ else if(!session.getAttribute("username").equals(id1)){
     	
     	</tr></form>
     	</c:forEach>
+    	
+    	
    
-    </table></div>
+    </table>
+    <%
+			int size=(Integer)request.getAttribute("size");
+			if(size==0){
+				%> <h2> No Records to Display. </h2> <%	
+			}
+		
+		%></div>
+    
     
   </div>
 </div>

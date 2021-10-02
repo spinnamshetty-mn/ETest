@@ -78,6 +78,10 @@ public class HealthWorkerService {
 	public List<HealthWorker> displayPendingHW(){
 		return hw_repo.findAllPendingHw();
 	}
+	
+	public List<HealthWorker> displayPendingHWInState(String state){
+		return hw_repo.findAllPendingHwInState(state);
+	}
 	public void update(HealthWorker hw) {
 		hw_repo.save(hw);
 	}

@@ -39,7 +39,7 @@ public interface LatestResultRepo extends CrudRepository<LatestResult,Integer>{
 	@Query(value="select * from latestresult lr where lr.patient_id= :id",nativeQuery=true)
 	LatestResult findLatestResultPatient(@Param("id") int id);
 	
-	@Query(value="select * from latestresult lr where lr.status='positive' where lr.state=:state ",nativeQuery=true)
+	@Query(value="select * from latestresult lr where lr.status='positive' and lr.state=:state ",nativeQuery=true)
 	List<LatestResult> findAllActiveCases(@Param("state") String state);
 
 	@Query(value="select * from latestresult lr where lr.patient_id= :patientId and lr.disease_type=:diseaseType",nativeQuery=true)

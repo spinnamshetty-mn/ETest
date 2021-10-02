@@ -112,9 +112,10 @@ public class GovernmentController {
 		Government gov=gov_service.searchGov(id);
 		model.addAttribute("State",gov.getState());  // display state name at top of page
 		
-		List<HealthWorker> request_list=hw_service.displayPendingHW();  // get list of pending HW request from HW table
+		List<HealthWorker> request_list=hw_service.displayPendingHWInState(gov.getState());  // get list of pending HW request from HW table
 		model.addAttribute("request_list",request_list);
 		model.addAttribute("govId", id);
+		model.addAttribute("size",request_list.size());
 		
 		String hw_id=(String)request.getParameter("getbutton");        // mapped each row of the JSP hwID to button i.e buttonId=hwID so that controller knows which HW to update
 		String update=(String)request.getParameter("hw_request_update");  // get dropdown(accept/reject) reponse

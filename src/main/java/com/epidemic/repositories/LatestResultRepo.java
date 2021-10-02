@@ -45,6 +45,9 @@ public interface LatestResultRepo extends CrudRepository<LatestResult,Integer>{
 	@Query(value="select * from latestresult lr where lr.patient_id= :patientId and lr.disease_type=:diseaseType",nativeQuery=true)
 	LatestResult findLatestResultPatient(@Param("patientId") int patientId,@Param("diseaseType") String diseaseType);
 
+	@Query(value="select * from latestresult lr where lr.patient_id= :patientId",nativeQuery=true)
+	List<LatestResult> getLatestResultList(@Param("patientId")int patientId);
+
 	
 	
 	

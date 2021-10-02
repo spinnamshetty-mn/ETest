@@ -94,14 +94,27 @@
      <table id="find_and_update_request">
     
     	<tr>
-    	<th>Epidemic Name</th>
+    	<th>Report Id </th>
+    	<th>Disease</th>
+    	<th>Test Type</th>
     	<th>Status</th>
-    	<th> Current Recommendations </th>
     	<th> Health Worker </th>
     	<th>Tested on</th>
     	
     	</tr>
     	
+    	<c:forEach items="${lr}" var="lr">
+    	
+    	<tr>    	
+    	<td>${lr.reportId} </td>
+    	<td>${lr.diseaseType} </td>
+    	<td>${lr.testType }</td>
+    	<td>${lr.status}</td>
+    	<td>${lr.hwId}</td>
+    	<td>${lr.date}</td>
+    	
+    	</tr>
+    	</c:forEach>
     
    
     </table></div>

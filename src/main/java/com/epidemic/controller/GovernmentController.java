@@ -297,9 +297,9 @@ public class GovernmentController {
 	@RequestMapping("/{id}/test_results")  // Result TAB -----view all results of all patients and all hw
 	public String testResults(@PathVariable("id") int id,Model model) {
 		model.addAttribute("id",id+"");
-		List<TestResult> result_list=test_result_service.displayAllResults(); // from result table
 		Government gov=gov_service.searchGov(id);
 		model.addAttribute("State",gov.getState()); 
+		List<TestResult> result_list=test_result_service.displayAllResults(gov.getState()); // from result table
 		model.addAttribute("result_list",result_list);
 		model.addAttribute("size",result_list.size());
 		return "g_entity/test_results";

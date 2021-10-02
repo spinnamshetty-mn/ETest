@@ -74,7 +74,6 @@ else if(!session.getAttribute("username").equals(id1)){
     	<th>Submitted By Patient Id</th>
     	<th>Name</th>
     	<th>City</th>
-    	<th>State</th>
     	<th>Pincode</th>
     	<th> Mobile </th>
     	<th> Contact Date </th>
@@ -85,7 +84,6 @@ else if(!session.getAttribute("username").equals(id1)){
     	<td>${contact_list.patientId} </td>
     	<td>${contact_list.name} </td>
     	<td>${contact_list.city}</td>
-    	<td>${contact_list.state} </td>
     	<td>${contact_list.pincode} </td>
     	<td>${contact_list.mobile}</td>
     	<td>${contact_list.contactDate}</td>
@@ -94,7 +92,7 @@ else if(!session.getAttribute("username").equals(id1)){
     	</c:forEach>
    
     </table>
-     <%
+    <%
 			int size=(Integer)request.getAttribute("size");
 			if(size==0){
 				%> <h2> No Records to Display. </h2> <%	
@@ -107,4 +105,5 @@ else if(!session.getAttribute("username").equals(id1)){
   </div>
 </div>
 </body>
+
 </html>

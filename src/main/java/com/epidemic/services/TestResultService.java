@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
+import com.epidemic.UpdatedResult;
 import com.epidemic.joinclass;
 import com.epidemic.model.LatestResult;
 import com.epidemic.model.Patient;
@@ -105,10 +106,10 @@ public class TestResultService {
 		test_result_repo.findByPatient(patientId).getReportId();
 	}
 	
-	public List<TestResult> findAllResultsByHW(int hwId){
+	public List<UpdatedResult> findAllResultsByHW(int hwId){
 		return test_result_repo.findByOrderByHwIdDesc(hwId);
-		
 	}
+	
 	public List<String> getAllState(){
 		List<String> list=test_result_repo.findByState();
 		return list;
@@ -159,6 +160,11 @@ public class TestResultService {
 	public List<TestResult> displayAllResults() {
 		return test_result_repo.displayAll();
 	}
+	
+	public List<TestResult> displayAllResults(String state) {
+		return test_result_repo.displayAll(state);
+	}
+	
 	public int totalAllTests() {
 		return test_result_repo.totalAllTest();
 	}

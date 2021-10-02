@@ -76,6 +76,11 @@ public class PatientController {
 		model.addAttribute("state",p.getState());
 		model.addAttribute("city",p.getCity());
 		model.addAttribute("pincode",p.getPincode());
+		
+		List<LatestResult> lr=latest_result_service.getLatestResultPatientList(id);
+		model.addAttribute("lr",lr);
+		
+		
 		/*
 		LatestResult lr=latest_result_service.getLatestResultPatient(id);
 		if(lr==null) {

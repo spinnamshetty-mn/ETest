@@ -95,7 +95,9 @@ else if(!session.getAttribute("username").equals(id1)){
     	</c:forEach>
    
     </table>
+
     <%
+
 			int size=(Integer)request.getAttribute("size");
 			if(size==0){
 				%> <h2> No Records to Display. </h2> <%	

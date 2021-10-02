@@ -159,6 +159,11 @@ public class TestResultService {
 	public List<TestResult> displayAllResults() {
 		return test_result_repo.displayAll();
 	}
+	
+	public List<TestResult> displayAllResults(String state) {
+		return test_result_repo.displayAll(state);
+	}
+	
 	public int totalAllTests() {
 		return test_result_repo.totalAllTest();
 	}

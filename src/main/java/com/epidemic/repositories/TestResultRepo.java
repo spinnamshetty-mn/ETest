@@ -39,6 +39,9 @@ public interface TestResultRepo extends CrudRepository<TestResult,Integer> {
 	
 	@Query(value="select * from testresult tr order by tr.report_id desc",nativeQuery=true)
 	List<TestResult> displayAll();
+	
+	@Query(value="select * from testresult tr where tr.state=:state order by tr.report_id desc",nativeQuery=true)
+	List<TestResult> displayAll(@Param("state") String state);
 
 	//----------------------------------------------count results by some condition------------------------
 	
@@ -71,6 +74,8 @@ public interface TestResultRepo extends CrudRepository<TestResult,Integer> {
 	
 	@Query(value="select count(*) from testresult tr where tr.hw_id= :hwid",nativeQuery=true)
 	int totalTestByHwId(@Param("hwid") int hwid);
+	
+	
 
 	
 }

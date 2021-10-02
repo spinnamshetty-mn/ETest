@@ -61,4 +61,8 @@ public class LatestResultService {
 		
 		return latestresult_repo.findLatestResultPatient(patientId,diseaseType);
 	}
+	public List<LatestResult> getLatestResultPatientList(int patientId) {
+		// TODO Auto-generated method stub
+		return latestresult_repo.getLatestResultList(patientId);
+	}
 }

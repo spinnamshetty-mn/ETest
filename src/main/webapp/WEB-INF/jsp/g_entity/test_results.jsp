@@ -68,11 +68,12 @@ else if(!session.getAttribute("username").equals(id1)){
     	<th>Patient Id</th>
     	<th>Report Id</th>
     	<th>HW Id</th>
+    	<th>Disease</th>
+    	<th>Test Type</th>
     	<th>Result</th>
     	<th>Result Date</th>
     	<th>City</th>
     	<th>Pincode</th>
-    	<th>State</th>
     	</tr>
 		
 		<c:forEach var="result_list" items="${result_list}" >
@@ -81,11 +82,12 @@ else if(!session.getAttribute("username").equals(id1)){
         <td>${result_list.patientId}</td>
         <td>${result_list.reportId}</td>
           <td>${result_list.hwId}</td>
+          <td>${result_list.diseaseType}</td>
+          <td>${result_list.testType}</td>
         <td>${result_list.status}</td>
          <td>${result_list.date}</td>
           <td>${result_list.city}</td>
           <td>${result_list.pincode}</td>
-          <td>${result_list.state}</td>
         
     </tr>
 		
@@ -93,7 +95,7 @@ else if(!session.getAttribute("username").equals(id1)){
     	</c:forEach>
    
     </table>
-      <%
+    <%
 			int size=(Integer)request.getAttribute("size");
 			if(size==0){
 				%> <h2> No Records to Display. </h2> <%	
@@ -106,4 +108,5 @@ else if(!session.getAttribute("username").equals(id1)){
   </div>
 </div>
 </body>
+
 </html>

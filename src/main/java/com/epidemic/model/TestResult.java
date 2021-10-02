@@ -2,11 +2,15 @@ package com.epidemic.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -47,6 +51,10 @@ public class TestResult {
 	
 	@Column(name="test_type")
 	private String testType;
+	
+	@ManyToOne(targetEntity= Patient.class,cascade=CascadeType.PERSIST)
+	@JoinColumn(name="patient_id",referencedColumnName="patient_id" , insertable = false, updatable = false)
+	private Patient patient;
 	
 	public TestResult() {
 		

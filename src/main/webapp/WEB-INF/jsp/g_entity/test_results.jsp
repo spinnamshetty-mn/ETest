@@ -96,7 +96,9 @@ else if(!session.getAttribute("username").equals(id1)){
    
     </table>
 
+
        <%
+
 
 			int size=(Integer)request.getAttribute("size");
 			if(size==0){

@@ -94,7 +94,6 @@
      <table id="find_and_update_request">
     
     	<tr>
-    	<th>Report Id </th>
     	<th>Disease</th>
     	<th>Test Type</th>
     	<th>Status</th>
@@ -106,10 +105,9 @@
     	<c:forEach items="${lr}" var="lr">
     	
     	<tr>    	
-    	<td>${lr.reportId} </td>
     	<td>${lr.diseaseType} </td>
     	<td>${lr.testType }</td>
-    	<td>${lr.status}</td>
+    	<td>${lr.pendingTests}</td>
     	<td>${lr.hwId}</td>
     	<td>${lr.date}</td>
     	

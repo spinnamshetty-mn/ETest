@@ -75,6 +75,9 @@ public interface TestResultRepo extends CrudRepository<TestResult,Integer> {
 	
 	@Query(value="select count(*) from testresult tr where tr.hw_id= :hwid",nativeQuery=true)
 	int totalTestByHwId(@Param("hwid") int hwid);
+
+	@Query(value="select count(*) from testresult tr where tr.hw_id= :hwid and tr.disease_type=:diseaseType",nativeQuery=true)
+	int totalTestByHwId(@Param("hwid") int hwid, @Param("diseaseType")String diseaseType);
 	
 	
 	

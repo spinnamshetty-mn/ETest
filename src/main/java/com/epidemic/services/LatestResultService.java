@@ -65,4 +65,8 @@ public class LatestResultService {
 		// TODO Auto-generated method stub
 		return latestresult_repo.getLatestResultList(patientId);
 	}
+	public int getCountByHwId(int id, String diseaseType) {
+		// TODO Auto-generated method stub
+		return latestresult_repo.getCountByHwId(id,diseaseType);
+	}
 }

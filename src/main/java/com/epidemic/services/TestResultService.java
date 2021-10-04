@@ -171,6 +171,10 @@ public class TestResultService {
 	public int countAllPositive() {
 		return test_result_repo.countAllPositive();
 	}
+	public int totalTestsByHw(int id, String diseaseType) {
+		// TODO Auto-generated method stub
+		return test_result_repo.totalTestByHwId(id,diseaseType);
+	}
 	
 
 

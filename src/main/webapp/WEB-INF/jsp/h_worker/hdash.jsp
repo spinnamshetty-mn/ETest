@@ -29,12 +29,11 @@
 
  <%
  	 String name=(String)request.getAttribute("name");
-	 String address=(String)request.getAttribute("address");
+	 String city=(String)request.getAttribute("city");
 	 String id=(String)request.getAttribute("id");
 	 String type=(String)request.getAttribute("type");
-	 String pending=(String)request.getAttribute("pending");
-	 String active=(String)request.getAttribute("active");
-	 String test=(String)request.getAttribute("totalTests");
+	 String state=(String)request.getAttribute("state");
+	 String pincode=(String)request.getAttribute("pincode");
  			%>
 <div class="container-fluid">
   <div class="row content">
@@ -76,7 +75,7 @@
     <tr class ="blank_row"></tr>
     <tr class ="blank_row"></tr>
     <tr>
-    	 <td><b>Location :</b> <%= address %></td>
+    	 <td><b>Location :</b> <%= city %>,<%= state %><%= pincode %>,</td>
        
         
     </tr>
@@ -92,37 +91,30 @@
      <table id="find_and_update_request">
     
     	<tr>
-    	<th>Report Id </th>
+    	
     	<th>Disease</th>
-    	<th>Test Type</th>
-    	<th>Status</th>
-    	<th> Health Worker </th>
-    	<th>Tested on</th>
+    	<th>Total Tests Conducted</th>
+    	<th> Pending Requests</th>
+    	<th>Total Active Cases</th>
     	
     	</tr>
     	
-    	<c:forEach items="${lr}" var="lr">
+    	<c:forEach items="${hdash_list}" var="hdash_list">
     	
     	<tr>    	
-    	<td>${lr.reportId} </td>
-    	<td>${lr.diseaseType} </td>
-    	<td>${lr.testType }</td>
-    	<td>${lr.status}</td>
-    	<td>${lr.hwId}</td>
-    	<td>${lr.date}</td>
-    	
+    	<td>${hdash_list.diseaseType} </td>
+    	<td>${hdash_list.totalTests}</td>
+    	<td>${hdash_list.pendingTests }</td>
+    	<td>${hdash_list.totalActiveCases}</td>
     	</tr>
+    	
+    	
+    	
     	</c:forEach>
     
    
     </table>
-     <%
-			int size=(Integer)request.getAttribute("size");
-			if(size==0){
-				%> <h2> No Records to Display. </h2> <%	
-			}
-		
-		%>
+    
     </div>
     
   </div>

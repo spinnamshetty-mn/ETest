@@ -107,7 +107,7 @@
     	<tr>    	
     	<td>${lr.diseaseType} </td>
     	<td>${lr.testType }</td>
-    	<td>${lr.pendingTests}</td>
+    	<td>${lr.status}</td>
     	<td>${lr.hwId}</td>
     	<td>${lr.date}</td>
     	

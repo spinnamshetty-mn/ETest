@@ -85,33 +85,28 @@
     <tr>
         <td><b>Patient Id:</b> ${id} </td>
         <td><b>Location:</b> ${state} , ${city} , ${pincode} </td>
-    </tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr>
-    	<td><b>Epidemic Name:</b> - </td>
-        <td><b>Current health Status:</b><%= result %> </td>
-    </tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr>
-    	<td><b>Current Recommendations:</b> N/A </td>
-        <td><b>Latest Health Worker Chosen :</b><%= hwname%> </td>
-    </tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr>
-    	<td><b>Last Tested on :</b> <%= date%> </td>
-    </tr>
-</table>
+    </tr> 
+	</table>
       </div>
     </div>
+    
+    <div class="ex1">
+    
+     <table id="find_and_update_request">
+    
+    	<tr>
+    	<th>HW Id</th>
+    	<th>Report Id</th>
+    	<th> Disease </th>
+    	<th> Test Type </th>
+    	<th>Result Status</th>
+    	<th>Result Date</th>
+    	</tr>
+    	
+   
+    </table></div>
+    
+    
   </div>
 </div>
 

@@ -71,6 +71,7 @@ public class HealthWorkerController {
 		model.addAttribute("active",active+"");
 		model.addAttribute("pending",totalPending+"");
 		model.addAttribute("totalTests",totalTests+"");
+	
 		
 		return "h_worker/hdash";
 	}

@@ -79,8 +79,8 @@ public class PatientController {
 		
 		List<LatestResult> lr=latest_result_service.getLatestResultPatientList(id);
 		model.addAttribute("lr",lr);
-		model.addAttribute("size",lr.size());
-		
+		int size=lr.size();
+		model.addAttribute("size",size+"");
 		
 		/*
 		LatestResult lr=latest_result_service.getLatestResultPatient(id);

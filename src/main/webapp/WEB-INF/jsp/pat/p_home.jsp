@@ -33,6 +33,7 @@
 	 int pincode=(Integer)request.getAttribute("pincode");
 	  id=(String)request.getAttribute("id");
 	 String result=(String)request.getAttribute("result");
+	
 	 if(result==null){
 		 result="N/A";
 	 }
@@ -102,7 +103,7 @@
     	
     	</tr>
     	
-    	<c:forEach items="${lr}" var="lr">
+    	<c:forEach items="${lr}" var="lr" >
     	
     	<tr>    	
     	<td>${lr.diseaseType} </td>
@@ -116,9 +117,10 @@
     
    
     </table>
-        <%
-			int size=(Integer)request.getAttribute("size");
-			if(size==0){
+         <%
+     		
+			String size=(String)request.getAttribute("size");
+			if(size==null){
 				%> <h2> No Records to Display. </h2> <%	
 			}
 		

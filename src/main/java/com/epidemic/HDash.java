@@ -10,12 +10,12 @@ public class HDash {
 	
 	private int totalActiveCases;
 
-	public HDash(String diseaseType, int totalTests, int pendingTests, int totalAciveCases) {
+	public HDash(String diseaseType, int totalTests, int pendingTests, int totalActiveCases) {
 		super();
 		this.diseaseType = diseaseType;
 		this.totalTests = totalTests;
 		this.pendingTests = pendingTests;
-		this.totalActiveCases = totalAciveCases;
+		this.totalActiveCases = totalActiveCases;
 	}
 
 	public String getDiseaseType() {
@@ -46,8 +46,8 @@ public class HDash {
 		return totalActiveCases;
 	}
 
-	public void setTotalActiveCases(int totalAciveCases) {
-		this.totalActiveCases = totalAciveCases;
+	public void setTotalActiveCases(int totalActiveCases) {
+		this.totalActiveCases = totalActiveCases;
 	}
 	
 	

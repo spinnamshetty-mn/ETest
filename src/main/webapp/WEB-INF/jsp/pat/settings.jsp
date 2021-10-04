@@ -17,7 +17,7 @@
 </head>
 <body id="settings">
 <%			
-
+String name=(String)request.getAttribute("name");
 			String id=(String)request.getAttribute("id");
 		response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
 		if(session.getAttribute("username")==null){

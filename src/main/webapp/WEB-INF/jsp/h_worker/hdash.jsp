@@ -29,12 +29,11 @@
 
  <%
  	 String name=(String)request.getAttribute("name");
-	 String address=(String)request.getAttribute("address");
+	 String city=(String)request.getAttribute("city");
 	 String id=(String)request.getAttribute("id");
 	 String type=(String)request.getAttribute("type");
-	 String pending=(String)request.getAttribute("pending");
-	 String active=(String)request.getAttribute("active");
-	 String test=(String)request.getAttribute("totalTests");
+	 String state=(String)request.getAttribute("state");
+	 String pincode=(String)request.getAttribute("pincode");
  			%>
 <div class="container-fluid">
   <div class="row content">
@@ -76,21 +75,46 @@
     <tr class ="blank_row"></tr>
     <tr class ="blank_row"></tr>
     <tr>
-    	 <td><b>Location :</b> <%= address %></td>
-        <td><b>Number of pending tests:</b> <%= pending %> <td>
+    	 <td><b>Location :</b> <%= city %>,<%= state %><%= pincode %>,</td>
+       
         
     </tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr>
-    	<td><b>Total tests conducted:</b> <%= test %> </td>
-        <td><b>Active positive Cases:</b> <%= active %> </td>
-       
-    </tr>
+    
+    
 </table>
       </div>
+      
+      
+    </div>
+     <div class="ex1">
+    
+     <table id="find_and_update_request">
+    
+    	<tr>
+    	
+    	<th>Disease</th>
+    	<th>Total Tests Conducted</th>
+    	<th> Pending Requests</th>
+    	<th>Total Active Cases</th>
+    	
+    	</tr>
+    	
+    	<c:forEach items="${hdash_list}" var="hdash_list">
+    	
+    	<tr>    	
+    	<td>${hdash_list.diseaseType} </td>
+    	<td>${hdash_list.totalTests}</td>
+    	<td>${hdash_list.pendingTests }</td>
+    	<td>${hdash_list.totalActiveCases}</td>
+    	</tr>
+    	
+    	
+    	
+    	</c:forEach>
+    
+   
+    </table>
+    
     </div>
     
   </div>

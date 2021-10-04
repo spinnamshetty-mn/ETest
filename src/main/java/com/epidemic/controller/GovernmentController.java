@@ -112,9 +112,10 @@ public class GovernmentController {
 		Government gov=gov_service.searchGov(id);
 		model.addAttribute("State",gov.getState());  // display state name at top of page
 		
-		List<HealthWorker> request_list=hw_service.displayPendingHW();  // get list of pending HW request from HW table
+		List<HealthWorker> request_list=hw_service.displayPendingHWInState(gov.getState());  // get list of pending HW request from HW table
 		model.addAttribute("request_list",request_list);
 		model.addAttribute("govId", id);
+		model.addAttribute("size",request_list.size());
 		
 		String hw_id=(String)request.getParameter("getbutton");        // mapped each row of the JSP hwID to button i.e buttonId=hwID so that controller knows which HW to update
 		String update=(String)request.getParameter("hw_request_update");  // get dropdown(accept/reject) reponse
@@ -268,6 +269,7 @@ public class GovernmentController {
 		
 		model.addAttribute("id",id+"");
 		List<ContactList> cl=contact_service.displayAll();
+		model.addAttribute("size",cl.size());
 			   // from contactlist table
 		model.addAttribute("state",gov_service.searchGov(id).getState());
 		model.addAttribute("contact_list",cl);
@@ -295,10 +297,11 @@ public class GovernmentController {
 	@RequestMapping("/{id}/test_results")  // Result TAB -----view all results of all patients and all hw
 	public String testResults(@PathVariable("id") int id,Model model) {
 		model.addAttribute("id",id+"");
-		List<TestResult> result_list=test_result_service.displayAllResults(); // from result table
 		Government gov=gov_service.searchGov(id);
 		model.addAttribute("State",gov.getState()); 
+		List<TestResult> result_list=test_result_service.displayAllResults(gov.getState()); // from result table
 		model.addAttribute("result_list",result_list);
+		model.addAttribute("size",result_list.size());
 		return "g_entity/test_results";
 	}
 //---------------------------------------------------------------------------------------------------------------------------------
@@ -309,6 +312,7 @@ public class GovernmentController {
 		model.addAttribute("State",gov.getState());  // for displaying state name
 		List<LatestResult> result_list=latest_result_service.displayActiveCases(gov.getState()); // from latest result table
 		model.addAttribute("result_list",result_list);
+		model.addAttribute("size",result_list.size());
 		return "g_entity/active_cases";
 	}
 //---------------------------------------------------------------------------------------------------------------------------------
@@ -318,7 +322,7 @@ public class GovernmentController {
 		Government gov=gov_service.searchGov(id);
 		model.addAttribute("State",gov.getState()); 
 		List<joinclass> request_list=test_request_service.diplayAllRequest(gov.getState()); // from test request table
-		
+		model.addAttribute("size",request_list.size());
 		model.addAttribute("request_list",request_list);
 		return "g_entity/test_requests";
 	}

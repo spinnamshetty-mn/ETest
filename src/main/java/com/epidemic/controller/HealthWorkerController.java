@@ -1,3 +1,4 @@
+
 package com.epidemic.controller;
 
 import java.io.IOException;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.epidemic.HDash;
 import com.epidemic.UpdatedResult;
 import com.epidemic.joinclass;
 import com.epidemic.model.HealthWorker;
+import com.epidemic.model.LatestResult;
 import com.epidemic.model.Patient;
 import com.epidemic.model.TestRequest;
 import com.epidemic.model.TestResult;
@@ -55,19 +58,36 @@ public class HealthWorkerController {
 	@RequestMapping ("/{id}/hdash")    // HW HOME-----------display hw info
 	public String home(@PathVariable("id")  int id,Model model) {
 		
+
 		HealthWorker hw=hw_service.searchWorker(id);    // get all details to display in home page
+		
 		model.addAttribute("name", hw.getName());		
 		model.addAttribute("id",hw.getId()+"");
-		model.addAttribute("address",hw.getAddress());
-		model.addAttribute("type",hw.getType());
+		model.addAttribute("city",hw.getCity()+"");
+		model.addAttribute("type",hw.getType()+"");
+		model.addAttribute("state",hw.getState()+"");
+		model.addAttribute("pincode",hw.getPincode()+"");
 		
-		int active=latest_result_service.getCountByHwId(id); //total active cases-->  count positive in latestresult by hwId
-		int totalTests=test_result_service.totalTestsByHw(id); //total tests--> result table  by hwId
-		int totalPending=test_request_service.countPendingByHw(id); //total pending --> test request table  by hwId
+		List<HDash> hdash_list=new ArrayList<>();
 		
-		model.addAttribute("active",active+"");
-		model.addAttribute("pending",totalPending+"");
-		model.addAttribute("totalTests",totalTests+"");
+		List<String> disease=new ArrayList<>();
+		disease.add("COVID");
+		disease.add("EBOLA");
+		disease.add("NIPAH");
+				
+		// list loop 
+		//get a particular disease from list
+		for(int i=0;i<disease.size();i++) {
+			
+		String diseaseType=disease.get(i);
+		int active=latest_result_service.getCountByHwId(id,diseaseType); //total active cases-->  count positive in latestresult by hwId
+		int totalTests=test_result_service.totalTestsByHw(id,diseaseType); //total tests--> result table  by hwId
+		int totalPending=test_request_service.countPendingByHw(id,diseaseType); //total pending --> test request table  by hwId
+		
+		hdash_list.add(new HDash(diseaseType,totalTests,totalPending,active));
+		}
+		
+	model.addAttribute("hdash_list",hdash_list);
 		
 		return "h_worker/hdash";
 	}
@@ -80,6 +100,7 @@ public class HealthWorkerController {
 		String result=(String)request.getParameter("test_result_update");  // dropdown id of positive/negative
 		List<joinclass> request_list=test_request_service.getInformation(id); //from test request JOIN_CLASS TYPE (patient+request)
 		model.addAttribute("request_list",request_list); 
+		model.addAttribute("size",request_list.size()); 
 		String button=(String)request.getParameter("getbutton"); // buttonId = reportId 
 		
 		if(result==null || button==null) {   // when page opened first time
@@ -100,22 +121,11 @@ public class HealthWorkerController {
 		HealthWorker hw=hw_service.searchWorker(id);    
 		model.addAttribute("name", hw.getName());
 		model.addAttribute("id",id+"");
-		List<TestResult> result_list=test_result_service.findAllResultsByHW(id); // get all uploaded result from result table sorted by newest resultId on top
-		List<UpdatedResult> ur_list=new ArrayList<>(); // to store info since we are not joining tables
-		for(int i=0;i<result_list.size();i++) {
-			TestResult tr=result_list.get(i);
-			Patient p=patient_service.searchPatient(result_list.get(i).getPatientId()); // get EACH patientId and search for fname and lname in patient table
-			int pid=p.getId();
-			long rid=tr.getReportId();
-			String fname=p.getFirstName();
-			String lname=p.getLastName();
-			String result=tr.getStatus();
-			int pincode=tr.getPincode();
-			UpdatedResult ur=new UpdatedResult(pid,rid,fname,lname,result,tr.getDate(),pincode,tr.getDiseaseType(),tr.getTestType()); // store in updatedResult list and send to JSP
-			ur_list.add(ur);
-			
-		}
-		model.addAttribute("ur",ur_list);
+
+		List<UpdatedResult> result_list=test_result_service.findAllResultsByHW(id); // get all uploaded result from result table sorted by newest resultId on top
+		model.addAttribute("ur",result_list);
+		model.addAttribute("size",result_list.size()); 
+		
 		return "h_worker/Upload_results";
 	}
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -171,3 +181,4 @@ public class HealthWorkerController {
 	}
 
 }
+

@@ -91,8 +91,6 @@
 	<br>
 	<br>
 	<br>
-	<label for="address"><b>Address</b></label>
-    <input type="text" placeholder="Enter Address" name="address" id="address" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>
 	<label for="mobile"><b>Mobile Number</b></label>
     <input type="text" placeholder="Enter Mobile Number" name="mobile" id="mobile" pattern="[6-9][0-9]{9}" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>
     <hr>

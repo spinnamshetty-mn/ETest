@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import com.epidemic.UpdatedResult;
 import com.epidemic.joinclass;
 import com.epidemic.model.TestResult;
 
@@ -19,8 +20,8 @@ public interface TestResultRepo extends CrudRepository<TestResult,Integer> {
 	@Query(value="select * from (select * from testresult tr where tr.patient_id= :patientId order by tr.report_id desc) where rownum=1",nativeQuery=true)
 	TestResult findByPatient(@Param("patientId") int patientId);
 	
-	@Query(value="select * from testresult tr where tr.hw_id= :hwId order by tr.result_id desc",nativeQuery=true)
-	List<TestResult> findByOrderByHwIdDesc(@Param("hwId") int hwId);
+	@Query(" SELECT new com.epidemic.UpdatedResult(tr.patientId,tr.reportId,p.firstName,p.lastName,tr.status,tr.date,tr.state,tr.city,tr.pincode,tr.diseaseType,tr.testType) FROM TestResult tr JOIN tr.patient p WHERE tr.hwId= :hwId  ")
+	List<UpdatedResult> findByOrderByHwIdDesc(@Param("hwId") int hwId);
 	
 	@Query(value="select distinct(tr.state) from testresult tr",nativeQuery=true)
 	List<String> findByState();
@@ -39,6 +40,9 @@ public interface TestResultRepo extends CrudRepository<TestResult,Integer> {
 	
 	@Query(value="select * from testresult tr order by tr.report_id desc",nativeQuery=true)
 	List<TestResult> displayAll();
+	
+	@Query(value="select * from testresult tr where tr.state=:state order by tr.report_id desc",nativeQuery=true)
+	List<TestResult> displayAll(@Param("state") String state);
 
 	//----------------------------------------------count results by some condition------------------------
 	
@@ -71,6 +75,12 @@ public interface TestResultRepo extends CrudRepository<TestResult,Integer> {
 	
 	@Query(value="select count(*) from testresult tr where tr.hw_id= :hwid",nativeQuery=true)
 	int totalTestByHwId(@Param("hwid") int hwid);
+
+	@Query(value="select count(*) from testresult tr where tr.hw_id= :hwid and tr.disease_type=:diseaseType",nativeQuery=true)
+	int totalTestByHwId(@Param("hwid") int hwid, @Param("diseaseType")String diseaseType);
+	
+	
+	
 
 	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import com.epidemic.model.HealthWorker;
 
@@ -21,4 +22,7 @@ public interface HealthWorkerRepo extends CrudRepository<HealthWorker,Integer>{
 	
 	@Query(value="select * from healthworker hw where hw.approved_status like 'pending' order by hw.hw_id desc" ,nativeQuery=true)
 	List<HealthWorker> findAllPendingHw(); // get all pending hw
+	
+	@Query(value="select * from healthworker hw where hw.approved_status like 'pending' and hw.state=:state order by hw.hw_id desc" ,nativeQuery=true)
+	List<HealthWorker> findAllPendingHwInState(@Param("state") String state);
 }

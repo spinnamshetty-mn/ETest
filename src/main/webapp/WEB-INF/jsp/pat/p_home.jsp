@@ -15,7 +15,6 @@
 </head>
 <body>
 	<%			
-
 			String id=(String)request.getAttribute("id");
 		response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
 		if(session.getAttribute("username")==null){
@@ -34,6 +33,7 @@
 	 int pincode=(Integer)request.getAttribute("pincode");
 	  id=(String)request.getAttribute("id");
 	 String result=(String)request.getAttribute("result");
+	
 	 if(result==null){
 		 result="N/A";
 	 }
@@ -85,31 +85,50 @@
     <tr>
         <td><b>Patient Id:</b> ${id} </td>
         <td><b>Location:</b> ${state} , ${city} , ${pincode} </td>
-    </tr> 
-	</table>
+    </tr>
+</table>
       </div>
+      
     </div>
-    
-    <div class="ex1">
+     <div class="ex1">
     
      <table id="find_and_update_request">
     
     	<tr>
-    	<th>HW Id</th>
-    	<th>Report Id</th>
-    	<th> Disease </th>
-    	<th> Test Type </th>
-    	<th>Result Status</th>
-    	<th>Result Date</th>
+    	<th>Disease</th>
+    	<th>Test Type</th>
+    	<th>Status</th>
+    	<th> Health Worker </th>
+    	<th>Tested on</th>
+    	
     	</tr>
     	
+    	<c:forEach items="${lr}" var="lr" >
+    	
+    	<tr>    	
+    	<td>${lr.diseaseType} </td>
+    	<td>${lr.testType }</td>
+    	<td>${lr.status}</td>
+    	<td>${lr.hwId}</td>
+    	<td>${lr.date}</td>
+    	
+    	</tr>
+    	</c:forEach>
+    
    
-    </table></div>
-    
-    
+    </table>
+         <%
+     		
+			String size=(String)request.getAttribute("size");
+			if(size==null){
+				%> <h2> No Records to Display. </h2> <%	
+			}
+		
+		%>
+    </div>
   </div>
 </div>
 
 </body>
-</html>
-    
+</html>    
+

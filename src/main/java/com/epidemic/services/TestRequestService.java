@@ -53,6 +53,11 @@ public class TestRequestService {
 	public List<joinclass> diplayAllRequest(String state){
 		return test_request_repo.displayAllRequest(state);
 	}
+
+	public int countPendingByHw(int id, String diseaseType) {
+		// TODO Auto-generated method stub
+		return test_request_repo.pendingByHw(id,diseaseType);
+	}
 	
 	
 }

@@ -42,5 +42,8 @@ public interface TestRequestRepo extends CrudRepository<TestRequest,Long> {
 
 	@Query(" SELECT new com.epidemic.joinclass(t.patientId, t.id,t.hwId,t.diseaseType, t.testType) FROM TestRequest t JOIN t.patient p where p.state=:state ")
 	List<joinclass> displayAllRequest(@Param("state") String state);
+
+	@Query(value="select count(*) from testrequest tq where tq.hw_id= :hwid and tq.disease_type=:diseaseType",nativeQuery=true)
+	int pendingByHw(@Param("hwid") int hwid, @Param("diseaseType") String diseaseType);
 	
 }

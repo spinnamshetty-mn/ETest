@@ -46,6 +46,8 @@ public class LatestResult {
 	@Column(name="test_type")
 	private String testType;
 	
+	
+	
 	public LatestResult() {
 		
 	}

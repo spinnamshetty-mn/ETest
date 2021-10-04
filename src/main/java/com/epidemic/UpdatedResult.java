@@ -33,6 +33,10 @@ public class UpdatedResult {
 	
 	private String testType;
 	
+	private String state;
+	
+	private String city;
+	
 	public UpdatedResult() {
 		
 	}
@@ -50,7 +54,23 @@ public class UpdatedResult {
 		this.diseaseType=diseaseType;
 		this.testType=testType;
 	}
-
+	
+	public UpdatedResult(int patient_id, long report_id, String first_name, String last_name,
+			String result,Date contactDate,String state,String city,int pincode,String diseaseType,String testType) {
+		super();
+		this.patientId = patient_id;
+		this.reportId = report_id;
+		this.firstName = first_name;
+		this.lastName = last_name;
+		this.result = result;
+		this.contactDate=contactDate;
+		this.pincode=pincode;
+		this.diseaseType=diseaseType;
+		this.testType=testType;
+		this.city=city;
+		this.state=state;
+	}
+	
 	public int getPatientId() {
 		return patientId;
 	}
@@ -131,6 +151,22 @@ public class UpdatedResult {
 
 	public void setTestType(String testType) {
 		this.testType = testType;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 	
 	

@@ -212,45 +212,111 @@ public class GovernmentController {
 		int totalTests=0;
 		int totalCases=0;
 		float positivityRate=0;
-			
+		List<String> disease=new ArrayList<>();
+		disease.add("COVID");
+		disease.add("EBOLA");
+		disease.add("NIPAH");	
+		List<Stats> result_list=new ArrayList<>();
 			if(type.equals("state")) {        // name =specific state/city/pincode chosen from dropdown
 				
-					totalActiveCases=latest_result_service.countActiveByState(name);  // from latest result table
-					totalTests=test_result_service.totalTestState(name);      		 // from result table
-					totalCases=test_result_service.totalCasesState(name);            // from result table
+					for(int i=0;i<disease.size();i++) {
+					String diseaseType=disease.get(i);
+					totalActiveCases=latest_result_service.countActiveByState(name,diseaseType);  // from latest result table
+					totalTests=test_result_service.totalTestState(name,diseaseType);      		 // from result table
+					totalCases=test_result_service.totalCasesState(name,diseaseType);            // from result table
+					
+					
+					if(totalTests!=0) {
+						positivityRate= (totalCases*100/totalTests);
+						}
+						
+				
+					if(positivityRate>30) {
+						result_list.add(new Stats(diseaseType,totalActiveCases,totalTests,totalCases,positivityRate,"Red"));
+					}
+						
+				else if(positivityRate<10) {
+					result_list.add(new Stats(diseaseType,totalActiveCases,totalTests,totalCases,positivityRate,"Green"));
+					}
+					
+				else {
+					result_list.add(new Stats(diseaseType,totalActiveCases,totalTests,totalCases,positivityRate,"Orange"));
+				    	}
+					
+					
+				
+				}
 			}
+			
+			
 			if(type.equals("city")) {
 				
-				 totalActiveCases=latest_result_service.countActiveByCity(name);
-				 totalTests=test_result_service.totalTestCity(name);
-				totalCases=test_result_service.totalCasesCity(name);
-	
+				for(int i=0;i<disease.size();i++) {
+					String diseaseType=disease.get(i);
+				 totalActiveCases=latest_result_service.countActiveByCity(name,diseaseType);
+				 totalTests=test_result_service.totalTestCity(name,diseaseType);
+				totalCases=test_result_service.totalCasesCity(name,diseaseType);
+				if(totalTests!=0) {
+				positivityRate= (totalCases*100/totalTests);
+				}
+			
+				
+				
+				if(positivityRate>30) {
+					result_list.add(new Stats(diseaseType,totalActiveCases,totalTests,totalCases,positivityRate,"Red"));
+				}
+					
+			else if(positivityRate<10) {
+				result_list.add(new Stats(diseaseType,totalActiveCases,totalTests,totalCases,positivityRate,"Green"));
+				}
+				
+			else {
+				result_list.add(new Stats(diseaseType,totalActiveCases,totalTests,totalCases,positivityRate,"Orange"));
+			    	}
+				
+				
+				
+				}
 			}
 				
 			if(type.equals("pincode")) {
 					
-				totalActiveCases=latest_result_service.CountActiveByPincode(Integer.parseInt(name));
-				 totalTests=test_result_service.totalTestPincode(Integer.parseInt(name));
-				totalCases=test_result_service.totalCasesPincode(Integer.parseInt(name));
+				for(int i=0;i<disease.size();i++) {
+					String diseaseType=disease.get(i);
+				totalActiveCases=latest_result_service.CountActiveByPincode(Integer.parseInt(name),diseaseType);
+				 totalTests=test_result_service.totalTestPincode(Integer.parseInt(name),diseaseType);
+				totalCases=test_result_service.totalCasesPincode(Integer.parseInt(name),diseaseType);
+				
+
+				if(totalTests!=0) {
+					positivityRate= (totalCases*100/totalTests);
+					}
+					
+				
+				if(positivityRate>30) {
+					result_list.add(new Stats(diseaseType,totalActiveCases,totalTests,totalCases,positivityRate,"Red"));
+				}
+					
+			else if(positivityRate<10) {
+				result_list.add(new Stats(diseaseType,totalActiveCases,totalTests,totalCases,positivityRate,"Green"));
+				}
+				
+			else {
+				result_list.add(new Stats(diseaseType,totalActiveCases,totalTests,totalCases,positivityRate,"Orange"));
+			    	}
+				
+				
+				}
 			}
 
-			positivityRate= (totalCases*100/totalTests);
-			Stats st=new Stats(totalActiveCases,totalTests,totalCases,positivityRate); // stats class to store info at one place and send to JSP
-			
-		if(positivityRate>30) {
-				st.setZone("Red");
-			}
-				
-		else if(positivityRate<10) {
-					st.setZone("Green");
-			}
-		else {
-					st.setZone("Orange");
-		    	}
-				model.addAttribute("stats",st);
+	
+		
+				model.addAttribute("result_list",result_list);
 		
 		return "g_entity/zonal_info_result";
 	}
+	
+	
 //---------------------------------------------------------------------------------------------------------------------------------
 	
 	@RequestMapping("/{id}/{type}/{tab}")   // ignore---- just for redirecting from tab to tab

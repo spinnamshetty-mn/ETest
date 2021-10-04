@@ -1,5 +1,5 @@
 package com.example.demo;
-
+/*
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -89,7 +89,7 @@ class EpidemicLatestResultServiceTests {
 		when(latestResultRepo.findLatestResultPatient(id)).thenReturn(latestResult);
 		assertEquals(latestResult,latestResultService.getLatestResultPatient(id));
 	}
-	*/
+	
 	@Test
 	public void getCountByHwIdTest()
 	{
@@ -103,12 +103,13 @@ class EpidemicLatestResultServiceTests {
 		when(latestResultRepo.countAllActive()).thenReturn(5);
 		assertEquals(5,latestResultService.getCountAllActiveCases());
 	}
-	/*
+	
 	@Test
 	public void displayActiveCasesTest() {
 		when(latestResultRepo.findAllActiveCases()).thenReturn(Arrays.asList(new LatestResult(1,11,101,21,"positive",new Date(19-9-2020),"nagar","tel",500001), new LatestResult(2,12,102,22,"positive",new Date(19-9-2019),"nagar2","tel2",500002)));
 		assertEquals(2,latestResultService.displayActiveCases().size());
 	}
-	*/
+	
 	
 }
+*/

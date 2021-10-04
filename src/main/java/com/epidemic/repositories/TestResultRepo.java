@@ -80,7 +80,23 @@ public interface TestResultRepo extends CrudRepository<TestResult,Integer> {
 	int totalTestByHwId(@Param("hwid") int hwid, @Param("diseaseType")String diseaseType);
 	
 	
+	@Query(value="select count(*) from testresult tr where tr.city= :name and tr.disease_type=:diseaseType",nativeQuery=true)
+	int totalTestCity(@Param("name") String name,@Param("diseaseType") String diseaseType);
 	
+	@Query(value="select count(*) from testresult tr where tr.state= :name and tr.disease_type=:diseaseType",nativeQuery=true)
+	int totalTestState(@Param("name") String name,@Param("diseaseType") String diseaseType);
+	
+	@Query(value="select count(*) from testresult tr where tr.pincode= :name and tr.disease_type=:diseaseType",nativeQuery=true)
+	int totalTestPincode(@Param("name") int name,@Param("diseaseType") String diseaseType);
 
+	
+	@Query(value="select count(distinct(patient_id)) from testresult tr where tr.status='positive' and tr.state= :name and tr.disease_type=:diseaseType ",nativeQuery=true)
+	int totalCasesState(@Param("name") String name,@Param("diseaseType") String diseaseType);
+	
+	@Query(value="select count(distinct(patient_id)) from testresult tr where tr.status='positive' and tr.city= :name and tr.disease_type=:diseaseType ",nativeQuery=true)
+	int totalCasesCity(@Param("name") String name,@Param("diseaseType") String diseaseType);
+	
+	@Query(value="select count(distinct(patient_id)) from testresult tr where tr.status='positive' and tr.pincode= :name and tr.disease_type=:diseaseType",nativeQuery=true)
+	int totalCasesPincode(@Param("name") int name,@Param("diseaseType") String diseaseType);
 	
 }

@@ -46,14 +46,21 @@ public class LatestResultService {
 		return latestresult_repo.getCountByHwId(hwid);
 	}
 	
-	public int countActiveByState(String state) {
-		return latestresult_repo.getCountByState(state);
+	public int countActiveByState(String state, String diseaseType) {
+		return latestresult_repo.getCountByState(state,diseaseType);
+	}
+	public int countActiveByCity(String city, String diseaseType) {
+		return latestresult_repo.getCountByCity(city,diseaseType);
 	}
 	public int countActiveByCity(String city) {
 		return latestresult_repo.getCountByCity(city);
 	}
+	
 	public int CountActiveByPincode(int pincode) {
 		return latestresult_repo.getCountByPincode(pincode);
+	}
+	public int CountActiveByPincode(int pincode, String diseaseType) {
+		return latestresult_repo.getCountByPincode(pincode,diseaseType);
 	}
 	public LatestResult getLatestResultPatient(int patientId, String diseaseType) {
 		// TODO Auto-generated method stub

@@ -9,13 +9,16 @@ public class Stats {
 	private int infected;
 	private float positiveRate;
 	private String zone;
+	private String diseaseType;
 	
-	public Stats(int activeCases, int tests, int infected, float positiveRate) {
+	public Stats(String diseaseType,int activeCases, int tests, int infected, float positiveRate,String zone) {
 		super();
+		this.diseaseType=diseaseType;
 		this.activeCases = activeCases;
 		this.tests = tests;
 		this.infected = infected;
 		this.positiveRate = positiveRate;
+		this.zone=zone;
 		
 	}
 
@@ -57,6 +60,14 @@ public class Stats {
 
 	public void setZone(String zone) {
 		this.zone = zone;
+	}
+
+	public String getDiseaseType() {
+		return diseaseType;
+	}
+
+	public void setDiseaseType(String diseaseType) {
+		this.diseaseType = diseaseType;
 	}
 	
 	

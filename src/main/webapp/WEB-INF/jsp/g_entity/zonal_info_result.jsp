@@ -75,17 +75,17 @@ else if(!session.getAttribute("username").equals(id1)){
     	
     	</tr>
     	
-    	<c:forEach items="${hdash_list}" var="hdash_list">
+    	<c:forEach items="${result_list}" var="result_list">
     	
     	<tr>    	
-    	<td>${hdash_list.diseaseType} </td>
-    	<td>${hdash_list.totalTests}</td>
-    	<td>${hdash_list.pendingTests }</td>
-    	<td>${hdash_list.totalActiveCases}</td>
+    	<td>${result_list.diseaseType} </td>
+    	<td>${result_list.infected}</td>
+    	<td>${result_list.tests }</td>
+    	<td>${result_list.activeCases}</td>
+    	<td>${result_list.positiveRate}</td>
+    	<td>${result_list.zone}</td>
     	</tr>
-    	
-    	
-    	
+    
     	</c:forEach>
     
    

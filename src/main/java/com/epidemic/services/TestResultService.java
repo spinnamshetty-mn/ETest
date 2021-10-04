@@ -176,6 +176,33 @@ public class TestResultService {
 		return test_result_repo.totalTestByHwId(id,diseaseType);
 	}
 	
+	public int totalTestState(String name, String diseaseType) {
+		// TODO Auto-generated method stub
+		return test_result_repo.totalTestState(name, diseaseType);
+	}
+	public int totalTestCity(String name, String diseaseType) {
+		// TODO Auto-generated method stub
+		return test_result_repo.totalTestCity(name, diseaseType);
+	}
+	public int totalTestPincode(int name, String diseaseType) {
+		// TODO Auto-generated method stub
+		return test_result_repo.totalTestPincode(name, diseaseType);
+	}
+	
+	
+	
+	public int totalCasesState(String name, String diseaseType) {
+		// TODO Auto-generated method stub
+		return test_result_repo.totalCasesState(name, diseaseType);
+	}
+	public int totalCasesCity(String name, String diseaseType) {
+		// TODO Auto-generated method stub
+		return test_result_repo.totalCasesCity(name, diseaseType);
+	}
+	public int totalCasesPincode(int name, String diseaseType) {
+		// TODO Auto-generated method stub
+		return test_result_repo.totalCasesPincode(name, diseaseType);
+	}
 
 
 }

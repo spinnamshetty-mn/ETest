@@ -77,20 +77,52 @@
     <tr class ="blank_row"></tr>
     <tr>
     	 <td><b>Location :</b> <%= address %></td>
-        <td><b>Number of pending tests:</b> <%= pending %> <td>
+       
         
     </tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr>
-    	<td><b>Total tests conducted:</b> <%= test %> </td>
-        <td><b>Active positive Cases:</b> <%= active %> </td>
-       
-    </tr>
+    
+    
 </table>
       </div>
+      
+      
+    </div>
+     <div class="ex1">
+    
+     <table id="find_and_update_request">
+    
+    	<tr>
+    	<th>Report Id </th>
+    	<th>Disease</th>
+    	<th>Test Type</th>
+    	<th>Status</th>
+    	<th> Health Worker </th>
+    	<th>Tested on</th>
+    	
+    	</tr>
+    	
+    	<c:forEach items="${lr}" var="lr">
+    	
+    	<tr>    	
+    	<td>${lr.reportId} </td>
+    	<td>${lr.diseaseType} </td>
+    	<td>${lr.testType }</td>
+    	<td>${lr.status}</td>
+    	<td>${lr.hwId}</td>
+    	<td>${lr.date}</td>
+    	
+    	</tr>
+    	</c:forEach>
+    
+   
+    </table>
+     <%
+			int size=(Integer)request.getAttribute("size");
+			if(size==0){
+				%> <h2> No Records to Display. </h2> <%	
+			}
+		
+		%>
     </div>
     
   </div>

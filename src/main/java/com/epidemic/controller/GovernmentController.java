@@ -229,6 +229,9 @@ public class GovernmentController {
 					if(totalTests!=0) {
 						positivityRate= (totalCases*100/totalTests);
 						}
+					else {
+						continue; // if no test for a disease dont show it
+					}
 						
 				
 					if(positivityRate>30) {
@@ -258,6 +261,9 @@ public class GovernmentController {
 				totalCases=test_result_service.totalCasesCity(name,diseaseType);
 				if(totalTests!=0) {
 				positivityRate= (totalCases*100/totalTests);
+				}
+				else {
+					continue; // if no test for a disease dont show it
 				}
 			
 				
@@ -291,6 +297,9 @@ public class GovernmentController {
 				if(totalTests!=0) {
 					positivityRate= (totalCases*100/totalTests);
 					}
+				else {
+					continue; // if no test for a disease dont show it
+				}
 					
 				
 				if(positivityRate>30) {

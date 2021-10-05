@@ -98,5 +98,15 @@ public interface TestResultRepo extends CrudRepository<TestResult,Integer> {
 	
 	@Query(value="select count(distinct(patient_id)) from testresult tr where tr.status='positive' and tr.pincode= :name and tr.disease_type=:diseaseType",nativeQuery=true)
 	int totalCasesPincode(@Param("name") int name,@Param("diseaseType") String diseaseType);
+
+	@Query(value="select count(*) from testresult tr where tr.status='positive' and tr.disease_type=:diseaseType",nativeQuery=true)
+	int countAllPositive(@Param("diseaseType") String diseaseType);
+	
+	@Query(value="select count(*) from testresult tr where tr.disease_type=:diseaseType",nativeQuery=true)
+	int countAllTest(@Param("diseaseType") String diseaseType);
+	
+	
+	
+	
 	
 }

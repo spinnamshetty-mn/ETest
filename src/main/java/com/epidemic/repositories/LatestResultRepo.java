@@ -38,6 +38,9 @@ public interface LatestResultRepo extends CrudRepository<LatestResult,Integer>{
 	
 	@Query(value="select count(*) from latestresult lr where lr.pincode= :str and lr.disease_type=:diseaseType and lr.status='positive'",nativeQuery=true)
 	int getCountByPincode(@Param("str") int str, @Param("diseaseType") String diseaseType);
+	
+	@Query(value="select count(*) from latestresult lr where lr.status='positive' and lr.disease_type=:diseaseType ",nativeQuery=true)
+	int countAllActive(@Param("diseaseType") String diseaseType);
 //------------------------------------find latest result of patient by type----------------------------------------
 	@Query(value="select distinct(tr.state) from latestresult tr",nativeQuery=true)
 	List<String> findByState();
@@ -59,6 +62,9 @@ public interface LatestResultRepo extends CrudRepository<LatestResult,Integer>{
 
 	@Query(value="select * from latestresult lr where lr.patient_id= :patientId",nativeQuery=true)
 	List<LatestResult> getLatestResultList(@Param("patientId")int patientId);
+
+	
+	
 
 	
 	

@@ -76,4 +76,8 @@ public class LatestResultService {
 		// TODO Auto-generated method stub
 		return latestresult_repo.getCountByHwId(id,diseaseType);
 	}
+	public int getCountAllActiveCases(String diseaseType) {
+		// TODO Auto-generated method stub
+		return latestresult_repo.countAllActive(diseaseType);
+	}
 }

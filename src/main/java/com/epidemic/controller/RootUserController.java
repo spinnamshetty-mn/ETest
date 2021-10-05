@@ -51,8 +51,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.lowagie.text.DocumentException;
 //government controller
 @Controller
-@RequestMapping("/gov")
-public class GovernmentController {
+@RequestMapping("/rootgov")
+public class RootUserController {
 	
 	@Autowired
 	TestRequestService test_request_service;
@@ -95,9 +95,9 @@ public class GovernmentController {
 				
 					for(int i=0;i<disease.size();i++) {
 					String diseaseType=disease.get(i);
-					int totalActiveCases=latest_result_service.countActiveByState(state,diseaseType);  // from latest result table
-					int totalTests=test_result_service.totalTestState(state,diseaseType);      		 // from result table
-					int totalCases=test_result_service.totalCasesState(state,diseaseType);            // from result table
+					int totalActiveCases=latest_result_service.getCountAllActiveCases(diseaseType); // from latest result table
+					int totalTests=test_result_service.totalAllTests(diseaseType);      		 // from result table
+					int totalCases=test_result_service.countAllPositive(diseaseType);          // from result table
 					
 					if(totalTests!=0) {
 						positivityRate= (totalCases*100/totalTests);
@@ -105,21 +105,11 @@ public class GovernmentController {
 					else {
 						continue; // if no test for a disease dont show it
 					}
-				if(positivityRate>30) {
 						result_list.add(new Stats(diseaseType,totalActiveCases,totalTests,totalCases,positivityRate,"Red"));
-					}
-						
-				else if(positivityRate<10) {
-					result_list.add(new Stats(diseaseType,totalActiveCases,totalTests,totalCases,positivityRate,"Green"));
-					}
-					
-				else {
-					result_list.add(new Stats(diseaseType,totalActiveCases,totalTests,totalCases,positivityRate,"Orange"));
-				    	}	
 				}
 		model.addAttribute("result_list",result_list);
 		
-		return "g_entity/gdash";
+		return "root_gov_entity/gdash";
 	}
 //---------------------------------------------------------------------------------------------------------------------------------
 	

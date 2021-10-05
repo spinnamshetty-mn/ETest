@@ -203,6 +203,14 @@ public class TestResultService {
 		// TODO Auto-generated method stub
 		return test_result_repo.totalCasesPincode(name, diseaseType);
 	}
+	public int countAllPositive(String diseaseType) {
+		// TODO Auto-generated method stub
+		return test_result_repo.countAllPositive(diseaseType);
+	}
+	public int totalAllTests(String diseaseType) {
+		// TODO Auto-generated method stub
+		return test_result_repo.countAllTest(diseaseType);
+	}
 
 
 }

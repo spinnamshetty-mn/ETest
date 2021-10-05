@@ -1,5 +1,7 @@
 package com.epidemic.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,5 +62,22 @@ public class GovernmentService {
 		return false;
 	}
 //--------------------------------------------------------------------------------------
+	public List<Government> getPendingRequests(){
+		return gov_repo.getPendingRequests();
+	}
+
+	public void deleteRequest(int gov_id) {
+		// TODO Auto-generated method stub
+		gov_repo.deleteById(gov_id);
+	}
+
+	public void updateRequest(int gov_id) {
+		// TODO Auto-generated method stub
+		Government gov_db=gov_repo.findByGovId(gov_id);
+		gov_db.setStatus("approved");
+		gov_repo.save(gov_db);
+	}
+	
+	
 	
 }

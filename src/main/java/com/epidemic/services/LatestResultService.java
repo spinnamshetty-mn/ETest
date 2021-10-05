@@ -80,4 +80,8 @@ public class LatestResultService {
 		// TODO Auto-generated method stub
 		return latestresult_repo.countAllActive(diseaseType);
 	}
+	public List<LatestResult> displayActiveCases() {
+		// TODO Auto-generated method stub
+		return latestresult_repo.findAllActiveCases(); 
+	}
 }

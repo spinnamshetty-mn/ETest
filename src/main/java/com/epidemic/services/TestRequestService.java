@@ -58,6 +58,11 @@ public class TestRequestService {
 		// TODO Auto-generated method stub
 		return test_request_repo.pendingByHw(id,diseaseType);
 	}
+
+	public List<joinclass> diplayAllRequest() {
+		// TODO Auto-generated method stub
+		return test_request_repo.displayAllRequests();
+	}
 	
 	
 }

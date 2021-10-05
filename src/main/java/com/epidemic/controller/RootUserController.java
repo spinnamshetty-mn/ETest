@@ -113,31 +113,31 @@ public class RootUserController {
 	}
 //---------------------------------------------------------------------------------------------------------------------------------
 	
-	@RequestMapping("/{id}/hw_info")     // HW Request TAB ----->  page to handle accept / reject HW account creation by GOV.
+	@RequestMapping("/{id}/pending_approvals")     // HW Request TAB ----->  page to handle accept / reject HW account creation by GOV.
 	public String approveHw(@PathVariable("id") int id,Model model,HttpServletRequest request) {
 		model.addAttribute("id",id+"");
 		Government gov=gov_service.searchGov(id);
 		model.addAttribute("State",gov.getState());  // display state name at top of page
 		
-		List<HealthWorker> request_list=hw_service.displayPendingHWInState(gov.getState());  // get list of pending HW request from HW table
+		List<Government> request_list=gov_service.getPendingRequests();  // get list of pending HW request from HW table
 		model.addAttribute("request_list",request_list);
 		model.addAttribute("govId", id);
 		model.addAttribute("size",request_list.size());
 		
-		String hw_id=(String)request.getParameter("getbutton");        // mapped each row of the JSP hwID to button i.e buttonId=hwID so that controller knows which HW to update
-		String update=(String)request.getParameter("hw_request_update");  // get dropdown(accept/reject) reponse
+		String gov_id=(String)request.getParameter("getbutton");        // mapped each row of the JSP hwID to button i.e buttonId=hwID so that controller knows which HW to update
+		String update=(String)request.getParameter("gov_request_update");  // get dropdown(accept/reject) reponse
 		
-		if(hw_id==null || update==null) {    // for handling when page opened for first time.
-			return "g_entity/hw_info";
+		if(gov_id==null || update==null) {    // for handling when page opened for first time.
+			return "root_gov_entity/pending_approvals";
 		}
 		
 		if(update.equals("reject")) {						// update response in HW DB 
-		hw_service.deleteRequest(Integer.parseInt(hw_id));
+		gov_service.deleteRequest(Integer.parseInt(gov_id));
 		}
 		else {
-			hw_service.updateRequest(Integer.parseInt(hw_id));
+			gov_service.updateRequest(Integer.parseInt(gov_id));
 		}
-		return "redirect:/gov/{id}/hw_info";
+		return "redirect:/rootgov/{id}/pending_approvals";
 	}
 //-----------------------------------------------------------------------------------------------------------------------------
 	
@@ -163,7 +163,7 @@ public class RootUserController {
 		gov_service.Update(gov);  //update new pasword in GOV DB
 		}
 		
-		return "g_entity/gsettings";
+		return "root_gov_entity/gsettings";
 	}
 //-----------------------------------------------------------------------------------------------------------------------------
 	
@@ -175,10 +175,10 @@ public class RootUserController {
 		
 		String type=(String)request.getParameter("zones");    // catch the zone type and redirect correspondingly
 			if(type==null) {  // for handling opening of tab for first time
-			return "g_entity/zonal_info";
+			return "root_gov_entity/zonal_info";
 		}
 			
-		return "redirect:/gov/"+id+"/"+type+"/zonal_info_category";  // redirect to next url with type information
+		return "redirect:/rootgov/"+id+"/"+type+"/zonal_info_category";  // redirect to next url with type information
 	}
 
 //---------------------------------------------------------------------------------------------------------------------------------
@@ -204,7 +204,7 @@ public class RootUserController {
 		
 		model.addAttribute("list",list);
 		
-		return "g_entity/zonal_info_category";
+		return "root_gov_entity/zonal_info_category";
 	}
 	
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -317,7 +317,7 @@ public class RootUserController {
 			}
 				model.addAttribute("result_list",result_list);
 		
-		return "g_entity/zonal_info_result";
+		return "root_gov_entity/zonal_info_result";
 	}
 	
 	
@@ -325,12 +325,12 @@ public class RootUserController {
 	
 	@RequestMapping("/{id}/{type}/{tab}")   // ignore---- just for redirecting from tab to tab
 	public String redirect(@PathVariable("id") int id,@PathVariable("type") String type,@PathVariable("tab") String tab) {
-		return "redirect:/gov/"+id + "/"+ tab;
+		return "redirect:/rootgov/"+id + "/"+ tab;
 	}
 	
 	@RequestMapping("/{id}/{type}/{name}/{tab}")  // ignore ----just for redirecting from tab to tab
 	public String redirect3(@PathVariable("id") int id,@PathVariable("type") String type,@PathVariable("name") String name,@PathVariable("tab") String tab) {
-		return "redirect:/gov/"+ id +"/"+ tab;
+		return "redirect:/rootgov/"+ id +"/"+ tab;
 	}
 //-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -343,7 +343,7 @@ public class RootUserController {
 			   // from contactlist table
 		model.addAttribute("state",gov_service.searchGov(id).getState());
 		model.addAttribute("contact_list",cl);
-		return "g_entity/view_contacts_list";
+		return "root_gov_entity/view_contacts_list";
 		}
 	
 	
@@ -369,10 +369,10 @@ public class RootUserController {
 		model.addAttribute("id",id+"");
 		Government gov=gov_service.searchGov(id);
 		model.addAttribute("State",gov.getState()); 
-		List<TestResult> result_list=test_result_service.displayAllResults(gov.getState()); // from result table
+		List<TestResult> result_list=test_result_service.displayAllResults(); // from result table
 		model.addAttribute("result_list",result_list);
 		model.addAttribute("size",result_list.size());
-		return "g_entity/test_results";
+		return "root_gov_entity/test_results";
 	}
 //---------------------------------------------------------------------------------------------------------------------------------
 	@RequestMapping("/{id}/active_cases") // Active Cases TAB------
@@ -380,10 +380,10 @@ public class RootUserController {
 		model.addAttribute("id",id+"");
 		Government gov=gov_service.searchGov(id);
 		model.addAttribute("State",gov.getState());  // for displaying state name
-		List<LatestResult> result_list=latest_result_service.displayActiveCases(gov.getState()); // from latest result table
+		List<LatestResult> result_list=latest_result_service.displayActiveCases(); // from latest result table
 		model.addAttribute("result_list",result_list);
 		model.addAttribute("size",result_list.size());
-		return "g_entity/active_cases";
+		return "root_gov_entity/active_cases";
 	}
 //---------------------------------------------------------------------------------------------------------------------------------
 	@RequestMapping("/{id}/test_requests")  //  Test Request tab-----display all current test requests by all patients
@@ -391,10 +391,10 @@ public class RootUserController {
 		model.addAttribute("id",id+"");
 		Government gov=gov_service.searchGov(id);
 		model.addAttribute("State",gov.getState()); 
-		List<joinclass> request_list=test_request_service.diplayAllRequest(gov.getState()); // from test request table
+		List<joinclass> request_list=test_request_service.diplayAllRequest(); // from test request table
 		model.addAttribute("size",request_list.size());
 		model.addAttribute("request_list",request_list);
-		return "g_entity/test_requests";
+		return "root_gov_entity/test_requests";
 	}
 //---------------------------------------------------------------------------------------------------------------------------------
 	@RequestMapping("/{id}/logout")

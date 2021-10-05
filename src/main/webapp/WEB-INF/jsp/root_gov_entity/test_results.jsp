@@ -74,7 +74,9 @@ else if(!session.getAttribute("username").equals(id1)){
     	<th>Result</th>
     	<th>Result Date</th>
     	<th>City</th>
+    	<th>State</th>
     	<th>Pincode</th>
+    	
     	</tr>
 		
 		<c:forEach var="result_list" items="${result_list}" >
@@ -88,6 +90,7 @@ else if(!session.getAttribute("username").equals(id1)){
         <td>${result_list.status}</td>
          <td>${result_list.date}</td>
           <td>${result_list.city}</td>
+          <td>${result_list.state}</td>
           <td>${result_list.pincode}</td>
         
     </tr>

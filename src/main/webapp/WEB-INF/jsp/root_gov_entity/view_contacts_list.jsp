@@ -51,7 +51,7 @@ else if(!session.getAttribute("username").equals(id1)){
       <div class="top">
       <table id="head">
       <tr>
-      <td><h1><small>State Government of <%= state %>  </small></h1></td>
+      <td><h1><small> <%= state %>  </small></h1></td>
       <td>
       <a href="/gov/users/export/pdf">
           <button value="export"  id="export">Export</button>

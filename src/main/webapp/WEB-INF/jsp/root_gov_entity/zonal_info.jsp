@@ -49,7 +49,7 @@ else if(!session.getAttribute("username").equals(id1)){
       <div class="top">
       <table id="head">
       <tr>
-      <td><h1><small>State Government of <%= State %></h1></td>
+      <td><h1><small><%= State %></h1></td>
       <td>
      <form action="logout" method="post">
       <button value="logout" id="logout" style="float:right;" >Logout</button>

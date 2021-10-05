@@ -36,27 +36,22 @@ else if(!session.getAttribute("username").equals(id1)){
         <a href="gdash"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Home</span></a></li>
          <li><a href="test_requests"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Test Requests</span></a></li>
          <li><a href="active_cases"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Active Cases</span></a></li> 
-        <li><a href="hw_info"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Health Workers Requests</span></a></li>
+        <li><a href="pending_approvals"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Pending Approvals</span></a></li>
          <li><a href="test_results"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Test Results</span></a></li>
-         <li ><a href="zonal_info"><i class="fa fa-circle-thin" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Zones</span></a></li>
-         <li class="active"><a href="view_contacts_list"><i class="fa fa-eye" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> View Contacts List</span></a></li>
+         <li class="active"><a href="zonal_info"><i class="fa fa-circle-thin" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Zones</span></a></li>
+         <li><a href="view_contacts_list"><i class="fa fa-eye" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> View Contacts List</span></a></li>
+         <li><a href="manage_disease"><i class="fa fa-plus" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Manage Disease</span></a></li>
          <li><a href="gsettings"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Settings</span></a></li>
       </ul><br>
     </div>
-	<%
-		String state=(String)request.getAttribute("state");
-	%>
+
     <div class="col-sm-9">
       <div class="top">
       <table id="head">
       <tr>
-      <td><h1><small>State Government of <%= state %>  </small></h1></td>
+      <td><h1><small>State Government of <%= State %></h1></td>
       <td>
-      <a href="/gov/users/export/pdf">
-          <button value="export"  id="export">Export</button>
-        </a>
-      
-      <form action="logout" method="post">
+     <form action="logout" method="post">
       <button value="logout" id="logout" style="float:right;" >Logout</button>
       </form>
       </td>
@@ -65,47 +60,30 @@ else if(!session.getAttribute("username").equals(id1)){
      </div>
       <hr>
     </div>
-    
-    <div class="ex1">
-    
-    <table id="find_and_update_request">
-    
-    	<tr>
-    	<th>Submitted By Patient Id</th>
-    	<th>Name</th>
-    	<th>City</th>
-    	<th>Pincode</th>
-    	<th> Mobile </th>
-    	<th> Contact Date </th>
-    	</tr>
-    	<c:forEach items="${contact_list}" var="contact_list">
-		
-    	<tr>    	
-    	<td>${contact_list.patientId} </td>
-    	<td>${contact_list.name} </td>
-    	<td>${contact_list.city}</td>
-    	<td>${contact_list.pincode} </td>
-    	<td>${contact_list.mobile}</td>
-    	<td>${contact_list.contactDate}</td>
-    	
-    	</tr>
-    	</c:forEach>
    
-    </table>
+    <form align="center" action="zonal_info" method="post">
+   	
+    <br>
+    <br>
+    <br>
+    <br>
+   
 
-    <%
+    <label align="center" for="zones" style="font-size:large">Search By:</label>
 
-			int size=(Integer)request.getAttribute("size");
-			if(size==0){
-				%> <h2> No Records to Display. </h2> <%	
-			}
-		
-		%>
-    </div>
-    
-    
+<select name="zones" id="zones">
+  <option disabled selected value> -- select an option -- </option>
+  <option value="state">State</option>
+  <option value="city">City</option>
+  <option value="pincode">Pincode</option>
+</select>
+
+    <br>
+    <br>
+    <br>
+  <button align="center"  >Search</button>
+  </form>
   </div>
 </div>
 </body>
-
 </html>

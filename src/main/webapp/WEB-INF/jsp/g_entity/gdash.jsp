@@ -71,24 +71,39 @@ else if(!session.getAttribute("username").equals(id1)){
       </table>
      </div>
       <hr>
-      <div class="table">
-      	<table id="body">
-    <tr>
-        <td><b>Number of Active Cases :</b> <%= active %></td>
-        <td><b>Positivity Rate :</b> <%= rate %> % </td>
-        
-    </tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr>
-    	 <td><b>Number of Health Workers :</b> <%= totalHW %></td>
-        <td><b>Total tests conducted:</b> <%= test %><td>
-        
-    </tr>
-</table>
-      </div>
+     
+    </div>
+    
+     <div class="ex1">
+    
+     <table id="find_and_update_request">
+    
+    	<tr>
+    	
+    	<th>Disease</th>
+    	<th>Total Tests Conducted</th>
+   
+    	<th>Total Active Cases</th>
+    	 	<th> Positivity Rate</th>
+    	 	 	<th> Zone</th>
+    	</tr>
+    	
+    	<c:forEach items="${hdash_list}" var="hdash_list">
+    	
+    	<tr>    	
+    	<td>${hdash_list.diseaseType} </td>
+    	<td>${hdash_list.totalTests}</td>
+    	<td>${hdash_list.pendingTests }</td>
+    	<td>${hdash_list.totalActiveCases}</td>
+    	</tr>
+    	
+    	
+    	
+    	</c:forEach>
+    
+   
+    </table>
+    
     </div>
   </div>
 </div>

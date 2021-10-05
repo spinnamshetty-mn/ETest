@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Epidemic TTT</title>
+  <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />" >
@@ -37,23 +37,16 @@ else if(!session.getAttribute("username").equals(id1)){
         <a href="#"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Home</span></a></li>
          <li><a href="test_requests"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Test Requests</span></a></li>
          <li ><a href="active_cases"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Active Cases</span></a></li> 
-        <li><a href="pending_approvals"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Pending Approvals</span></a></li>
+        <li><a href="hw_info"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Health Workers Requests</span></a></li>
          <li><a href="test_results"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Test Results</span></a></li>
          <li><a href="zonal_info"><i class="fa fa-circle-thin" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Zones</span></a></li>
         <li><a href="view_contacts_list"><i class="fa fa-eye" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> View Contacts List</span></a></li>
-        <li><a href="manage_disease"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Manage Disease</span></a></li>
          <li><a href="gsettings"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Settings</span></a></li>
        </ul><br>
     </div>
 	<%
 	
  	 String State=(String)request.getAttribute("State");
-	 String city=(String)request.getAttribute("city");
-	 String id=(String)request.getAttribute("id");
-	 String active=(String)request.getAttribute("active");
-	 String test=(String)request.getAttribute("totalTest");
-	 String rate=(String)request.getAttribute("rate");
-	 String totalHW=(String)request.getAttribute("totalHW");
 	
 	
 	
@@ -81,25 +74,26 @@ else if(!session.getAttribute("username").equals(id1)){
     
     	<tr>
     	
-    	<th>Disease</th>
-    	<th>Total Tests Conducted</th>
-   
-    	<th>Total Active Cases</th>
-    	 	<th> Positivity Rate</th>
-    	 	 	<th> Zone</th>
+    	<th> Disease</th>
+    	<th> Total Infected</th>
+    	<th> Total Tests Conducted</th>
+    	<th> Current Active Cases</th>
+    	<th> Positivity Rate</th>
+    	<th> Zone</th>
+    	
     	</tr>
     	
-    	<c:forEach items="${hdash_list}" var="hdash_list">
+    	<c:forEach items="${result_list}" var="result_list">
     	
     	<tr>    	
-    	<td>${hdash_list.diseaseType} </td>
-    	<td>${hdash_list.totalTests}</td>
-    	<td>${hdash_list.pendingTests }</td>
-    	<td>${hdash_list.totalActiveCases}</td>
+    	<td>${result_list.diseaseType} </td>
+    	<td>${result_list.infected}</td>
+    	<td>${result_list.tests }</td>
+    	<td>${result_list.activeCases}</td>
+    	<td>${result_list.positiveRate}</td>
+    	<td>${result_list.zone}</td>
     	</tr>
-    	
-    	
-    	
+    
     	</c:forEach>
     
    

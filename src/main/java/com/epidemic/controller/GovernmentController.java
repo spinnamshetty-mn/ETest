@@ -85,22 +85,39 @@ public class GovernmentController {
 		
 		String state=gov.getState();	// initialize state name to be displayed on top of every page
 		model.addAttribute("State",gov.getState());
-		
-		int activeCases=latest_result_service.getCountAllActiveCases();  // count all active cases from latest result table
-		int totalHW=hw_service.findActiveHW().size();	// count all "approved" HW from HW table
-		int totalTest=test_result_service.totalAllTests(); //count total test in Result Table
+		model.addAttribute("id",id+"");
 		int positivityRate=0;   
-		if(totalTest!=0) {   // to avoid arithmetic Exception ( / 0 )
-		positivityRate=test_result_service.countAllPositive()*100/totalTest;
-		}
-		
-		model.addAttribute("state",state);     //added variables to model and sent to JSP for display purposes 
-		model.addAttribute("State",state);
-		model.addAttribute("id",gov.getGovId()+"");
-		model.addAttribute("active",activeCases+"");
-		model.addAttribute("totalHW",totalHW+"");
-		model.addAttribute("totalTest",totalTest+"");
-		model.addAttribute("rate",positivityRate+"");
+		List<String> disease=new ArrayList<>();
+		disease.add("COVID");
+		disease.add("EBOLA");
+		disease.add("NIPAH");	
+		List<Stats> result_list=new ArrayList<>();
+				
+					for(int i=0;i<disease.size();i++) {
+					String diseaseType=disease.get(i);
+					int totalActiveCases=latest_result_service.countActiveByState(state,diseaseType);  // from latest result table
+					int totalTests=test_result_service.totalTestState(state,diseaseType);      		 // from result table
+					int totalCases=test_result_service.totalCasesState(state,diseaseType);            // from result table
+					
+					if(totalTests!=0) {
+						positivityRate= (totalCases*100/totalTests);
+						}
+					else {
+						continue; // if no test for a disease dont show it
+					}
+				if(positivityRate>30) {
+						result_list.add(new Stats(diseaseType,totalActiveCases,totalTests,totalCases,positivityRate,"Red"));
+					}
+						
+				else if(positivityRate<10) {
+					result_list.add(new Stats(diseaseType,totalActiveCases,totalTests,totalCases,positivityRate,"Green"));
+					}
+					
+				else {
+					result_list.add(new Stats(diseaseType,totalActiveCases,totalTests,totalCases,positivityRate,"Orange"));
+				    	}	
+				}
+		model.addAttribute("result_list",result_list);
 		
 		return "g_entity/gdash";
 	}
@@ -244,10 +261,7 @@ public class GovernmentController {
 					
 				else {
 					result_list.add(new Stats(diseaseType,totalActiveCases,totalTests,totalCases,positivityRate,"Orange"));
-				    	}
-					
-					
-				
+				    	}	
 				}
 			}
 			
@@ -264,10 +278,7 @@ public class GovernmentController {
 				}
 				else {
 					continue; // if no test for a disease dont show it
-				}
-			
-				
-				
+				}	
 				if(positivityRate>30) {
 					result_list.add(new Stats(diseaseType,totalActiveCases,totalTests,totalCases,positivityRate,"Red"));
 				}
@@ -278,10 +289,7 @@ public class GovernmentController {
 				
 			else {
 				result_list.add(new Stats(diseaseType,totalActiveCases,totalTests,totalCases,positivityRate,"Orange"));
-			    	}
-				
-				
-				
+			    	}	
 				}
 			}
 				
@@ -317,9 +325,6 @@ public class GovernmentController {
 				
 				}
 			}
-
-	
-		
 				model.addAttribute("result_list",result_list);
 		
 		return "g_entity/zonal_info_result";

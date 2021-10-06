@@ -20,13 +20,18 @@ public class Disease {
 	@Column(name="disease")
 	private	String disease;
 	
+	@Column(name="test")
+	private String test;
+	
+	
 	public Disease() {
 		
 	}
 	
-	public Disease(String disease) {
+	public Disease(String disease,String test) {
 		super();
 		this.disease = disease;
+		this.test=test;
 	}
 
 	public int getId() {
@@ -44,5 +49,14 @@ public class Disease {
 	public void setDisease(String disease) {
 		this.disease = disease;
 	}
+
+	public String getTest() {
+		return test;
+	}
+
+	public void setTest(String test) {
+		this.test = test;
+	}
+	
 	
 }

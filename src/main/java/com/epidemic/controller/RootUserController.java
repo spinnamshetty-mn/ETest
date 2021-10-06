@@ -396,6 +396,18 @@ public class RootUserController {
 		model.addAttribute("request_list",request_list);
 		return "root_gov_entity/test_requests";
 	}
+//------------------------------------------------------------------------------------------------------------------------------
+	
+	@RequestMapping("/{id}/manage_disease")  
+	public String manageDisease(@PathVariable("id") int id,Model model) {
+		model.addAttribute("id",id+"");
+		Government gov=gov_service.searchGov(id);
+		
+		return "root_gov_entity/manage_disease";
+	
+	}
+	
+	
 //---------------------------------------------------------------------------------------------------------------------------------
 	@RequestMapping("/{id}/logout")
 	public String logout(@PathVariable("id") int id,HttpServletRequest request,HttpServletResponse response)throws IOException {

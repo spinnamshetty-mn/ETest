@@ -35,7 +35,7 @@ else if(!session.getAttribute("username").equals(id1)){
         <li >
         <a href="gdash"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Home</span></a></li>
          <li><a href="test_requests"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Test Requests</span></a></li>
-         <li class="active"><a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Active Cases</span></a></li> 
+         <li class="active"><a href="active_cases"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Active Cases</span></a></li> 
         <li><a href="pending_approvals"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">  Pending Approvals</span></a></li>
          <li><a href="test_results"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Test Results</span></a></li>
          <li><a href="zonal_info"><i class="fa fa-circle-thin" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Zones</span></a></li>
@@ -49,7 +49,7 @@ else if(!session.getAttribute("username").equals(id1)){
       <div class="top">
       <table id="head">
       <tr>
-      <td><h1><small>State Government of <%= State %></small></h1></td>
+      <td><h1><small> <%= State %></small></h1></td>
       <td>
       <form action="logout" method="post">
       <button value="logout" id="logout" style="float:right;" >Logout</button>

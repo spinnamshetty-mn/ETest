@@ -19,4 +19,22 @@ public class DiseaseService {
 	public String getAllDisease(){
 		return diseaseRepo.findAllDisease();
 	}
+	public void addDisease(Disease disease) {
+		diseaseRepo.save(disease);
+	}
+	public Disease findDisease(String diseaseType) {
+		return diseaseRepo.findDisease(diseaseType);
+	}
+	public List<String> getDiseaseList(){
+		return diseaseRepo.findAllDiseases();
+	}
+	public Disease findDiseaseEntity(String disease,String test) {
+		return diseaseRepo.isPresent(disease,test);
+	}
+	public boolean isPresent(String disease,String test) {
+		if( diseaseRepo.isPresent(disease,test)!=null) {
+			return true;
+		}
+		return false;
+	}
 }

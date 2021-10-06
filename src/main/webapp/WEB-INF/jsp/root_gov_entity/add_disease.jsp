@@ -25,7 +25,7 @@
          <li><a href="test_results"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Test Results</span></a></li>
          <li><a href="zonal_info"><i class="fa fa-circle-thin" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Zones</span></a></li>
         <li><a href="view_contacts_list"><i class="fa fa-eye" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> View Contacts List</span></a></li>
-        <li class="active"><a href="#"><i class="fa fa-plus" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Manage Disease</span></a></li>
+        <li class="active"><a href="manage_disease"><i class="fa fa-plus" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Manage Disease</span></a></li>
          <li><a href="gsettings"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Settings</span></a></li>
        </ul><br>
     </div>
@@ -37,7 +37,7 @@
       <td><h1><small>  HELLO   </small>   </h1></td>
       <td>
       <form action="logout" method="post">
-      <button value="logout" id="logout" style="float:right;" >Logout</button>
+      <button value="logout" id="logout" style="float:right;" >Logout</button></form>
       
       </td>
       </tr>
@@ -49,13 +49,14 @@
       <h4>
       
       
-      <form action="">
+     <form align="center" action="add_disease" method="post">
   	<label for="disease">Enter Disease:</label>
-  	<input type="text" id="disease" name="disease"><br><br>
+  	<input type="text" id="disease" name="disease" required><br><br>
   	<label for="test">Enter Test:</label>
-  	<input type="text" id="test" name="test"><br><br>
-  	<input type="submit" value="Submit">
-	</form>
+  	<input type="text" id="test" name="test" required><br><br>
+  	
+  	<input type="submit" value="Submit"></form>
+
       
       </h4>
       </div>

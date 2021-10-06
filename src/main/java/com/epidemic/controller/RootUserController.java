@@ -21,6 +21,7 @@ import com.epidemic.UpdatedResult;
 import com.epidemic.UserPDFExporter;
 import com.epidemic.joinclass;
 import com.epidemic.model.ContactList;
+import com.epidemic.model.Disease;
 import com.epidemic.model.Government;
 import com.epidemic.model.HealthWorker;
 import com.epidemic.model.LatestResult;
@@ -30,6 +31,7 @@ import com.epidemic.model.TestRequest;
 import com.epidemic.model.TestResult;
 import com.epidemic.repositories.PatientRepo;
 import com.epidemic.services.ContactListService;
+import com.epidemic.services.DiseaseService;
 import com.epidemic.services.GovernmentService;
 import com.epidemic.services.HealthWorkerService;
 import com.epidemic.services.LatestResultService;
@@ -74,6 +76,9 @@ public class RootUserController {
 	
 	@Autowired
 	ContactListService contact_service;
+	
+	@Autowired
+	DiseaseService diseaseService;
 	
  	// To Display State Name on top of every Page
 	
@@ -346,7 +351,7 @@ public class RootUserController {
 		return "root_gov_entity/view_contacts_list";
 		}
 	
-	
+//----------------------------------------------------------------------------------------------------------------------------
 	@RequestMapping("/users/export/pdf")
 	 public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException {
 		
@@ -399,13 +404,82 @@ public class RootUserController {
 //------------------------------------------------------------------------------------------------------------------------------
 	
 	@RequestMapping("/{id}/manage_disease")  
-	public String manageDisease(@PathVariable("id") int id,Model model) {
+	public String manageDisease(@PathVariable("id") int id,Model model,HttpServletRequest request) {
 		model.addAttribute("id",id+"");
 		Government gov=gov_service.searchGov(id);
+		String type=(String)request.getParameter("epidemic");
+		
+		if(type==null) {
+			return "root_gov_entity/manage_disease";
+		}
+		
+		if(type.equals("disease")) {
+			return "redirect:/rootgov/{id}/add_disease";
+		}
+		if(type.equals("test")) {
+			return "redirect:/rootgov/{id}/add_test";
+		}
 		
 		return "root_gov_entity/manage_disease";
 	
 	}
+	
+	@RequestMapping("/{id}/add_disease")  
+	public String addDisease(@PathVariable("id") int id,Model model,HttpServletRequest request) {
+		model.addAttribute("id",id+"");
+		Government gov=gov_service.searchGov(id);
+		
+		
+		String diseaseType=(String)request.getParameter("disease");
+		String testType=(String)request.getParameter("test");
+		
+		
+		if(diseaseType==null||testType==null) {
+			return "root_gov_entity/add_disease";
+		}
+		
+		if(diseaseType!=null && testType!=null && diseaseService.isPresent(diseaseType, testType)==true) {
+			//display msg already present
+			
+			return "root_gov_entity/add_disease";
+		}
+		 
+		Disease disease=new Disease(diseaseType,testType);
+		
+		diseaseService.addDisease(disease);
+		
+		return "root_gov_entity/add_disease";
+	
+	}
+	
+	@RequestMapping("/{id}/add_test")  
+	public String addTest(@PathVariable("id") int id,Model model,HttpServletRequest request) {
+		model.addAttribute("id",id+"");
+		Government gov=gov_service.searchGov(id);
+		
+		List<String> diseaseList=diseaseService.getDiseaseList();
+		model.addAttribute("list",diseaseList);
+		
+		String diseaseType=(String)request.getParameter("disease");
+		String testType=(String)request.getParameter("test");
+		
+		if(diseaseType==null || testType==null) {
+			return "root_gov_entity/add_test";
+		}
+		
+		if(diseaseType!=null && testType!=null && diseaseService.isPresent(diseaseType, testType)==true) {
+			//display msg already present
+			
+			return "root_gov_entity/add_test";
+		}
+		
+		Disease d=new Disease(diseaseType,testType);
+		diseaseService.addDisease(d);
+		
+		return "root_gov_entity/add_test";
+	
+	}
+	
 	
 	
 //---------------------------------------------------------------------------------------------------------------------------------

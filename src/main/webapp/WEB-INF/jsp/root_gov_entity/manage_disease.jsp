@@ -25,7 +25,7 @@
          <li><a href="test_results"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Test Results</span></a></li>
          <li><a href="zonal_info"><i class="fa fa-circle-thin" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Zones</span></a></li>
         <li><a href="view_contacts_list"><i class="fa fa-eye" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> View Contacts List</span></a></li>
-        <li class="active"><a href="#"><i class="fa fa-plus" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Manage Disease</span></a></li>
+        <li class="active"><a href="manage_disease"><i class="fa fa-plus" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Manage Disease</span></a></li>
          <li><a href="gsettings"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Settings</span></a></li>
        </ul><br>
     </div>
@@ -37,14 +37,14 @@
       <td><h1><small>  HELLO   </small>   </h1></td>
       <td>
       <form action="logout" method="post">
-      <button value="logout" id="logout" style="float:right;" >Logout</button>
+      <button value="logout" id="logout" style="float:right;" >Logout</button></form>
       
       </td>
       </tr>
       </table>
      </div>
       <hr>
-      
+      <form align="center" action="manage_disease" method="post">
       <div> 
       <h4>
       <label for="epidemic">Choose what to manage:</label>
@@ -53,6 +53,10 @@
        <option value="disease"> Disease </option>
        <option value="test"> Test </option>
       </select>
+      <br>
+  		<br>
+  		<input type="submit" value="Submit"></form>
+      
       
       </h4>
       </div>

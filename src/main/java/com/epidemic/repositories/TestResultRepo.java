@@ -32,7 +32,7 @@ public interface TestResultRepo extends CrudRepository<TestResult,Integer> {
 	@Query(value="select distinct(tr.pincode) from testresult tr",nativeQuery=true)
 	List<String> findByPincode();
 	
-	@Query(value="select tr.result_id from testresult tr where tr.report_id= :reportId",nativeQuery=true)
+	@Query(value="select * from testresult tr where tr.report_id= :reportId",nativeQuery=true)
 	TestResult findByReportId(@Param("reportId") long reportId);
 	
 	@Query(value="select tr.result_date from testresult tr where tr.report_id= :report_id",nativeQuery=true)

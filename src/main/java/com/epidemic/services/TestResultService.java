@@ -64,9 +64,6 @@ public class TestResultService {
 		
 		TestResult t=test_result_repo.findByReportId(report_id);
 		
-		int resultId=t.getResultId();
-		
-		
 		String state=t.getState();
 		String city=t.getCity();
 		String status=t.getStatus();
@@ -81,7 +78,6 @@ public class TestResultService {
 			//update
 			
 			System.out.println(lr.getPatientId() +" "+ lr.getDiseaseType());
-			lr.setResultId(resultId);
 			lr.setStatus(status);
 			lr.setHwId(hwId);
 			lr.setDate(date);
@@ -92,7 +88,7 @@ public class TestResultService {
 		}
 		//add new in latestresult
 		
-		LatestResult latestResult=new LatestResult(resultId,patientId,report_id,hwId,status,date,city,state,pincode,diseaseNew,testNew);
+		LatestResult latestResult=new LatestResult(patientId,report_id,hwId,status,date,city,state,pincode,diseaseNew,testNew);
 		latest_result_repo.save(latestResult);
 		
 	}

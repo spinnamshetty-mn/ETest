@@ -18,15 +18,12 @@ import javax.persistence.Table;
 public class TestResult {
 
 	@Id
-	@Column(name="result_id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int resultId;
+	@Column(name="report_id")
+	private long reportId;
+	
 	
 	@Column(name="patient_id")
 	private int patientId;
-	
-	@Column(name="report_id")
-	private long reportId;
 	
 	@Column(name="hw_id")
 	private int hwId;
@@ -72,6 +69,7 @@ public class TestResult {
 		this.pincode=pincode;
 		this.diseaseType=diseaseType;
 		this.testType=testType;
+		
 	}
 	
 	
@@ -87,14 +85,6 @@ public class TestResult {
 		this.pincode=pincode;
 		this.diseaseType=diseaseType;
 		this.testType=testType;
-	}
-
-	public int getResultId() {
-		return resultId;
-	}
-
-	public void setResultId(int resultId) {
-		this.resultId = resultId;
 	}
 
 	public int getPatientId() {

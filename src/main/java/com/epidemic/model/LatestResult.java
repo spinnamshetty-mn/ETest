@@ -16,9 +16,6 @@ public class LatestResult {
 	@Column(name="report_id")
 	private long reportId;
 	
-	@Column(name="result_id")
-	private int resultId;
-	
 	@Column(name="patient_id")
 	private int patientId;
 	
@@ -52,10 +49,10 @@ public class LatestResult {
 		
 	}
 	
-	public LatestResult(int resultId, int patientId, long reportId, int hwId, String status,Date date2, String city,
+	public LatestResult( int patientId, long reportId, int hwId, String status,Date date2, String city,
 			String state, int pincode,String diseaseType,String testType) {
 		super();
-		this.resultId = resultId;
+		
 		this.patientId = patientId;
 		this.reportId = reportId;
 		this.hwId = hwId;
@@ -68,13 +65,7 @@ public class LatestResult {
 		this.testType=testType;
 	}
 
-	public int getResultId() {
-		return resultId;
-	}
-
-	public void setResultId(int resultId) {
-		this.resultId = resultId;
-	}
+	
 
 	public int getPatientId() {
 		return patientId;

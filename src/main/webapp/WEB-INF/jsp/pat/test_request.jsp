@@ -94,57 +94,25 @@ String name=(String)request.getAttribute("name");
       <br>
       <div>
       <h4>
-      <label for="disease">Disease Type:     </label>
+      <label for="disease">Choose a health worker:</label>
       <select name="disease" id="disease">
-  	<option value="" disabled selected>Select an option</option>
-  	<option value="CORONA">CORONA</option>
-  	<option value="EBOLA">EBOLA</option>
-  	<option value="NIPAH">NIPAH</option>
-	</select>
+      <option disabled selected value> -- select an option -- </option>
+       <c:forEach items="${disease_list}" var="disease_list" >
+        <option value="${disease_list}">${disease_list}</option>
+    </c:forEach>
+      </select>
 	</h4>
 	</div>
 	<br>
 	<br>
 	<div>
 	<h4>
-	<label for="test">Test To Conduct:  </label>
-	<select name="test" id="test">
-  	<option value="" disabled selected>Please select an option</option>
-	</select>
-	</h4>
-	</div>
-	<br>
-	<br>
-	<div>
-	<h4>
-	<button id="testrequest" style="float:right; margin-right:50%" >Submit Test Request</button>
+	<button id="testrequest" style="float:right; margin-right:50%" >Select Test</button>
 	</h4>
 	</div>
     </div>
   </div>
 </div>
-<script>
-var lookup = {
-		   "CORONA": ["RTPCR", "ANTIBODY"],
-		   "EBOLA": ["PCR", "CBP"],
-		   "NIPAH": ["PCR","CBP","ANTIBODY"],
-		};
-
-		// When an option is changed, search the above for matching test
-		$('#disease').on('change', function() {
-		   // Set selected option as variable
-		   var selectValue = $(this).val();
-
-		   // Empty the target field
-		   $('#test').empty();
-		   
-		   // For each chocie in the selected option
-		   for (i = 0; i < lookup[selectValue].length; i++) {
-		      // Output choice in the target field
-		      $('#test').append("<option value='" + lookup[selectValue][i] + "'>" + lookup[selectValue][i] + "</option>");
-		   }
-		});
-</script>
 </body> 
 
 </html>

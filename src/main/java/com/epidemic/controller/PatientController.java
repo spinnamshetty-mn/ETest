@@ -117,6 +117,9 @@ public class PatientController {
 		Patient p=patient_service.searchPatient(id);
 		model.addAttribute("name",p.getFirstName());
 		model.addAttribute("id",p.getId()+"");
+		
+		
+		
 		String disease=(String)request.getParameter("disease");
 		String test=(String)request.getParameter("test");
 		

@@ -1,5 +1,5 @@
 package com.example.demo;
-/*
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -36,22 +36,48 @@ class EpidemicHealthWorkersTests {
 	@Test
 	public void addHealthWorkerTest()
 	{
-		HealthWorker healthworker=new HealthWorker("srija","hyderabad","srija@gmail.com","Modeln-123","9898989898","doctor","approved");
+		HealthWorker healthworker=new HealthWorker("srija","srija@gmail.com","Modeln-123","9898989898","doctor","approved","nagar","telan",509100);
 		healthWorkerService.addWorker(healthworker);
 		verify(healthWorkerRepo,times(1)).save(healthworker);
 	}
 	
 	@Test
+	public void updateRequestTest() {
+		HealthWorker healthworker=new HealthWorker("srija","srija@gmail.com","Modeln-123","9898989898","doctor","approved","nagar","telan",509100);
+		healthworker.setId(1);
+		when(healthWorkerRepo.findById(1)).thenReturn(healthworker);
+		healthWorkerService.updateRequest(1);
+		verify(healthWorkerRepo,times(1)).findById(1);
+		verify(healthWorkerRepo,times(1)).save(healthworker);
+	}
+	
+	@Test
+	public void deleteRequestTest(){
+		HealthWorker healthworker=new HealthWorker("srija","srija@gmail.com","Modeln-123","9898989898","doctor","approved","nagar","telan",509100);
+		healthworker.setId(1);
+		healthWorkerService.deleteRequest(1);
+		verify(healthWorkerRepo,times(1)).deleteById(1);
+	}
+	
+	@Test
+	public void validateTest()
+	{
+		HealthWorker healthworker=new HealthWorker("srija","srija@gmail.com","Modeln-123","9898989898","doctor","approved","nagar","telan",509100);
+		healthWorkerService.validate(healthworker.getEmail(),healthworker.getPassword());
+		verify(healthWorkerRepo,times(1)).findByEmail(healthworker.getEmail());
+	}
+	
+	@Test
 	public void searchHealthWorkerTestByHealthWorker() 
 	{
-			HealthWorker healthworker=new HealthWorker("srija","hyderabad","srija@gmail.com","Modeln-123","9898989898","doctor","approved");
+			HealthWorker healthworker=new HealthWorker("srija","srija@gmail.com","Modeln-123","9898989898","doctor","approved","nagar","telan",509100);
 			 when(healthWorkerRepo.findByEmail(healthworker.getEmail())).thenReturn(healthworker);
 			 assertEquals(healthworker,healthWorkerService.searchWorker(healthworker));
 	}
 	@Test
 	public void searchHealthWorkerTestById() 
 	{
-			HealthWorker healthworker=new HealthWorker("srija","hyderabad","srija@gmail.com","Modeln-123","9898989898","doctor","approved");
+			HealthWorker healthworker=new HealthWorker("srija","srija@gmail.com","Modeln-123","9898989898","doctor","approved","nagar","telan",509100);
 			int id=1;
 			when(healthWorkerRepo.findById(id)).thenReturn(healthworker);
 			assertEquals(healthworker,healthWorkerService.searchWorker(id));
@@ -59,58 +85,44 @@ class EpidemicHealthWorkersTests {
 	@Test
 	public void searchHealthWorkerTestByEmail() 
 	{
-			HealthWorker healthworker=new HealthWorker("srija","hyderabad","srija@gmail.com","Modeln-123","9898989898","doctor","approved");
+			HealthWorker healthworker=new HealthWorker("srija","srija@gmail.com","Modeln-123","9898989898","doctor","approved","nagar","telan",509100);
 			String email="srija@gmail.com";
 			when(healthWorkerRepo.findByEmail(email)).thenReturn(healthworker);
 			assertEquals(healthworker,healthWorkerService.searchWorker(email));
 	}
-	@Test
-	public void validateTest()
-	{
-		HealthWorker healthworker=new HealthWorker("srija","hyderabad","srija@gmail.com","Modeln-123","9898989898","doctor","approved");
-		healthWorkerService.validate(healthworker.getEmail(),healthworker.getPassword());
-		verify(healthWorkerRepo,times(1)).findByEmail(healthworker.getEmail());
-	}
-	@Test
-	public void updateRequestTest() {
-		HealthWorker healthworker=new HealthWorker("srija","hyderabad","srija@gmail.com","Modeln-123","9898989898","doctor","pending");
-		healthworker.setId(1);
-		when(healthWorkerRepo.findById(1)).thenReturn(healthworker);
-		healthWorkerService.updateRequest(1);
-		verify(healthWorkerRepo,times(1)).findById(1);
-		verify(healthWorkerRepo,times(1)).save(healthworker);
-	}
-	@Test
-	public void deleteRequestTest(){
-		HealthWorker healthworker=new HealthWorker("srija","hyderabad","srija@gmail.com","Modeln-123","9898989898","doctor","pending");
-		healthworker.setId(1);
-		healthWorkerService.deleteRequest(1);
-		verify(healthWorkerRepo,times(1)).deleteById(1);
-	}
 	
 	@Test
 	public void findActiveHWTest() {
-		when(healthWorkerRepo.findByActiveHw()).thenReturn(Arrays.asList(new HealthWorker("srija","hyderabad","srija@gmail.com","Modeln-123","9898989898","doctor","approved"),new HealthWorker("srij","hyderaba","srij@gmail.com","Model-123","9898989899","doctor","approved")));
+		when(healthWorkerRepo.findByActiveHw()).thenReturn(Arrays.asList(new HealthWorker("srija","srija@gmail.com","Modeln-123","9898989898","doctor","approved","nagar","telan",509100),new HealthWorker("srija","srija@gmail.com","Modeln-123","9898989898","doctor","approved","nagar","telan",509100)));
 		assertEquals(2,healthWorkerService.findActiveHW().size());
 	}
 	
 	@Test
 	public void displayAllHWTest() {
-		when(healthWorkerRepo.findAllHW()).thenReturn(Arrays.asList(new HealthWorker("srija","hyderabad","srija@gmail.com","Modeln-123","9898989898","doctor","approved"),new HealthWorker("srij","hyderaba","srij@gmail.com","Model-123","9898989899","doctor","approved")));
-		assertEquals(2,healthWorkerService.displayAllHW().size());
+		when(healthWorkerRepo.findAllHW()).thenReturn(Arrays.asList(new HealthWorker("srija","srija@gmail.com","Modeln-123","9898989898","doctor","approved","nagar","telan",509100)));
+		assertEquals(1,healthWorkerService.displayAllHW().size());
 	}
+	
 	@Test
 	public void displayPendingHWTest() {
-		when(healthWorkerRepo.findAllPendingHw()).thenReturn(Arrays.asList(new HealthWorker("srija","hyderabad","srija@gmail.com","Modeln-123","9898989898","doctor","approved"),new HealthWorker("srij","hyderaba","srij@gmail.com","Model-123","9898989899","doctor","approved")));
+		when(healthWorkerRepo.findAllPendingHw()).thenReturn(Arrays.asList(new HealthWorker("srija","srija@gmail.com","Modeln-123","9898989898","doctor","approved","nagar","telan",509100),new HealthWorker("srija","srija@gmail.com","Modeln-123","9898989898","doctor","approved","nagar","telan",509100)));
 		assertEquals(2,healthWorkerService.displayPendingHW().size());
 	}
+	
+	@Test
+	public void displayPendingHWInStateTest() {
+		String state="telangana";
+		when(healthWorkerRepo.findAllPendingHwInState(state)).thenReturn(Arrays.asList(new HealthWorker("srija","srija@gmail.com","Modeln-123","9898989898","doctor","approved","nagar","telan",509100),new HealthWorker("srija","srija@gmail.com","Modeln-123","9898989898","doctor","approved","nagar","telan",509100)));
+		assertEquals(2,healthWorkerService.displayPendingHWInState("telangana").size());
+	}
+	
 	@Test
 	public void updateTest()
 	{
-		HealthWorker healthworker=new HealthWorker("srija","hyderabad","srija@gmail.com","Modeln-123","9898989898","doctor","approved");
+		HealthWorker healthworker=new HealthWorker("srija","srija@gmail.com","Modeln-123","9898989898","doctor","approved","nagar","telan",509100);
 		healthWorkerService.update(healthworker);
 		verify(healthWorkerRepo,times(1)).save(healthworker);
 	}
-
+	
+	
 }
-*/

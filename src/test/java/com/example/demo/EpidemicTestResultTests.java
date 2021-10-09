@@ -1,5 +1,5 @@
 package com.example.demo;
-/*
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -18,6 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.epidemic.EpidemicApplication;
+import com.epidemic.UpdatedResult;
 import com.epidemic.model.HealthWorker;
 import com.epidemic.model.LatestResult;
 import com.epidemic.model.Patient;
@@ -57,8 +58,8 @@ class EpidemicTestResultTests {
 	@Test
 	public void addTest() {
 		Date date1=new Date(12-9-1999);
-		TestResult testResult=new TestResult(11,101,21,"positive",date1,"nagar","telanagan",500001);
-		TestRequest tr=new TestRequest(11,21);
+		TestResult testResult=new TestResult(11,101,21,"positive",date1,"nagar","telanagan",500001,"corona","pcr");
+		TestRequest tr=new TestRequest(11,21,"corona","pcr");
 		when(testRequestRepo.findById(101)).thenReturn(tr);
 		when(testResultRepo.findByReportId(101)).thenReturn(testResult);
 		testResultService.add(101, "positive");
@@ -72,112 +73,138 @@ class EpidemicTestResultTests {
 		int pat_id=11;
 		Date date1=new Date(12-9-1999);
 		List<TestResult> l=new ArrayList<TestResult>();
-		l.add(new TestResult(11,101,21,"positive",date1,"nagar","telanagan",500001));
-		l.add(new TestResult(11,102,22,"positive",date1,"nagar2","telanagana2",500002));
+		l.add(new TestResult(11,101,21,"positive",date1,"nagar","telanagan",500001,"corona","pcr"));
+		l.add(new TestResult(11,102,22,"positive",date1,"nagar2","telanagana2",500002,"corona","rt-pcr"));
 		when(testResultRepo.findAllByPatient(11)).thenReturn(l);	
 		assertEquals(2,testResultService.findAllPatientResult(pat_id).size());
 	} 
-	/*@Test
+	/*
+	@Test
 	public void findByPatientTest() {
 		int pat_id=11;
-		TestResult testResult=new TestResult(11,101,21,"posotive","nagar","telangana",500001);
+		TestResult testResult=new TestResult(11,101,21,"posotive","nagar","telangana",500001,"corona","pcr");
 		when(testResultRepo.findByPatient(pat_id)).thenReturn(101);
 		testResultService.findByPatient(11);
 		verify(testResultRepo,times(1)).findByPatient(pat_id);
-	}
+	}*/
 	
 	@Test
 	public void findAllResultsByHWTest() {
 		int hwId=21;
-		when(testResultRepo.findByOrderByHwIdDesc(hwId)).thenReturn(Arrays.asList(new TestResult(11,101,21,"posotive",new Date(18-9-2021),"nagar","telangana",500001),new TestResult(12,102,21,"positive",new Date(14-8-2020),"warang","andhra",500002)));
+		Date d=new Date();
+		when(testResultRepo.findByOrderByHwIdDesc(hwId)).thenReturn(Arrays.asList(new UpdatedResult(11,101,"srija","pinnamshetty","positive",d,500001,"corona","pcr"),new UpdatedResult(12,102,"srija","pinnamshetty","positive",d,500001,"corona","rt-pcr")));
 		assertEquals(2,testResultService.findAllResultsByHW(hwId).size());
 	}
 	
-	
-	
 	@Test
 	public void getAllStateTest() {
-		List<String> l=new ArrayList<String>();
-		l.add("telangana");
-		l.add("andhra_pradesh");
-		l.add("uttar_pradesh");
-		when(testResultRepo.findByState()).thenReturn(l);	
-		assertEquals(3,testResultService.getAllState().size());
+		when(testResultRepo.findByState()).thenReturn(Arrays.asList("telangana","andhra_pradesh"));	
+		assertEquals(2,testResultService.getAllState().size());
 	}
 	
 	@Test
 	public void getAllCityTest() {
-		List<String> l=new ArrayList<String>();
-		l.add("nagar");
-		l.add("warangal");
-		l.add("allahabad");
-		when(testResultRepo.findByCity()).thenReturn(l);	
-		assertEquals(3,testResultService.getAllCity().size());
+		when(testResultRepo.findByCity()).thenReturn(Arrays.asList("nagar","allahabad"));	
+		assertEquals(2,testResultService.getAllCity().size());
 	}
 	
 	@Test
 	public void getAllPincodeTest() {
-		List<String> l=new ArrayList<String>();
-		l.add("509001");
-		l.add("500034");
-		l.add("200567");
-		when(testResultRepo.findByPincode()).thenReturn(l);	
-		assertEquals(3,testResultService.getAllPincode().size());
+		when(testResultRepo.findByPincode()).thenReturn(Arrays.asList("500001","500002"));	
+		assertEquals(2,testResultService.getAllPincode().size());
 	}
 	
 	
 	@Test
 	public void  totalTestStateTest() {
 		String state="telangana";
-		when(testResultRepo.totalTestState(state)).thenReturn(20);
-		assertEquals(20,testResultService.totalTestState(state));
+		String diseaseType="corona";
+		when(testResultRepo.totalTestState(state,diseaseType)).thenReturn(20);
+		assertEquals(20,testResultService.totalTestState("telangana","corona"));
 	}
 	
 	@Test
 	public void  totalTestCityTest() {
 		String city="nagar";
-		when(testResultRepo.totalTestCity(city)).thenReturn(20);
-		assertEquals(20,testResultService.totalTestCity(city));
+		String diseaseType="corona";
+		when(testResultRepo.totalTestCity(city,diseaseType)).thenReturn(20);
+		assertEquals(20,testResultService.totalTestCity("nagar","corona"));
 	}
 	
 	@Test
 	public void totalTestPincodeTest()
 	{
 		int pin=500001;
-		when(testResultRepo.totalTestPincode(pin)).thenReturn(20);
-		assertEquals(20,testResultService.totalTestPincode(pin));
+		String diseaseType="corona";
+		when(testResultRepo.totalTestPincode(pin,diseaseType)).thenReturn(20);
+		assertEquals(20,testResultService.totalTestPincode(500001,"corona"));
 	}
 	
 	@Test
 	public void totalCasesStateTest()
 	{
 		String state="telangana";
-		when(testResultRepo.totalCasesCity(state)).thenReturn(3);
-		assertEquals(3,testResultService.totalCasesCity(state));
+		String diseaseType="corona";
+		when(testResultRepo.totalCasesCity(state,diseaseType)).thenReturn(3);
+		assertEquals(3,testResultService.totalCasesCity("telangana","corona"));
 	}
 	
 	@Test
 	public void totalCasesCityTest()
 	{
 		String city="nagar";
-		when(testResultRepo.totalCasesCity(city)).thenReturn(3);
-		assertEquals(3,testResultService.totalCasesCity(city));
+		String diseaseType="corona";
+		when(testResultRepo.totalCasesCity(city,diseaseType)).thenReturn(3);
+		assertEquals(3,testResultService.totalCasesCity("nagar","corona"));
 	}
 	
 	@Test
 	public void totalCasesPincodeTest()
 	{
 		int pin=500001;
-		when(testResultRepo.totalCasesPincode(pin)).thenReturn(3);
-		assertEquals(3,testResultService.totalCasesPincode(pin));
+		String diseaseType="corona";
+		when(testResultRepo.totalCasesPincode(pin,diseaseType)).thenReturn(3);
+		assertEquals(3,testResultService.totalCasesPincode(500001,"corona"));
 	}
 	
 	@Test
 	public void totalTestsByHwTest() {
 		int hwid=21;
-		when(testResultRepo.totalTestByHwId(hwid)).thenReturn(2);
-		assertEquals(2,testResultService.totalTestsByHw(hwid));
+		String diseaseType="corona";
+		when(testResultRepo.totalTestByHwId(hwid,diseaseType)).thenReturn(2);
+		assertEquals(2,testResultService.totalTestsByHw(21,"corona"));
 	}
-
+	
+	@Test
+	public void displayAllResultsTest() {
+		Date d=new Date();
+		when(testResultRepo.displayAll()).thenReturn(Arrays.asList(new TestResult(11,101,21,"positive",d,"nagar","telangana",500001,"corona","pcr"),new TestResult(12,102,22,"positive",d,"nagar2","telangana",500003,"corona","pcr")));
+		assertEquals(2,testResultService.displayAllResults().size());
+	}
+	
+	@Test
+	public void displayAllResultsByStateTest() {
+		Date d=new Date();
+		String state="telangana";
+		when(testResultRepo.displayAll(state)).thenReturn(Arrays.asList(new TestResult(11,101,21,"positive",d,"nagar","telangana",500001,"corona","pcr"),new TestResult(12,102,22,"positive",d,"nagar2","telangana",500003,"corona","pcr")));
+		assertEquals(2,testResultService.displayAllResults("telangana").size());
+	}
+	
+	@Test
+	public void totalAllTestsTest()
+	{
+		String diseaseType="corona";
+		when(testResultRepo.countAllTest(diseaseType)).thenReturn(3);
+		assertEquals(3,testResultService.totalAllTests("corona"));
+	}
+	
+	@Test
+	public void countAllPositiveTest()
+	{
+		String diseaseType="corona";
+		when(testResultRepo.countAllPositive(diseaseType)).thenReturn(3);
+		assertEquals(3,testResultService.countAllPositive("corona"));
+	}
+	
+	
 }
-*/

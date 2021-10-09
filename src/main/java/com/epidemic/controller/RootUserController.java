@@ -117,7 +117,7 @@ public class RootUserController {
 //---------------------------------------------------------------------------------------------------------------------------------
 	
 	@RequestMapping("/{id}/pending_approvals")     // HW Request TAB ----->  page to handle accept / reject HW account creation by GOV.
-	public String approveHw(@PathVariable("id") int id,Model model,HttpServletRequest request) {
+	public String approveStateRequests(@PathVariable("id") int id,Model model,HttpServletRequest request) {
 		model.addAttribute("id",id+"");
 		Government gov=gov_service.searchGov(id);
 		model.addAttribute("State",gov.getState());  // display state name at top of page

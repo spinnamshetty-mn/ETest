@@ -28,7 +28,7 @@
     <label for="password-repeat"><b>Confirm Password</b></label>
     <input type="password" placeholder="Confirm Password" name="password-repeat" id="password-repeat" minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="Please include at least 1 uppercase character, 1 lowercase character, and 1 number."  required>
     <label for="name"><b>Name</b></label>
-    <input type="text" placeholder="Enter Name" name="name" id="name" pattern="[a-zA-Z]+" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>
+    <input type="text" placeholder="Enter Name" name="name" id="name" pattern="([A-Za-z])+( [A-Za-z]+)" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>
     <label for="city"><b>City</b></label>
     <input type="text" placeholder="Enter City" name="city" id="city" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>
     

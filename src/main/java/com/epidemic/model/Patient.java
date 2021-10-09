@@ -4,6 +4,8 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import com.epidemic.EncryptPassword;
+
 @Entity
 @Table(name="Patient")
 
@@ -47,7 +49,7 @@ public class Patient {
 		this.firstName = firstname.toUpperCase();
 		this.lastName=lastname.toUpperCase();
 		this.email = email;
-		this.password = password;
+		this.password=password;
 		this.mobile=Long.parseLong(mobile);
 		this.city=city.toUpperCase();
 		this.state=state.toUpperCase();

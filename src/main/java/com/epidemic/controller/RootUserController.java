@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.epidemic.EncryptPassword;
 import com.epidemic.UpdatedResult;
 import com.epidemic.UserPDFExporter;
 import com.epidemic.joinclass;
@@ -92,10 +93,7 @@ public class RootUserController {
 		model.addAttribute("State",gov.getState());
 		model.addAttribute("id",id+"");
 		int positivityRate=0;   
-		List<String> disease=new ArrayList<>();
-		disease.add("CORONA");
-		disease.add("EBOLA");
-		disease.add("NIPAH");	
+		List<String> disease=diseaseService.getDiseaseList();
 		List<Stats> result_list=new ArrayList<>();
 				
 					for(int i=0;i<disease.size();i++) {
@@ -156,12 +154,13 @@ public class RootUserController {
 		
 		String newpassword=(String)request.getParameter("newpassword");		// for getting these fields from JSP
 		String oldpassword=(String)request.getParameter("oldpassword");
+		EncryptPassword encrypt=new EncryptPassword();
 		
 		
 		if( newpassword!=null ) {		// validate and set new password
-			if(oldpassword!="" && oldpassword.equals(gov.getPassword())) {
-				if(newpassword!="") {
-					gov.setPassword(newpassword);
+			if( encrypt.encryptPassword(oldpassword)!="" && encrypt.encryptPassword(oldpassword).equals(gov.getPassword())) {
+				if(encrypt.encryptPassword(newpassword)!="") {
+					gov.setPassword(encrypt.encryptPassword(newpassword));
 				}
 			}
 		
@@ -224,10 +223,7 @@ public class RootUserController {
 		int totalTests=0;
 		int totalCases=0;
 		float positivityRate=0;
-		List<String> disease=new ArrayList<>();
-		disease.add("COVID");
-		disease.add("EBOLA");
-		disease.add("NIPAH");	
+		List<String> disease=diseaseService.getDiseaseList();
 		List<Stats> result_list=new ArrayList<>();
 			if(type.equals("state")) {        // name =specific state/city/pincode chosen from dropdown
 				

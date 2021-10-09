@@ -52,15 +52,16 @@ String name=(String)request.getAttribute("name");
       <form action="logout" method="post">
       <button value="logout" id="logout" style="float:right;" >Logout</button>
       </form>
-      <form action="test_request" method="post">
+      <form action="test_select" method="post">
 		<%
-		String msg=(String)request.getAttribute("msg1");
+		
+		String msg=(String)request.getAttribute("msg");
 		if(msg==null){
 			msg="";
 		
 		}
 		%>
-      </td>
+      </td></form>
       </tr>
       <tr><td><h1><%= msg %></h1></td></tr>
       </table>
@@ -69,20 +70,22 @@ String name=(String)request.getAttribute("name");
       
       <div> 
       <h4>
-     <label for="hw">test:</label>
-      <select name="hw" id="hw">
+      <form action="test_select" method="post">
+     <label for="test">test:</label>
+      <select name="test" id="test">
       <option disabled selected value> -- select an option -- </option>
-       <c:forEach items="${test_list}" var="hw" >
-        <option value="${test.id}">${test.id}</option>
+       <c:forEach items="${test_list}" var="test" >
+        <option value="${test}">${test}</option>
     </c:forEach>
       </select>
       </h4>
       </div>  
+      
 	<div>
 	<h4>
-	<button id="testrequest" style="float:right; margin-right:50%" >Select Test</button>
+	<button id="testrequest" style="float:right; margin-right:50%" > Request Test</button>
 	</h4>
-	</div>
+	</div></form>
     </div>
   </div>
 </div>

@@ -37,4 +37,9 @@ public class DiseaseService {
 		}
 		return false;
 	}
+	
+	public List<String> getTestList(String diseaseType) {
+		// TODO Auto-generated method stub
+		return diseaseRepo.getTestList( diseaseType);
+	}
 }

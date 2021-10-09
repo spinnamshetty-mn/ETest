@@ -63,29 +63,23 @@ String name=(String)request.getAttribute("name");
       </td>
       </tr>
       <tr><td><h1><%= msg %></h1></td></tr>
+      <% 
+      if(msg.length()!=0){
+      response.setHeader("Refresh", "2;url=test_request");} %>
       </table>
      </div>
       <hr>
       
       <div> 
       <h4>
+        <form action="/patient/${id}/${disease}/test_select" method="post">
       <label for="hw">Choose a health worker:</label>
       <select name="hw" id="hw">
       <option disabled selected value> -- select an option -- </option>
        <c:forEach items="${hw_list}" var="hw" >
         <option value="${hw.id}">HW name: ${hw.name} and HW id : ${hw.id}</option>
     </c:forEach>
-      </select>
-      
-      <!-- 
-       <label for="hw">Choose a health worker:</label>
-      <select name="hw" id="hw">
-			<option value="sel" selected>select</option>
-			  <option value="3">3</option>
-			  <option value="4">4</option>
-			  <option value="1">1</option>
-			  <option value="6">6</option>
-			</select> -->	
+      </select>	
 	
       
       </h4>
@@ -94,7 +88,7 @@ String name=(String)request.getAttribute("name");
       <br>
       <div>
       <h4>
-      <label for="disease">Choose a health worker:</label>
+      <label for="disease">Choose Disease:</label>
       <select name="disease" id="disease">
       <option disabled selected value> -- select an option -- </option>
        <c:forEach items="${disease_list}" var="disease_list" >
@@ -105,11 +99,12 @@ String name=(String)request.getAttribute("name");
 	</div>
 	<br>
 	<br>
+	
 	<div>
 	<h4>
 	<button id="testrequest" style="float:right; margin-right:50%" >Select Test</button>
 	</h4>
-	</div>
+	</div></form>
     </div>
   </div>
 </div>

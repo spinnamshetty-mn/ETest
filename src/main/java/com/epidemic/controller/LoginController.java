@@ -46,6 +46,7 @@ public class LoginController {
 	@RequestMapping("/signup") //catch the type
 	public String signup(@RequestParam("Type") String type) {
 		if(type.equals("Patient")) {
+			
 			return "patient";   
 		}
 		if(type.equals("HealthWorker")) {
@@ -53,7 +54,8 @@ public class LoginController {
 		}
 		if(type.equals("GovernmentEntity")) {
 			return "government"; 
-		}	
+		}
+		
 		return "";
 	}
 //-----------------------------------------------------------------------------------------------------------------------------
@@ -61,7 +63,11 @@ public class LoginController {
 	public String signupPatient(@ModelAttribute Patient patient,Model model,HttpServletRequest request) {
 
 		boolean st=false;
-		 st=patient_service.addPatient(patient);  // validate and add in DB
+		EncryptPassword p=new EncryptPassword();
+		patient.setPassword(p.encryptPassword(patient.getPassword()));
+		 st=patient_service.addPatient(patient); 
+		 // validate and add in DB
+		 	
 		 model.addAttribute("patient",patient);
 
 		if(st==true) {
@@ -76,7 +82,10 @@ public class LoginController {
 	@RequestMapping("/signup/healthworker") // HW Sign Up Page 
 	public String signupPatient(@ModelAttribute HealthWorker hw,Model model) {
 		boolean st=false;
-		 st=hw_service.addWorker(hw);         // validate and add in DB with PENDING status (to be approved by GOV)
+		EncryptPassword p=new EncryptPassword();
+		hw.setPassword(p.encryptPassword(hw.getPassword())); 
+		
+		st=hw_service.addWorker(hw);         // validate and add in DB with PENDING status (to be approved by GOV)
 		 model.addAttribute("healthworker",hw);
 		if(st==true) {
 			return "redirect:/signin"; // redirect to signin/login 
@@ -87,6 +96,8 @@ public class LoginController {
 	@RequestMapping("/signup/government")
 	public String signupGovernment(@ModelAttribute Government gov,Model model) {
 		boolean st=false;
+		EncryptPassword p=new EncryptPassword();
+		gov.setPassword(p.encryptPassword(gov.getPassword())); 
 		st=gov_service.addGov(gov); // validate and add in DB with PENDING status (to be approved by ROOT USER)
 		if(st==true) {
 			return "login";
@@ -113,8 +124,8 @@ public class LoginController {
 	@RequestMapping("/login") //catch the type
 	public String login(@RequestParam("category") String type, @RequestParam("email") String email, @RequestParam("password") String password,Model model,HttpServletResponse response,HttpServletRequest request) throws IOException {
 		String error="";
-		
-		if(type.equals("Patient") &&  patient_service.validate(email,password)) {
+		EncryptPassword encrypt=new EncryptPassword();
+		if(type.equals("Patient") &&  patient_service.validate(email,encrypt.encryptPassword(password))) {
 			int id = patient_service.searchPatient(email).getId();
 			HttpSession session=request.getSession();
 			model.addAttribute("id",id+"");
@@ -125,7 +136,7 @@ public class LoginController {
 			return "pat/p_home";
 			//return "redirect:/patient/" + id +"/p_home";  //redirect to new jsp pages patient/p_home
 		}	
-		else	if(type.equals("Health Worker") && hw_service.validate(email,password)) {
+		else	if(type.equals("Health Worker") && hw_service.validate(email,encrypt.encryptPassword(password))) {
 			
 			
 			HealthWorker hw_db=hw_service.searchWorker(email);
@@ -139,7 +150,7 @@ public class LoginController {
 				return "h_worker/hdash"; // //redirect to new jsp pages hw/hdash
 			}
 			
-		else	if(type.equals("GovernmentEntity") && email.equals("rootuser@gmail.com" )&& password.equals("Modeln-123")) {
+		else	if(type.equals("GovernmentEntity") && email.equals("rootuser@gmail.com" )&& gov_service.validate("rootuser@gmail.com",encrypt.encryptPassword(password))) {
 					Government gov_db=gov_service.searchGov(email);
 					int id=gov_db.getGovId();
 					HttpSession session=request.getSession();
@@ -150,7 +161,7 @@ public class LoginController {
 			
 				}
 			
-			if(type.equals("GovernmentEntity") && gov_service.validate(email,password)) {
+			if(type.equals("GovernmentEntity") && gov_service.validate(email,encrypt.encryptPassword(password))) {
 				Government gov_db=gov_service.searchGov(email);
 				if(gov_db.getStatus().equals("pending")) {
 					return "pending_gov"; //  Sorry your request is still pending...

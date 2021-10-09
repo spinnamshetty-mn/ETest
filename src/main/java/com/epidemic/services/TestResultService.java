@@ -75,16 +75,8 @@ public class TestResultService {
 		
 		
 		if(lr!=null){
-			//update
-			
-			System.out.println(lr.getPatientId() +" "+ lr.getDiseaseType());
-			lr.setStatus(status);
-			lr.setHwId(hwId);
-			lr.setDate(date);
-			lr.setReportId(report_id);
-			lr.setTestType(testNew);
-			latest_result_repo.save(lr);
-			return;
+			//delete existing since cant override primary key.
+			latest_result_repo.delete(lr);
 		}
 		//add new in latestresult
 		

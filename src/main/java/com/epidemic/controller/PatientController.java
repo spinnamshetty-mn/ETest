@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.epidemic.EncryptPassword;
 import com.epidemic.model.ContactList;
 import com.epidemic.model.Disease;
 import com.epidemic.model.HealthWorker;
@@ -81,26 +83,6 @@ public class PatientController {
 		model.addAttribute("lr",lr);
 		int size=lr.size();
 		model.addAttribute("size",size+"");
-		
-		/*
-		LatestResult lr=latest_result_service.getLatestResultPatient(id);
-		if(lr==null) {
-			return "pat/p_home";
-		}
-		
-		Date date1=lr.getDate();
-		String date = new SimpleDateFormat("dd-MM-YYYY").format(date1);
-		model.addAttribute("date",date);
-		int hwId=lr.getHwId();
-		String hwname=hw_service.searchWorker(hwId).getName();
-		if(hwname==null) {
-			hwname="N/A";
-		}
-		String result=lr.getStatus();
-		
-		model.addAttribute("result",result);
-		model.addAttribute("hwname",hwname);
-		*/
 	
 
 		return "pat/p_home";
@@ -118,18 +100,20 @@ public class PatientController {
 		model.addAttribute("name",p.getFirstName());
 		model.addAttribute("id",p.getId()+"");
 		
-		
-		
 		String disease=(String)request.getParameter("disease");
-		String test=(String)request.getParameter("test");
 		
-		if(disease!=null && test!=null && test_request_service.findTest(id,disease) !=null) {
-			
-			model.addAttribute("msg1","Oops, Looks Like You Have Already Requested. Try Again Later");
-			}
-		
-		else {
 		String hw_id=(String)request.getParameter("hw");
+		if(disease!=null) {
+			if(test_request_service.findTest(id,disease) !=null) {
+				model.addAttribute("msg1","Oops, Looks Like You Have Already Requested. Try Again Later");
+				return "pat/test_request";
+			}
+			
+			return "redirect:/patient/"+id+"/"+hw_id+"/"+disease+"/test_select";
+		}
+		
+		List<String> disease_list=diseaseService.getDiseaseList();
+		model.addAttribute("disease_list",disease_list);
 		
 		if(hw_id==null) {
 			hw_id="sel";
@@ -142,15 +126,54 @@ public class PatientController {
 			return "pat/test_request";
 		}  
 		// first time hw_id=sel so no msg will be displayed.  ->next time select will have id as 1,2,3 etc so below code will run.
-		model.addAttribute("msg1","Request Sent");
-		TestRequest tr=new TestRequest(id,Integer.parseInt(hw_id),disease,test);
-		test_request_service.add(tr);
-		
-		return "pat/test_request";
-		}
 		
 		return "pat/test_request";
 	}
+	
+	//---------------------------------------------------------------------------------------------------------------------
+	
+	@RequestMapping("/{id}/{hw}/{disease}/test_select")
+	public String test_select(@PathVariable("id") int id,@PathVariable("hw") String hw,@PathVariable("disease") String disease, Model model ,HttpServletRequest request,HttpServletResponse response) throws InterruptedException {
+		
+	
+		Patient p=patient_service.searchPatient(id);
+		model.addAttribute("name",p.getFirstName());
+		model.addAttribute("id",p.getId()+"");
+		
+		List<String> test_list=diseaseService.getTestList(disease);
+		model.addAttribute("test_list",test_list);
+		
+		String test=(String)request.getParameter("test");
+		
+		String msg=(String)request.getParameter("msg"); 
+		if(msg!=null) {
+			model.addAttribute("msg","Request Sent");
+				
+		}
+		if(test_request_service.findTest(id,disease) !=null) {
+			model.addAttribute("msg","Oops, Looks Like You Have Already Requested. Try Again Later");
+			return "redirect:/patient/"+id+"/test_request";
+		}
+		
+		if(test!=null) {
+			
+			TestRequest tr=new TestRequest(id,Integer.parseInt(hw),disease,test);
+			test_request_service.add(tr);
+			model.addAttribute("msg","Request Sent");
+		}
+		
+		return "pat/test_select";
+		
+	}
+	
+	@RequestMapping("/{id}/{hw}/{disease}/{tab}")   // ignore---- just for redirecting from tab to tab
+	public String redirect(@PathVariable("id") int id,@PathVariable("hw") String hw,@PathVariable("disease") String disease, @PathVariable("tab") String tab) {
+		if(tab.equals("test_select")) {
+			return "redirect:/patient/"+id +"/"+hw+"/"+disease+"/"+tab;
+		}
+		return "redirect:/patient/"+id +"/"+tab;
+	}
+	
 //---------------------------------------------------------------------------------------------------------------------------------
 	@RequestMapping ("/{id}/results") // get list of all result uploaded by hw
 	public String test_result(@PathVariable("id") int id, Model model) {
@@ -171,7 +194,7 @@ public class PatientController {
 		model.addAttribute("id",p.getId()+"");
 		model.addAttribute("mobile",p.getMobile()+"");
 		model.addAttribute("email",p.getEmail());
-		
+		EncryptPassword encrypt=new EncryptPassword();
 		String firstname=(String)request.getParameter("firstname");
 		String lastname=(String)request.getParameter("lastname");
 		String mobile=(String)request.getParameter("mobile");
@@ -192,9 +215,10 @@ public class PatientController {
 				p.setMobile(Long.parseLong(mobile));
 			}
 		
-			if(oldpassword!="" && oldpassword.equals(p.getPassword())) {
-				if(newpassword!="") {
-					p.setPassword(newpassword);
+			
+			if( encrypt.encryptPassword(oldpassword)!="" && encrypt.encryptPassword(oldpassword).equals(p.getPassword())) {
+				if(encrypt.encryptPassword(newpassword)!="") {
+					p.setPassword(encrypt.encryptPassword(newpassword));
 				}
 			}
 		

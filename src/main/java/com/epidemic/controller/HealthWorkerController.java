@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.epidemic.EncryptPassword;
 import com.epidemic.HDash;
 import com.epidemic.UpdatedResult;
 import com.epidemic.joinclass;
@@ -25,6 +26,7 @@ import com.epidemic.model.Patient;
 import com.epidemic.model.TestRequest;
 import com.epidemic.model.TestResult;
 import com.epidemic.repositories.PatientRepo;
+import com.epidemic.services.DiseaseService;
 import com.epidemic.services.HealthWorkerService;
 import com.epidemic.services.LatestResultService;
 import com.epidemic.services.PatientService;
@@ -53,6 +55,9 @@ public class HealthWorkerController {
 	
 	@Autowired
 	PatientService patient_service;
+	
+	@Autowired
+	DiseaseService disease_service;
 
 //--------------------------------------------------------------------------------------------------------------------------------
 	@RequestMapping ("/{id}/hdash")    // HW HOME-----------display hw info
@@ -70,11 +75,7 @@ public class HealthWorkerController {
 		
 		List<HDash> hdash_list=new ArrayList<>();
 		
-		List<String> disease=new ArrayList<>();
-		disease.add("COVID");
-		disease.add("EBOLA");
-		disease.add("NIPAH");
-				
+		List<String> disease=disease_service.getDiseaseList();
 		// list loop 
 		//get a particular disease from list
 		for(int i=0;i<disease.size();i++) {
@@ -142,6 +143,8 @@ public class HealthWorkerController {
 		String mobile=(String)request.getParameter("mobile");
 		String newpassword=(String)request.getParameter("newpassword");
 		String oldpassword=(String)request.getParameter("oldpassword");
+		EncryptPassword encrypt=new EncryptPassword();
+		
 		
 		if(name!=null ||  mobile!=null && (!mobile.equals(hw.getMobile()))  || newpassword!=null ) { // to be submitted only if something is not null
 			
@@ -152,10 +155,10 @@ public class HealthWorkerController {
 			if(mobile!="" ) {
 				hw.setMobile(Long.parseLong(mobile));
 			}
-		
-			if(oldpassword!="" && oldpassword.equals(hw.getPassword())) {
-				if(newpassword!="") {
-					hw.setPassword(newpassword);
+			
+			if( encrypt.encryptPassword(oldpassword)!="" && encrypt.encryptPassword(oldpassword).equals(hw.getPassword())) {
+				if(encrypt.encryptPassword(newpassword)!="") {
+					hw.setPassword(encrypt.encryptPassword(newpassword));
 				}
 			}
 		hw_service.update(hw);  // update in DB

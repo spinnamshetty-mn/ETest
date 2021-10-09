@@ -21,5 +21,8 @@ public interface DiseaseRepo extends CrudRepository<Disease,Integer> {
 
 	@Query(value="select * from epidemic e where e.disease=:disease and e.test=:test",nativeQuery=true)
 	Disease isPresent(@Param("disease") String disease,@Param("test") String test);
+
+	@Query(value="select e.test from epidemic e where e.disease=:diseaseType",nativeQuery=true)
+	List<String> getTestList(@Param("diseaseType") String diseaseType);
 	
 }

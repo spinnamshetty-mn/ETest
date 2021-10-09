@@ -74,7 +74,7 @@ else if(!session.getAttribute("username").equals(id1)){
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-fn">Name/Organisation</label>
-                        <input class="form-control" type="text" id="name" name="name" placeholder=<%= name %> required="">
+                        <input class="form-control" type="text" id="name" name="name" placeholder=<%= name %> >
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -86,7 +86,7 @@ else if(!session.getAttribute("username").equals(id1)){
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-phone">Phone Number</label>
-                        <input class="form-control" type="text" id="mobile" name="mobile" value=<%= mobile %> required="">
+                        <input class="form-control" type="text" id="mobile" name="mobile" value=<%= mobile %> >
                     </div>
                 </div>
                 <div class="col-md-6">

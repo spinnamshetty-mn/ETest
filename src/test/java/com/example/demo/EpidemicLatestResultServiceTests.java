@@ -1,5 +1,5 @@
 package com.example.demo;
-/*
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -37,31 +37,28 @@ class EpidemicLatestResultServiceTests {
 	
 	@Test
 	public void countActiveByStateTest() {
-		String state="telangana";
-		when(latestResultRepo.getCountByState(state)).thenReturn(1);
-		assertEquals(1,latestResultService.countActiveByState("telangana"));
+		String state="telangana",diseaseType="corona";
+		when(latestResultRepo.getCountByState(state,diseaseType)).thenReturn(1);
+		assertEquals(1,latestResultService.countActiveByState("telangana","corona"));
 	}
 	@Test
 	public void countActiveByCityTest() {
-		String city="hyderabad";
-		when(latestResultRepo.getCountByCity(city)).thenReturn(1);
-		assertEquals(1,latestResultService.countActiveByCity("hyderabad"));
+		String city="hyderabad",diseaseType="corona";
+		when(latestResultRepo.getCountByCity(city,diseaseType)).thenReturn(1);
+		assertEquals(1,latestResultService.countActiveByCity("hyderabad","corona"));
 	}
 	@Test
 	public void CountActiveByPincodeTest() {
 		int pincode=500001;
-		when(latestResultRepo.getCountByPincode(pincode)).thenReturn(1);
-		assertEquals(1,latestResultService.CountActiveByPincode(500001));
+		String diseaseType="corona";
+		when(latestResultRepo.getCountByPincode(pincode,diseaseType)).thenReturn(1);
+		assertEquals(1,latestResultService.CountActiveByPincode(500001,"corona"));
 	}
 	
 	@Test
 	public void getAllStateTest() {
-		List<String> ls=new ArrayList<String>();
-		ls.add("tel");
-		ls.add("up");
-		ls.add("mp");
-		when(latestResultRepo.findByState()).thenReturn(ls);
-		assertEquals(ls,latestResultService. getAllState());
+		when(latestResultRepo.findByState()).thenReturn(Arrays.asList("tel","up","mp"));
+		assertEquals(3,latestResultService. getAllState().size());
 	}
 	
 	@Test
@@ -69,7 +66,7 @@ class EpidemicLatestResultServiceTests {
 	{
 		int id=11;
 		when(latestResultRepo.findLatestResult(id)).thenReturn("positive");
-		assertEquals("positive",latestResultService.getLatestResult(id));
+		assertEquals("positive",latestResultService.getLatestResult(11));
 	}
 	
 	@Test
@@ -78,38 +75,54 @@ class EpidemicLatestResultServiceTests {
 		Date date=new Date(1-1-1970);
 		int id=11;
 		when(latestResultRepo.findLatestDate(id)).thenReturn(date);
-		assertEquals(date,latestResultService.getLatestDate(id));
+		assertEquals(date,latestResultService.getLatestDate(11));
 	}
-	/*
+	
 	@Test
 	public void getLatestResultPatientTest()
 	{
 		int id=11;
-		LatestResult latestResult=new LatestResult(1,11,101,21,"positive",new Date(19-9-2020),"nagar","tel",500001);
-		when(latestResultRepo.findLatestResultPatient(id)).thenReturn(latestResult);
-		assertEquals(latestResult,latestResultService.getLatestResultPatient(id));
+		Date d=new Date();
+		String diseaseType="corona";
+		LatestResult latestResult=new LatestResult(11,101,21,"positive",d,"nagar","tel",500001,"corona","pcr");
+		when(latestResultRepo.findLatestResultPatient(id,diseaseType)).thenReturn(latestResult);
+		assertEquals(latestResult,latestResultService.getLatestResultPatient(11,"corona"));
 	}
 	
 	@Test
 	public void getCountByHwIdTest()
 	{
 		int hw_id=11;
-		when(latestResultRepo.getCountByHwId(hw_id)).thenReturn(5);
-		assertEquals(5,latestResultService.getCountByHwId(hw_id));
+		String diseaseType="corona";
+		when(latestResultRepo.getCountByHwId(hw_id,diseaseType)).thenReturn(5);
+		assertEquals(5,latestResultService.getCountByHwId(11,"corona"));
 	}
 	
 	@Test
 	public void getCountAllActiveCasesTest() {
-		when(latestResultRepo.countAllActive()).thenReturn(5);
-		assertEquals(5,latestResultService.getCountAllActiveCases());
+		String diseaseType="corona";
+		when(latestResultRepo.countAllActive(diseaseType)).thenReturn(5);
+		assertEquals(5,latestResultService.getCountAllActiveCases("corona"));
+	}
+	
+	@Test
+	public void displayActiveCasesByStateTest() {
+		String state="telangana";
+		when(latestResultRepo.findAllActiveCases(state)).thenReturn(Arrays.asList(new LatestResult(11,101,21,"positive",new Date(19-9-2020),"nagar","tel",500001,"corona","pcr"), new LatestResult(12,102,22,"positive",new Date(19-9-2019),"nagar2","tel2",500002,"corona","rt-pcr")));
+		assertEquals(2,latestResultService.displayActiveCases("telangana").size());
+	}
+	
+	@Test
+	public void getLatestResultPatientListTest() {
+		int patient_id=11;
+		when(latestResultRepo.getLatestResultList(patient_id)).thenReturn(Arrays.asList(new LatestResult(11,101,21,"positive",new Date(19-9-2020),"nagar","tel",500001,"corona","pcr"), new LatestResult(11,102,22,"positive",new Date(19-9-2019),"nagar2","tel2",500002,"corona","rt-pcr")));
+		assertEquals(2,latestResultService.getLatestResultPatientList(11).size());
 	}
 	
 	@Test
 	public void displayActiveCasesTest() {
-		when(latestResultRepo.findAllActiveCases()).thenReturn(Arrays.asList(new LatestResult(1,11,101,21,"positive",new Date(19-9-2020),"nagar","tel",500001), new LatestResult(2,12,102,22,"positive",new Date(19-9-2019),"nagar2","tel2",500002)));
+		when(latestResultRepo.findAllActiveCases()).thenReturn(Arrays.asList(new LatestResult(11,101,21,"positive",new Date(19-9-2020),"nagar","tel",500001,"corona","pcr"), new LatestResult(12,102,22,"positive",new Date(19-9-2019),"nagar2","tel2",500002,"corona","rt-pcr")));
 		assertEquals(2,latestResultService.displayActiveCases().size());
 	}
-	
-	
 }
-*/
+

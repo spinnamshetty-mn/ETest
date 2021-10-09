@@ -5,6 +5,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +80,28 @@ class EpidemicGovernmentTests {
 	{
 		Government government=new Government("gov@gmail.com","Modeln-123","telangana");
 		governmentService.Update(government);
+		verify(governmentRepo,times(1)).save(government);
+	}
+	
+	@Test
+	public void getPendingRequestsTest() {
+		when(governmentRepo.getPendingRequests()).thenReturn(Arrays.asList(new Government("gov@gmail.com","Modeln-123","telangana"),new Government("gov2@gmail.com","Modeln-123","up")));
+		assertEquals(2,governmentService.getPendingRequests().size());
+	}
+	
+	@Test
+	public void deleteRequestTest() {
+		int id=2;
+		governmentService.deleteRequest(id);
+		verify(governmentRepo,times(1)).deleteById(2);
+	}
+	
+	@Test
+	public void updateRequestTest() {
+		int id=2;
+		Government government=new Government("gov@gmail.com","Modeln-123","telangana");
+		when(governmentRepo.findByGovId(id)).thenReturn(government);
+		governmentService.updateRequest(id);
 		verify(governmentRepo,times(1)).save(government);
 	}
 	

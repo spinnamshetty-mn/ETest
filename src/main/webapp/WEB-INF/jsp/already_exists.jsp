@@ -4,12 +4,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>EpidemicTTT</title>
 </head>
 <body>
-	<%
-	String msg=(String)request.getParameter("error") ;
-	%>
-	<h1><%= msg %></h1>
+	<h1>The User Already Exists. Try again</h1>
 </body>
 </html>

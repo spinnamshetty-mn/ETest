@@ -75,7 +75,6 @@ public class LoginController {
 			return "redirect:/signin";// redirect to signin page
 		}
 		
-		model.addAttribute("msg","The User Already Exists. Try again");
 		return "already_exists";  // error Page**************Incomplete
 	}
 //------------------------------------------------------------------------------------------------------------------------------
@@ -125,6 +124,7 @@ public class LoginController {
 	public String login(@RequestParam("category") String type, @RequestParam("email") String email, @RequestParam("password") String password,Model model,HttpServletResponse response,HttpServletRequest request) throws IOException {
 		String error="";
 		EncryptPassword encrypt=new EncryptPassword();
+	
 		if(type.equals("Patient") &&  patient_service.validate(email,encrypt.encryptPassword(password))) {
 			int id = patient_service.searchPatient(email).getId();
 			HttpSession session=request.getSession();

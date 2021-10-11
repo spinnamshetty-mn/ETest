@@ -36,13 +36,6 @@ String name=(String)request.getAttribute("name");
 				}
 	%>
 
-
-    <%
-    	String msg=(String)request.getParameter("msg");
-    	if(msg==null){
-    		msg="Submit the details of the person you have come in contact with recently : ";
-    	}
-    %>
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-3 sidenav">
@@ -74,8 +67,8 @@ String name=(String)request.getAttribute("name");
       <hr>
     </div>
     
-    <h3> <%= msg %> </h3><br>
-     <form action="" method="post">
+    <h3> Submit the details of the person you have come in contact with recently :  </h3><br>
+     <form action="update" method="post">
       <div class="form" style = "position:relative; left:15%;">
       
         <label for="name">Name      </label>

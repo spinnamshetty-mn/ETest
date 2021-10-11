@@ -182,7 +182,7 @@ public class LoginController {
 					return "login";
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+				
 				}//error Page**************Incomplete
 		}
 		return "login";

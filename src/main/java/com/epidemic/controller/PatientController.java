@@ -249,7 +249,7 @@ public class PatientController {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Error is in date in format");
-			e.printStackTrace();
+			
 		}  
 		
 		ContactList cl=new ContactList(id,name,city,state,Long.parseLong(pincode),Long.parseLong(mobile),datesq);

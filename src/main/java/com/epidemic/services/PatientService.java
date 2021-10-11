@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.epidemic.EncryptPassword;
 import com.epidemic.model.Patient;
 import com.epidemic.repositories.PatientRepo;
 
@@ -51,7 +52,7 @@ public class PatientService {
 	public boolean validate(String email,String password) {
 		Patient p_db=patient_repo.findByEmail(email);
 		if(p_db!=null) {
-			return p_db.getPassword().equals(password);
+			return EncryptPassword.decrypt(p_db.getPassword()).equals(password);
 		
 		}
 		return false;

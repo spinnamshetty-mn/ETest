@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.epidemic.EncryptPassword;
 import com.epidemic.model.HealthWorker;
 import com.epidemic.model.Patient;
 import com.epidemic.repositories.HealthWorkerRepo;
@@ -41,7 +42,7 @@ public class HealthWorkerService {
 	public boolean validate(String email,String password) {
 		HealthWorker hw_db=hw_repo.findByEmail(email);
 		if(hw_db!=null) {
-			return hw_db.getPassword().equals(password);
+			return EncryptPassword.decrypt(hw_db.getPassword()).equals(password);
 		
 		}
 		return false;

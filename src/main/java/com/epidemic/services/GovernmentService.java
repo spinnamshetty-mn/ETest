@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.epidemic.EncryptPassword;
 import com.epidemic.model.Government;
 import com.epidemic.model.HealthWorker;
 import com.epidemic.repositories.GovernmentRepo;
@@ -57,7 +58,7 @@ public class GovernmentService {
 		// TODO Auto-generated method stub
 		Government gov_db=gov_repo.findByEmail(email);
 		if(gov_db!=null) {
-			return gov_db.getPassword().equals(password);
+			return EncryptPassword.decrypt(gov_db.getPassword()).equals(password);
 		}
 		return false;
 	}

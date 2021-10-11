@@ -129,7 +129,7 @@ public class LoginController {
 	
 		
 		
-		if(type.equals("Patient") &&  patient_service.validate(email,encrypt.encryptPassword(password))) {
+		if(type.equals("Patient") &&  patient_service.validate(email,password)) {
 			int id = patient_service.searchPatient(email).getId();
 			HttpSession session=request.getSession();
 			model.addAttribute("id",id+"");
@@ -139,7 +139,7 @@ public class LoginController {
 			response.sendRedirect("/patient/" + id +"/p_home?r="+new Random().nextInt());
 			return "pat/p_home";
 		}	
-		else	if(type.equals("Health Worker") && hw_service.validate(email,encrypt.encryptPassword(password))) {
+		else	if(type.equals("Health Worker") && hw_service.validate(email,password)) {
 			
 			
 			HealthWorker hw_db=hw_service.searchWorker(email);
@@ -153,7 +153,7 @@ public class LoginController {
 				return "h_worker/hdash"; // //redirect to new jsp pages hw/hdash
 			}
 			
-		else	if(type.equals("GovernmentEntity") && email.equals("rootuser@gmail.com" )&& gov_service.validate("rootuser@gmail.com",encrypt.encryptPassword(password))) {
+		else	if(type.equals("GovernmentEntity") && email.equals("rootuser@gmail.com" )&& gov_service.validate("rootuser@gmail.com",password)) {
 					Government gov_db=gov_service.searchGov(email);
 					int id=gov_db.getGovId();
 					HttpSession session=request.getSession();
@@ -164,7 +164,7 @@ public class LoginController {
 			
 				}
 			
-			if(type.equals("GovernmentEntity") && gov_service.validate(email,encrypt.encryptPassword(password))) {
+			if(type.equals("GovernmentEntity") && gov_service.validate(email,password)) {
 				Government gov_db=gov_service.searchGov(email);
 				if(gov_db.getStatus().equals("pending")) {
 					return "pending_gov"; //  Sorry your request is still pending...

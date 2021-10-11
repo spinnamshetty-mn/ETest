@@ -1,6 +1,7 @@
 package com.epidemic.controller;
 
 import java.io.IOException;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -125,6 +126,9 @@ public class LoginController {
 		String error="";
 		EncryptPassword encrypt=new EncryptPassword();
 	
+	
+		
+		
 		if(type.equals("Patient") &&  patient_service.validate(email,encrypt.encryptPassword(password))) {
 			int id = patient_service.searchPatient(email).getId();
 			HttpSession session=request.getSession();
@@ -132,9 +136,8 @@ public class LoginController {
 			session.setAttribute("username",id+"");
 			
 			
-			response.sendRedirect("/patient/" + id +"/p_home");
+			response.sendRedirect("/patient/" + id +"/p_home?r="+Math.random());
 			return "pat/p_home";
-			//return "redirect:/patient/" + id +"/p_home";  //redirect to new jsp pages patient/p_home
 		}	
 		else	if(type.equals("Health Worker") && hw_service.validate(email,encrypt.encryptPassword(password))) {
 			
@@ -146,7 +149,7 @@ public class LoginController {
 				HttpSession session=request.getSession();
 				model.addAttribute("id",hw_db.getId()+"");
 				session.setAttribute("username",hw_db.getId()+"");
-				response.sendRedirect("/hw/" + hw_db.getId()+"/hdash");
+				response.sendRedirect("/hw/" + hw_db.getId()+"/hdash?r="+Math.random());
 				return "h_worker/hdash"; // //redirect to new jsp pages hw/hdash
 			}
 			
@@ -156,7 +159,7 @@ public class LoginController {
 					HttpSession session=request.getSession();
 					model.addAttribute("id",id+"");
 					session.setAttribute("username",id+"");
-					response.sendRedirect("/rootgov/" + id+"/gdash");
+					response.sendRedirect("/rootgov/" + id+"/gdash?r="+Math.random());
 					return "root_gov_entity/gdash"; 
 			
 				}
@@ -170,14 +173,14 @@ public class LoginController {
 				HttpSession session=request.getSession();
 				model.addAttribute("id",id+"");
 				session.setAttribute("username",id+"");
-				response.sendRedirect("/gov/" + id+"/gdash");
+				response.sendRedirect("/gov/" + id+"/gdash?r="+Math.random());
 				return "g_entity/gdash"; 
 			}
 		else {
 				try {
 					String msg="Wrong Credentials";
 					 request.getSession().setAttribute("msg", msg);
-					response.sendRedirect("/signin");
+					response.sendRedirect("/signin?r="+Math.random());
 					
 					return "login";
 				} catch (IOException e) {

@@ -136,7 +136,7 @@ public class LoginController {
 			session.setAttribute("username",id+"");
 			
 			
-			response.sendRedirect("/patient/" + id +"/p_home?r="+Math.random());
+			response.sendRedirect("/patient/" + id +"/p_home?r="+new Random().nextInt());
 			return "pat/p_home";
 		}	
 		else	if(type.equals("Health Worker") && hw_service.validate(email,encrypt.encryptPassword(password))) {
@@ -149,7 +149,7 @@ public class LoginController {
 				HttpSession session=request.getSession();
 				model.addAttribute("id",hw_db.getId()+"");
 				session.setAttribute("username",hw_db.getId()+"");
-				response.sendRedirect("/hw/" + hw_db.getId()+"/hdash?r="+Math.random());
+				response.sendRedirect("/hw/" + hw_db.getId()+"/hdash?r="+new Random().nextInt());
 				return "h_worker/hdash"; // //redirect to new jsp pages hw/hdash
 			}
 			
@@ -159,7 +159,7 @@ public class LoginController {
 					HttpSession session=request.getSession();
 					model.addAttribute("id",id+"");
 					session.setAttribute("username",id+"");
-					response.sendRedirect("/rootgov/" + id+"/gdash?r="+Math.random());
+					response.sendRedirect("/rootgov/" + id+"/gdash?r="+new Random().nextInt());
 					return "root_gov_entity/gdash"; 
 			
 				}
@@ -173,14 +173,14 @@ public class LoginController {
 				HttpSession session=request.getSession();
 				model.addAttribute("id",id+"");
 				session.setAttribute("username",id+"");
-				response.sendRedirect("/gov/" + id+"/gdash?r="+Math.random());
+				response.sendRedirect("/gov/" + id+"/gdash?r="+new Random().nextInt());
 				return "g_entity/gdash"; 
 			}
 		else {
 				try {
 					String msg="Wrong Credentials";
 					 request.getSession().setAttribute("msg", msg);
-					response.sendRedirect("/signin?r="+Math.random());
+					response.sendRedirect("/signin?r="+new Random().nextInt());
 					
 					return "login";
 				} catch (IOException e) {

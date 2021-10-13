@@ -21,7 +21,7 @@
   <h1>Register as</h1>
 <input type="submit" name="Type" value="Patient">
 <input type="submit" name="Type" value="HealthWorker">
-  <input type="submit" name="Type" value="GovernmentEntity">
+  <input type="submit" name="Type" value="Government">
 	<br>
 </form>
 

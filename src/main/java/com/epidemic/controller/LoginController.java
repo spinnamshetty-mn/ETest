@@ -53,7 +53,7 @@ public class LoginController {
 		if(type.equals("HealthWorker")) {
 			return "healthworker";
 		}
-		if(type.equals("GovernmentEntity")) {
+		if(type.equals("Government")) {
 			return "government"; 
 		}
 		

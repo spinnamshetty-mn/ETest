@@ -16,7 +16,7 @@
 
   <body>
 
-<form action="/signup/government">
+<form action="/signup/government" method="post">
   <div class="container">
     <h1>Government Registration</h1>
     <p>Please fill in this form to create an account.</p>
@@ -70,7 +70,7 @@
     <label for="password"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="password" id="password" minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="Please include at least 1 uppercase character, 1 lowercase character, and 1 number." required>
     <label for="password-repeat"><b>Confirm Password</b></label>
-    <input type="password" placeholder="Confirm Password" name="password-repeat" id="password-repeat" minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="Please include at least 1 uppercase character, 1 lowercase character, and 1 number." required>
+    <input type="password" placeholder="Confirm Password" name="password-repeat"  onchange="check()" id="password-repeat" minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="Please include at least 1 uppercase character, 1 lowercase character, and 1 number." required>
     
 	
     <hr>
@@ -95,5 +95,19 @@ $(function() {
         }
     });
 });
+
+var password = document.getElementById("password")
+, confirm_password = document.getElementById("password-repeat");
+
+function validatePassword(){
+if(password.value != confirm_password.value) {
+  confirm_password.setCustomValidity("Passwords Don't Match");
+} else {
+  confirm_password.setCustomValidity('');
+}
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
 </script>
 </html>

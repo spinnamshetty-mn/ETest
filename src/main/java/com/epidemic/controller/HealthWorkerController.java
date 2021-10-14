@@ -173,12 +173,12 @@ public class HealthWorkerController {
 			}
 			else {
 				request.getSession().setAttribute("msg1", "Old Password Is Not Correct");
-				response.sendRedirect("/hw/" + id+"/settings");
+				response.sendRedirect("/hw/" + id+"/hsettings");
 				return "h_worker/hsettings";
 			}
 		hw_service.update(hw);
 		request.getSession().setAttribute("msg1", "Updated Successfully");
-		response.sendRedirect("/hw/" + id+"/settings");
+		response.sendRedirect("/hw/" + id+"/hsettings");
 		return "h_worker/hsettings";// update in DB
 		}
 		

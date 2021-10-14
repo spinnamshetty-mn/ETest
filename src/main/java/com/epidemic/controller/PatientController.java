@@ -229,13 +229,13 @@ public class PatientController {
 			}
 			else {
 				request.getSession().setAttribute("msg1", "Old Password Is Not Correct");
-				response.sendRedirect("/patient/" + id+"/settings?oldpassword_incorrect");
+				response.sendRedirect("/patient/" + id+"/settings");
 				return "pat/settings";
 			}
 		
 		patient_service.addByPatient(p);
 		request.getSession().setAttribute("msg1", "Updated Successfully");
-		response.sendRedirect("/patient/" + id+"/settings?updated");
+		response.sendRedirect("/patient/" + id+"/settings");
 		return "pat/settings";
 		}
 		

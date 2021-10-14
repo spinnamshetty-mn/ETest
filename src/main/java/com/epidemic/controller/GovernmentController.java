@@ -183,13 +183,13 @@ public class GovernmentController {
 			}
 			else {
 				request.getSession().setAttribute("msg1", "Old Password Is Not Correct");
-				response.sendRedirect("/gov/" + id+"/settings");
+				response.sendRedirect("/gov/" + id+"/gsettings");
 				return "g_entity/gsettings";
 			}
 		
 		gov_service.Update(gov);  //update new pasword in GOV DB
 		request.getSession().setAttribute("msg1", "Updated Successfully");
-		response.sendRedirect("/gov/" + id+"/settings");
+		response.sendRedirect("/gov/" + id+"/gsettings");
 		return "g_entity/gsettings";
 		}
 		

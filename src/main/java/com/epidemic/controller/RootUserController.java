@@ -174,13 +174,13 @@ public class RootUserController {
 			}
 			else {
 				request.getSession().setAttribute("msg1", "Old Password Is Not Correct");
-				response.sendRedirect("/rootgov/" + id+"/settings");
+				response.sendRedirect("/rootgov/" + id+"/gsettings");
 				return "root_gov_entity/gsettings";
 			}
 		
 		gov_service.Update(gov);
 		request.getSession().setAttribute("msg1", "Updated Successfully");
-		response.sendRedirect("/rootgov/" + id+"/settings");
+		response.sendRedirect("/rootgov/" + id+"/gsettings");
 		return "root_gov_entity/gsettings";//update new pasword in GOV DB
 		}
 		

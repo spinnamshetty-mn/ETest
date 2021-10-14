@@ -162,11 +162,11 @@ public class HealthWorkerController {
 				hw.setName(name);
 			
 			}
-			if(mobile!="" ) {
+			else if(mobile!="" ) {
 				hw.setMobile(Long.parseLong(mobile));
 			}
 			
-			if( encrypt.encryptPassword(oldpassword)!="" && encrypt.encryptPassword(oldpassword).equals(hw.getPassword())) {
+			else if( encrypt.encryptPassword(oldpassword)!="" && encrypt.encryptPassword(oldpassword).equals(hw.getPassword())) {
 				if(encrypt.encryptPassword(newpassword)!="") {
 					hw.setPassword(encrypt.encryptPassword(newpassword));
 				}

@@ -20,7 +20,14 @@
 <form action="/signup/patient" method=post>
   <div class="container">
     <h1>Patient Registration</h1>
+     <% 		
+      	    %> <h3 style="color:red">${msg1}</h3> <%
+      	    		
+      	
+      	%>
     <p>Please fill in this form to create an account.</p>
+    
+    
     <hr>
 	<label for="firstname"><b>First Name</b></label>
     <input type="text" placeholder="Enter First Name" name="firstname" id="firstname" pattern="([A-Za-z])+( )?([A-Za-z]+)" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>

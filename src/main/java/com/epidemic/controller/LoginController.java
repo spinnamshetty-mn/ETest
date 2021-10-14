@@ -64,20 +64,25 @@ public class LoginController {
 	@RequestMapping("/signup/patient")  // Patient Sign Up Page 
 	public String signupPatient(@ModelAttribute Patient patient,Model model,HttpServletRequest request) {
 
+		String msg1=(String)request.getSession().getAttribute("msg1");
+		if(msg1!=null) {
+			model.addAttribute("msg1",msg1);
+			request.getSession().removeAttribute("msg1");
+			request.getSession().invalidate();
+		}
+		
 		boolean st=false;
 		EncryptPassword p=new EncryptPassword();
 		patient.setPassword(p.encryptPassword(patient.getPassword()));
 		 st=patient_service.addPatient(patient); 
 		 // validate and add in DB
-		 System.out.println(patient.getFirstName());
 		 model.addAttribute("patient",patient);
 
 		if(st==true) {
-			model.addAttribute("msg","Account created. Login Now");
 			return "redirect:/signin";// redirect to signin page
 		}
-		
-		return "already_exists";  // error Page**************Incomplete
+		 request.getSession().setAttribute("msg1", "Email Already Exists");
+		 return "patient"; // email already exists  // error Page**************Incomplete
 	}
 //------------------------------------------------------------------------------------------------------------------------------
 	@RequestMapping("/signup/healthworker") // HW Sign Up Page 
@@ -110,7 +115,7 @@ public class LoginController {
 		gov.setPassword(p.encryptPassword(gov.getPassword())); 
 		st=gov_service.addGov(gov); // validate and add in DB with PENDING status (to be approved by ROOT USER)
 		if(st==true) {
-			return "redirect:/login";
+			return "redirect:/signin";
 		}
 		 request.getSession().setAttribute("msg1", "Email Already Exists");
 		 return "government"; // email already exists

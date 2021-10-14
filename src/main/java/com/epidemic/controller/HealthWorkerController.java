@@ -162,26 +162,32 @@ public class HealthWorkerController {
 				hw.setName(name);
 			
 			}
-			 if(mobile!="" ) {
+	        if(mobile!="" ) {
 				hw.setMobile(Long.parseLong(mobile));
 			}
 			
-			 if(encrypt.encryptPassword(oldpassword)!="") {
-				 if(encrypt.encryptPassword(oldpassword).equals(hw.getPassword())) {
-					 if(encrypt.encryptPassword(newpassword)!="") {
-							hw.setPassword(encrypt.encryptPassword(newpassword));
-						}
-				 }
-				 else request.getSession().setAttribute("msg1", "Old Password Is Not Correct");
-					response.sendRedirect("/hw/" + id+"/hsettings");
-					return "h_worker/hsettings";
-			 }
+			if( oldpassword!="") {
+				if(encrypt.encryptPassword(oldpassword).equals(hw.getPassword())) {
+				if(encrypt.encryptPassword(newpassword)!="") {
+					hw.setPassword(encrypt.encryptPassword(newpassword));
+				}
+			}
+			else {
+				request.getSession().setAttribute("msg1", "Old Password Is Not Correct");
+				response.sendRedirect("/hw/" + id+"/hsettings");
+				return "h_worker/hsettings";
+			}
+			}
+			if(oldpassword=="" && newpassword!="") {
+				request.getSession().setAttribute("msg1", "Enter Old Password");
+				response.sendRedirect("/hw/" + id+"/hsettings");
+				return "h_worker/hsettings";
+			}
 		hw_service.update(hw);
 		request.getSession().setAttribute("msg1", "Updated Successfully");
 		response.sendRedirect("/hw/" + id+"/hsettings");
 		return "h_worker/hsettings";// update in DB
 		}
-		
 		return "h_worker/hsettings";
 	}
 //---------------------------------------------------------------------------------------------------------------------------------

@@ -82,7 +82,6 @@ else if(!session.getAttribute("username").equals(id1)){
     	<td>${request_list.govId} </td>
     	<td>${request_list.state} </td>
     	<td>${request_list.email}</td>
-    	<td>${request_list.status}</td>
     	<td>
     	
 			

@@ -283,7 +283,7 @@ public class PatientController {
 		contact_service.add(cl); // add to contactlist DB
 		
 		request.getSession().setAttribute("msg1", "Contact Updated Successfully");
-		response.sendRedirect("/patient/" + id+"/update?updated");
+		response.sendRedirect("/patient/" + id+"/update");
 		return "pat/update";
 		
 	}

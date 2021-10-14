@@ -48,6 +48,11 @@
       <div> 
       
       <form align="center" action="add_test" method="post">
+       <% 		
+      	    %> <h3 style="color:red">${msg1}</h3> <%
+      	    		
+      	
+      	%>
       <h4>
       <label for="disease">Choose Disease:</label>
       <select name="disease" id="disease" required>

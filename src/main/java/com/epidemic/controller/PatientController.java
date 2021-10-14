@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
@@ -183,11 +184,19 @@ public class PatientController {
 	}
 //-------------------------------------------------------------------------------------------------------------------------------	
 	@RequestMapping("/{id}/settings") // settings TAB
-	public String settings(@PathVariable("id") int id,Model model,HttpServletRequest request) {
+	public String settings(@PathVariable("id") int id,Model model,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		String msg1=(String)request.getSession().getAttribute("msg1");
+		if(msg1!=null) {
+			model.addAttribute("msg1",msg1);
+			request.getSession().removeAttribute("msg1");
+			msg1="";
+			
+		}
+		
 		Patient p=patient_service.searchPatient(id);
 		model.addAttribute("name",p.getFirstName());
 		model.addAttribute("firstname",p.getFirstName());
-		model.addAttribute("lastname",p.getFirstName());
+		model.addAttribute("lastname",p.getLastName());
 		model.addAttribute("id",p.getId()+"");
 		model.addAttribute("mobile",p.getMobile()+"");
 		model.addAttribute("email",p.getEmail());
@@ -197,7 +206,7 @@ public class PatientController {
 		String mobile=(String)request.getParameter("mobile");
 		String newpassword=(String)request.getParameter("newpassword");
 		String oldpassword=(String)request.getParameter("oldpassword");
-		
+	
 		if(firstname!=null || lastname!=null || mobile!=null && (!mobile.equals(p.getMobile()))  || newpassword!=null ) {
 			
 			
@@ -211,16 +220,25 @@ public class PatientController {
 			if(mobile!="" ) {
 				p.setMobile(Long.parseLong(mobile));
 			}
-		
 			
 			if( encrypt.encryptPassword(oldpassword)!="" && encrypt.encryptPassword(oldpassword).equals(p.getPassword())) {
+				
 				if(encrypt.encryptPassword(newpassword)!="") {
 					p.setPassword(encrypt.encryptPassword(newpassword));
 				}
 			}
+			else {
+				request.getSession().setAttribute("msg1", "Old Password Is Not Correct");
+				response.sendRedirect("/patient/" + id+"/settings?oldpassword_incorrect");
+				return "pat/settings";
+			}
 		
 		patient_service.addByPatient(p);
+		request.getSession().setAttribute("msg1", "Updated Successfully");
+		response.sendRedirect("/patient/" + id+"/settings?oldpassword_incorrect");
+		return "pat/settings";
 		}
+		
 		return "pat/settings";
 		}
 //---------------------------------------------------------------------------------------------------------------------------------

@@ -19,6 +19,11 @@
 <form action="/signup/healthworker" method="post">
   <div class="container">
     <h1>Health Worker Registration</h1>
+     <% 		
+      	    %> <h3 style="color:red">${msg1}</h3> <%
+      	    		
+      	
+      	%>
     <p>Please fill in this form to create an account.</p>
     <hr>
 	<label for="email"><b>Email</b></label>

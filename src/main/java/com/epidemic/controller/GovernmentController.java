@@ -154,7 +154,16 @@ public class GovernmentController {
 //-----------------------------------------------------------------------------------------------------------------------------
 	
 	@RequestMapping("/{id}/gsettings")  // for GOVT Settings TAB
-	public String settings(@PathVariable("id") int id,Model model,HttpServletRequest request ) {
+	public String settings(@PathVariable("id") int id,Model model,HttpServletRequest request ,HttpServletResponse response) throws IOException {
+		
+		String msg1=(String)request.getSession().getAttribute("msg1");
+		if(msg1!=null) {
+			model.addAttribute("msg1",msg1);
+			request.getSession().removeAttribute("msg1");
+			msg1="";
+			
+		}
+		
 		model.addAttribute("id",id+"");
 		Government gov=gov_service.searchGov(id);
 		model.addAttribute("State",gov.getState());        // to display these info in JSP
@@ -172,8 +181,16 @@ public class GovernmentController {
 					gov.setPassword(encrypt.encryptPassword(newpassword));
 				}
 			}
+			else {
+				request.getSession().setAttribute("msg1", "Old Password Is Not Correct");
+				response.sendRedirect("/gov/" + id+"/settings?oldpassword_incorrect");
+				return "g_entity/gsettings";
+			}
 		
 		gov_service.Update(gov);  //update new pasword in GOV DB
+		request.getSession().setAttribute("msg1", "Updated Successfully");
+		response.sendRedirect("/gov/" + id+"/settings?oldpassword_incorrect");
+		return "g_entity/gsettings";
 		}
 		
 		return "g_entity/gsettings";

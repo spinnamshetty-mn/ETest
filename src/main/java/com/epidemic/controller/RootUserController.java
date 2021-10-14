@@ -145,7 +145,16 @@ public class RootUserController {
 //-----------------------------------------------------------------------------------------------------------------------------
 	
 	@RequestMapping("/{id}/gsettings")  // for GOVT Settings TAB
-	public String settings(@PathVariable("id") int id,Model model,HttpServletRequest request ) {
+	public String settings(@PathVariable("id") int id,Model model,HttpServletRequest request,HttpServletResponse response ) throws IOException {
+
+		String msg1=(String)request.getSession().getAttribute("msg1");
+		if(msg1!=null) {
+			model.addAttribute("msg1",msg1);
+			request.getSession().removeAttribute("msg1");
+			msg1="";
+			
+		}
+		
 		model.addAttribute("id",id+"");
 		Government gov=gov_service.searchGov(id);
 		model.addAttribute("State",gov.getState());        // to display these info in JSP
@@ -163,8 +172,16 @@ public class RootUserController {
 					gov.setPassword(encrypt.encryptPassword(newpassword));
 				}
 			}
+			else {
+				request.getSession().setAttribute("msg1", "Old Password Is Not Correct");
+				response.sendRedirect("/rootgov/" + id+"/settings?oldpassword_incorrect");
+				return "root_gov_entity/gsettings";
+			}
 		
-		gov_service.Update(gov);  //update new pasword in GOV DB
+		gov_service.Update(gov);
+		request.getSession().setAttribute("msg1", "Updated Successfully");
+		response.sendRedirect("/rootgov/" + id+"/settings?oldpassword_incorrect");
+		return "root_gov_entity/gsettings";//update new pasword in GOV DB
 		}
 		
 		return "root_gov_entity/gsettings";
@@ -422,6 +439,14 @@ public class RootUserController {
 	
 	@RequestMapping("/{id}/add_disease")  
 	public String addDisease(@PathVariable("id") int id,Model model,HttpServletRequest request) {
+		
+		String msg1=(String)request.getSession().getAttribute("msg1");
+		if(msg1!=null) {
+			request.getSession().removeAttribute("msg1");
+			request.getSession().setAttribute("msg1","");
+			msg1="";
+		}
+		
 		model.addAttribute("id",id+"");
 		Government gov=gov_service.searchGov(id);
 		
@@ -434,22 +459,33 @@ public class RootUserController {
 			return "root_gov_entity/add_disease";
 		}
 		
-		if(diseaseType!=null && testType!=null && diseaseService.isPresent(diseaseType, testType)==true) {
+		if( diseaseService.isPresent(diseaseType, testType)==true) {
 			//display msg already present
 			
+			request.getSession().setAttribute("msg1", "Test Already Exists For The Given Disease.");
 			return "root_gov_entity/add_disease";
 		}
 		 
 		Disease disease=new Disease(diseaseType,testType);
 		
 		diseaseService.addDisease(disease);
-		
+		request.getSession().setAttribute("msg1", "Disease and Test Has Been Added Successfully.");
 		return "root_gov_entity/add_disease";
 	
 	}
 	
 	@RequestMapping("/{id}/add_test")  
 	public String addTest(@PathVariable("id") int id,Model model,HttpServletRequest request) {
+		
+		String msg1=(String)request.getSession().getAttribute("msg1");
+		if(msg1!=null) {
+			request.getSession().removeAttribute("msg1");
+			request.getSession().setAttribute("msg1","");
+			msg1="";
+			
+		}
+		
+		
 		model.addAttribute("id",id+"");
 		Government gov=gov_service.searchGov(id);
 		
@@ -463,15 +499,15 @@ public class RootUserController {
 			return "root_gov_entity/add_test";
 		}
 		
-		if(diseaseType!=null && testType!=null && diseaseService.isPresent(diseaseType, testType)==true) {
+		if( diseaseService.isPresent(diseaseType, testType)==true) {
 			//display msg already present
-			
+			request.getSession().setAttribute("msg1", "Test Already Exists For The Given Disease.");
 			return "root_gov_entity/add_test";
 		}
 		
 		Disease d=new Disease(diseaseType,testType);
 		diseaseService.addDisease(d);
-		
+		request.getSession().setAttribute("msg1", "Test Has Been Added Successfully.");
 		return "root_gov_entity/add_test";
 	
 	}

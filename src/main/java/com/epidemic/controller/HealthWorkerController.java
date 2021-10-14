@@ -131,7 +131,17 @@ public class HealthWorkerController {
 	}
 //----------------------------------------------------------------------------------------------------------------------------------
 	@RequestMapping ("/{id}/hsettings")  //Settings TAB
-	public String settings(@PathVariable("id") int id,Model model,HttpServletRequest request) {
+	public String settings(@PathVariable("id") int id,Model model,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		
+
+		String msg1=(String)request.getSession().getAttribute("msg1");
+		if(msg1!=null) {
+			model.addAttribute("msg1",msg1);
+			request.getSession().removeAttribute("msg1");
+			msg1="";
+			
+		}
+		
 		model.addAttribute("id",id+"");
 		HealthWorker hw=hw_service.searchWorker(id);   // for displaying info in JSP page
 		model.addAttribute("name",hw.getName());
@@ -161,7 +171,15 @@ public class HealthWorkerController {
 					hw.setPassword(encrypt.encryptPassword(newpassword));
 				}
 			}
-		hw_service.update(hw);  // update in DB
+			else {
+				request.getSession().setAttribute("msg1", "Old Password Is Not Correct");
+				response.sendRedirect("/hw/" + id+"/settings?oldpassword_incorrect");
+				return "h_worker/hsettings";
+			}
+		hw_service.update(hw);
+		request.getSession().setAttribute("msg1", "Updated Successfully");
+		response.sendRedirect("/hw/" + id+"/settings?oldpassword_incorrect");
+		return "h_worker/hsettings";// update in DB
 		}
 		
 		return "h_worker/hsettings";

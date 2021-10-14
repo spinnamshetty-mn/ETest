@@ -50,6 +50,11 @@
       
       
      <form align="center" action="add_disease" method="post">
+      <% 		
+      	    %> <h3 style="color:red">${msg1}</h3> <%
+      	    		
+      	
+      	%>
   	<label for="disease">Enter Disease:</label>
   	<input type="text" id="disease" name="disease" required><br><br>
   	<label for="test">Enter Test:</label>

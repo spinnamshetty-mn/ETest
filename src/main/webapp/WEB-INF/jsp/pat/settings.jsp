@@ -125,6 +125,12 @@ String name=(String)request.getAttribute("name");
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
                         
                         <button style="margin-top:12%; margin-left:45%; " class="btn btn-style-1 btn-primary" type="submit" data-toast="" data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
+                     <% 	
+                    
+      	    %> <h3 style="color:red">${msg1}</h3> <%
+      	    		
+      	
+      	%>
                     </div>
                 </div>
             
@@ -134,7 +140,7 @@ String name=(String)request.getAttribute("name");
   </div>
 </div>
 <script>
-var password = document.getElementById("password")
+var password = document.getElementById("newpassword")
 , confirm_password = document.getElementById("confirmpassword");
 
 function validatePassword(){

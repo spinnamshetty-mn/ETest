@@ -53,11 +53,11 @@
        <option value="disease"> Disease </option>
        <option value="test"> Test </option>
       </select>
+       
       <br>
   		<br>
   		<input type="submit" value="Submit"></form>
-      
-      
+     
       </h4>
       </div>
 	

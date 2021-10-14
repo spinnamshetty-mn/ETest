@@ -70,11 +70,7 @@ else if(!session.getAttribute("username").equals(id1)){
     	<th>Submit</th>
     	</tr>
     	
-    	
-    	
     	<c:forEach items="${request_list}" var="request_list">
-		
-		
 		
 		<form action="/rootgov/${govId}/pending_approvals" method=post>
 		

@@ -16,9 +16,14 @@
 
   <body>
 
-<form action="/signup/government">
+<form action="/signup/government" method="post">
   <div class="container">
     <h1>Government Registration</h1>
+    <% 		
+      	    %> <h3 style="color:red">${msg1}</h3> <%
+      	    		
+      	
+      	%>
     <p>Please fill in this form to create an account.</p>
     <hr>
 	<label for="email"><b>Email</b></label>
@@ -71,6 +76,7 @@
     <input type="password" placeholder="Enter Password" name="password" id="password" minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="Please include at least 1 uppercase character, 1 lowercase character, and 1 number." required>
     <label for="password-repeat"><b>Confirm Password</b></label>
     <input type="password" placeholder="Confirm Password" name="password-repeat" id="password-repeat" minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="Please include at least 1 uppercase character, 1 lowercase character, and 1 number." required>
+   	
     
 	
     <hr>

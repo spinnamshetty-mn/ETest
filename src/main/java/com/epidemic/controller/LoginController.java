@@ -1,6 +1,7 @@
 package com.epidemic.controller;
 
 import java.io.IOException;
+import java.net.http.HttpResponse;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -68,7 +69,7 @@ public class LoginController {
 		patient.setPassword(p.encryptPassword(patient.getPassword()));
 		 st=patient_service.addPatient(patient); 
 		 // validate and add in DB
-		 	
+		 System.out.println(patient.getFirstName());
 		 model.addAttribute("patient",patient);
 
 		if(st==true) {
@@ -94,15 +95,25 @@ public class LoginController {
 	}
 //-------------------------------------------------------------------------------------------------------------------------------
 	@RequestMapping("/signup/government")
-	public String signupGovernment(@ModelAttribute Government gov,Model model) {
+	public String signupGovernment(@ModelAttribute Government gov,Model model,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		
+		String msg1=(String)request.getSession().getAttribute("msg1");
+		if(msg1!=null) {
+			model.addAttribute("msg1",msg1);
+			request.getSession().removeAttribute("msg1");
+			request.getSession().invalidate();
+		}
+		
+		
 		boolean st=false;
 		EncryptPassword p=new EncryptPassword();
 		gov.setPassword(p.encryptPassword(gov.getPassword())); 
 		st=gov_service.addGov(gov); // validate and add in DB with PENDING status (to be approved by ROOT USER)
 		if(st==true) {
-			return "login";
+			return "redirect:/login";
 		}
-		return "error"; // error Page**************Incomplete
+		 request.getSession().setAttribute("msg1", "Email Already Exists");
+		 return "government"; // email already exists
 		
 	}
 	
@@ -125,17 +136,13 @@ public class LoginController {
 	public String login(@RequestParam("category") String type, @RequestParam("email") String email, @RequestParam("password") String password,Model model,HttpServletResponse response,HttpServletRequest request) throws IOException {
 		String error="";
 		EncryptPassword encrypt=new EncryptPassword();
-	
-	
-		
+
 		
 		if(type.equals("Patient") &&  patient_service.validate(email,password)) {
 			int id = patient_service.searchPatient(email).getId();
 			HttpSession session=request.getSession();
 			model.addAttribute("id",id+"");
 			session.setAttribute("username",id+"");
-			
-			
 			response.sendRedirect("/patient/" + id +"/p_home?r="+new Random().nextInt());
 			return "pat/p_home";
 		}	
@@ -153,7 +160,7 @@ public class LoginController {
 				return "h_worker/hdash"; // //redirect to new jsp pages hw/hdash
 			}
 			
-		else	if(type.equals("GovernmentEntity") && email.equals("rootuser@gmail.com" )&& gov_service.validate("rootuser@gmail.com",password)) {
+		else	if(type.equals("Government") && email.equals("rootuser@gmail.com" )&& gov_service.validate("rootuser@gmail.com",password)) {
 					Government gov_db=gov_service.searchGov(email);
 					int id=gov_db.getGovId();
 					HttpSession session=request.getSession();
@@ -164,10 +171,12 @@ public class LoginController {
 			
 				}
 			
-			if(type.equals("GovernmentEntity") && gov_service.validate(email,password)) {
+			if(type.equals("Government") && gov_service.validate(email,password)) {
 				Government gov_db=gov_service.searchGov(email);
 				if(gov_db.getStatus().equals("pending")) {
-					return "pending_gov"; //  Sorry your request is still pending...
+					request.getSession().setAttribute("msg", "Your account is yet to be verified by Root User");
+					response.sendRedirect("/signin?r="+new Random().nextInt());
+					return "login"; //  Sorry your request is still pending...
 				}
 				int id=gov_db.getGovId();
 				HttpSession session=request.getSession();

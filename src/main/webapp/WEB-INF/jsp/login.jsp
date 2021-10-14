@@ -30,7 +30,7 @@
     <select name="category" id="category">
     <option value="Patient">Patient</option>
     <option value="Health Worker">Health Worker</option>
-    <option value="GovernmentEntity">Government</option>
+    <option value="Government">Government</option>
     
    
   </select><br/><br/>

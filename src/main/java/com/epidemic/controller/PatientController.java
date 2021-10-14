@@ -214,14 +214,14 @@ public class PatientController {
 				p.setFirstname(firstname);
 			
 			}
-			if(lastname!="") {   
+			else if(lastname!="") {   
 				p.setLastname(lastname);
 			}
-			if(mobile!="" ) {
+			else if(mobile!="" ) {
 				p.setMobile(Long.parseLong(mobile));
 			}
 			
-			if( encrypt.encryptPassword(oldpassword)!="" && encrypt.encryptPassword(oldpassword).equals(p.getPassword())) {
+			else if( encrypt.encryptPassword(oldpassword)!="" && encrypt.encryptPassword(oldpassword).equals(p.getPassword())) {
 				
 				if(encrypt.encryptPassword(newpassword)!="") {
 					p.setPassword(encrypt.encryptPassword(newpassword));
@@ -235,7 +235,7 @@ public class PatientController {
 		
 		patient_service.addByPatient(p);
 		request.getSession().setAttribute("msg1", "Updated Successfully");
-		response.sendRedirect("/patient/" + id+"/settings?oldpassword_incorrect");
+		response.sendRedirect("/patient/" + id+"/settings?updated");
 		return "pat/settings";
 		}
 		
@@ -243,7 +243,16 @@ public class PatientController {
 		}
 //---------------------------------------------------------------------------------------------------------------------------------
 	@RequestMapping ("/{id}/update") // patient uploads contacted person details
-	public String update(@PathVariable("id") int id,HttpServletRequest request,Model model) {
+	public String update(@PathVariable("id") int id,HttpServletRequest request,Model model,HttpServletResponse response) throws IOException {
+	
+		String msg1=(String)request.getSession().getAttribute("msg1");
+		if(msg1!=null) {
+			model.addAttribute("msg1",msg1);
+			request.getSession().removeAttribute("msg1");
+			msg1="";
+			
+		}
+		
 		Patient p=patient_service.searchPatient(id);
 		model.addAttribute("name",p.getFirstName());
 		String  name=(String)request.getParameter("name");       //*** add firstname and lastname
@@ -272,7 +281,10 @@ public class PatientController {
 		
 		ContactList cl=new ContactList(id,name,city,state,Long.parseLong(pincode),Long.parseLong(mobile),datesq);
 		contact_service.add(cl); // add to contactlist DB
-		return "redirect:/patient/{id}/update";
+		
+		request.getSession().setAttribute("msg1", "Contact Updated Successfully");
+		response.sendRedirect("/patient/" + id+"/update?updated");
+		return "pat/update";
 		
 	}
 //----------------------------------------------------------------------------------------------------------------------------------	

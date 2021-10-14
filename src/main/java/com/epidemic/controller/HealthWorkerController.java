@@ -162,20 +162,20 @@ public class HealthWorkerController {
 				hw.setName(name);
 			
 			}
-			else if(mobile!="" ) {
+			 if(mobile!="" ) {
 				hw.setMobile(Long.parseLong(mobile));
 			}
 			
-			else if( encrypt.encryptPassword(oldpassword)!="" && encrypt.encryptPassword(oldpassword).equals(hw.getPassword())) {
-				if(encrypt.encryptPassword(newpassword)!="") {
-					hw.setPassword(encrypt.encryptPassword(newpassword));
-				}
-			}
-			else {
-				request.getSession().setAttribute("msg1", "Old Password Is Not Correct");
-				response.sendRedirect("/hw/" + id+"/hsettings");
-				return "h_worker/hsettings";
-			}
+			 if(encrypt.encryptPassword(oldpassword)!="") {
+				 if(encrypt.encryptPassword(oldpassword).equals(hw.getPassword())) {
+					 if(encrypt.encryptPassword(newpassword)!="") {
+							hw.setPassword(encrypt.encryptPassword(newpassword));
+						}
+				 }
+				 else request.getSession().setAttribute("msg1", "Old Password Is Not Correct");
+					response.sendRedirect("/hw/" + id+"/hsettings");
+					return "h_worker/hsettings";
+			 }
 		hw_service.update(hw);
 		request.getSession().setAttribute("msg1", "Updated Successfully");
 		response.sendRedirect("/hw/" + id+"/hsettings");

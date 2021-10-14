@@ -95,7 +95,7 @@ String name=(String)request.getAttribute("name");
         <input name="date" type="date" id="date" required><br>
         
        	<br>
-        <button name="getbutton" type="submit" id="getbutton" style = "position:relative; left:8%;"> Submit </button></form>
+        <button name="getbutton" type="submit" id="getbutton" style = "position:relative; left:8%;"> Submit </button>
                  <button style="margin-top:12%; margin-left:45%; " class="btn btn-style-1 btn-primary" type="submit" data-toast="" data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
                     <% 	
                     
@@ -105,7 +105,7 @@ String name=(String)request.getAttribute("name");
       	%>
       </div>
     
-  </div>
+  </div></form>
 </div>
 
 </body>

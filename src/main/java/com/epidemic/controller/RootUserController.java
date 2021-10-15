@@ -438,13 +438,14 @@ public class RootUserController {
 	}
 	
 	@RequestMapping("/{id}/add_disease")  
-	public String addDisease(@PathVariable("id") int id,Model model,HttpServletRequest request) {
+	public String addDisease(@PathVariable("id") int id,Model model,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		
 		String msg1=(String)request.getSession().getAttribute("msg1");
 		if(msg1!=null) {
+			model.addAttribute("msg1",msg1);
 			request.getSession().removeAttribute("msg1");
-			request.getSession().setAttribute("msg1","");
 			msg1="";
+			
 		}
 		
 		model.addAttribute("id",id+"");
@@ -463,6 +464,7 @@ public class RootUserController {
 			//display msg already present
 			
 			request.getSession().setAttribute("msg1", "Test Already Exists For The Given Disease.");
+			response.sendRedirect("/rootgov/" + id+"/add_disease");
 			return "root_gov_entity/add_disease";
 		}
 		 
@@ -470,6 +472,7 @@ public class RootUserController {
 		
 		diseaseService.addDisease(disease);
 		request.getSession().setAttribute("msg1", "Disease and Test Has Been Added Successfully.");
+		response.sendRedirect("/rootgov/" + id+"/add_disease");
 		return "root_gov_entity/add_disease";
 	
 	}

@@ -75,10 +75,10 @@
     	<tr>    	
     	<td>${result_list.hwId} </td>
     	<td>${result_list.reportId} </td>
-    	<td>${result_list.status}</td>
-    	<td>${result_list.date }</td>
     	<td>${result_list.diseaseType}</td>
     	<td>${result_list.testType}</td>
+    	<td>${result_list.status}</td>
+    	<td>${result_list.date }</td>
     	
     	</tr>
     	</c:forEach>

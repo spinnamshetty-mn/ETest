@@ -65,11 +65,8 @@ class EpidemicTestResultTests {
 		TestResult testResult=new TestResult(11,101,21,"positive",date1,"nagar","telanagan",500001,"corona","pcr");
 		TestRequest tr=new TestRequest(11,21,"corona","pcr");
 		Patient p=new Patient("srija","pinnamshetty","srija@gmail.com","Modeln-123","9090909090","nagar","telangana",500001);
-		
-		//assertEquals(509004,patientService.searchPatient(11));
 		when(testRequestRepo.findById(101)).thenReturn(tr);
-		when(patientRepo.findByEmail("srija@gmail.com")).thenReturn(p);
-		when(patientService.searchPatient(11)).thenReturn(p);
+		when(patientRepo.findById(11)).thenReturn(p);
 		when(testResultRepo.findByReportId(101)).thenReturn(testResult);
 		testResultService.add(101, "positive");
 		verify(testRequestRepo,times(1)).delete(tr);

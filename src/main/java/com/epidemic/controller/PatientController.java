@@ -207,6 +207,10 @@ public class PatientController {
 		String newpassword=(String)request.getParameter("newpassword");
 		String oldpassword=(String)request.getParameter("oldpassword");
 	
+		if(firstname=="" && lastname=="" && mobile==""  && newpassword=="" ) {
+			return "pat/settings";
+		}
+		
 		if(firstname!=null || lastname!=null || mobile!=null && (!mobile.equals(p.getMobile()))  || newpassword!=null ) {
 			
 			
@@ -214,21 +218,28 @@ public class PatientController {
 				p.setFirstname(firstname);
 			
 			}
-			else if(lastname!="") {   
+			if(lastname!="") {
 				p.setLastname(lastname);
+			
 			}
-			else if(mobile!="" ) {
+	        if(mobile!="" ) {
 				p.setMobile(Long.parseLong(mobile));
 			}
 			
-			else if( encrypt.encryptPassword(oldpassword)!="" && encrypt.encryptPassword(oldpassword).equals(p.getPassword())) {
-				
+			if( oldpassword!="") {
+				if(encrypt.encryptPassword(oldpassword).equals(p.getPassword())) {
 				if(encrypt.encryptPassword(newpassword)!="") {
 					p.setPassword(encrypt.encryptPassword(newpassword));
 				}
 			}
 			else {
 				request.getSession().setAttribute("msg1", "Old Password Is Not Correct");
+				response.sendRedirect("/patient/" + id+"/settings");
+				return "pat/settings";
+			}
+			}
+			if(oldpassword=="" && newpassword!="") {
+				request.getSession().setAttribute("msg1", "Enter Old Password");
 				response.sendRedirect("/patient/" + id+"/settings");
 				return "pat/settings";
 			}

@@ -155,6 +155,9 @@ public class HealthWorkerController {
 		String oldpassword=(String)request.getParameter("oldpassword");
 		EncryptPassword encrypt=new EncryptPassword();
 		
+		if(name=="" && mobile==""  && newpassword=="") {
+			return "h_worker/hsettings";
+		}
 		
 		if(name!=null ||  mobile!=null && (!mobile.equals(hw.getMobile()))  || newpassword!=null ) { // to be submitted only if something is not null
 			

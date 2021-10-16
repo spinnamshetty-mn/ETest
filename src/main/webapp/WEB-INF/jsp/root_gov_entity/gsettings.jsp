@@ -86,7 +86,7 @@ else if(!session.getAttribute("username").equals(id1)){
                  <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-confirm-pass">Old Password</label>
-                        <input class="form-control" type="password" name="oldpassword" id="account-confirm-pass">
+                        <input class="form-control" type="password" name="oldpassword" id="old-pass">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -107,6 +107,11 @@ else if(!session.getAttribute("username").equals(id1)){
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
                         
                         <button style="margin-top:12%; margin-left:45%; " class="btn btn-style-1 btn-primary" type="submit" data-toast="" data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
+                         <% 	
+                    
+      	    %> <h3 style="color:red">${msg1}</h3> <%
+
+      	%>
                     </div>
                 </div>
             </form>

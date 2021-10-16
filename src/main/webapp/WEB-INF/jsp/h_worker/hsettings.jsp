@@ -86,7 +86,7 @@ else if(!session.getAttribute("username").equals(id1)){
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-phone">Phone Number</label>
-                        <input class="form-control" type="text" id="mobile" name="mobile" value=<%= mobile %> >
+                        <input class="form-control" type="text" id="mobile" name="mobile" placeholder=<%= mobile %> >
                     </div>
                 </div>
                 <div class="col-md-6">

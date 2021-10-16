@@ -85,7 +85,7 @@ else if(!session.getAttribute("username").equals(id1)){
                  <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-confirm-pass">Old Password</label>
-                        <input class="form-control" type="password" name="oldpassword" id="account-confirm-pass">
+                        <input class="form-control" type="password" name="oldpassword" id="old-pass">
                     </div>
                 </div>
                 <div class="col-md-6">

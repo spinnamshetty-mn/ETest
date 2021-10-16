@@ -174,15 +174,25 @@ public class GovernmentController {
 		String oldpassword=(String)request.getParameter("oldpassword");
 		EncryptPassword encrypt=new EncryptPassword();
 		
-		
+		if(newpassword=="" && oldpassword=="") {
+			return "g_entity/gsettings";
+		}
+			
 		if( newpassword!=null ) {		// validate and set new password
-			if( encrypt.encryptPassword(oldpassword)!="" && encrypt.encryptPassword(oldpassword).equals(gov.getPassword())) {
+			if( oldpassword!="") {
+				if(encrypt.encryptPassword(oldpassword).equals(gov.getPassword())) {
 				if(encrypt.encryptPassword(newpassword)!="") {
 					gov.setPassword(encrypt.encryptPassword(newpassword));
 				}
 			}
 			else {
 				request.getSession().setAttribute("msg1", "Old Password Is Not Correct");
+				response.sendRedirect("/gov/" + id+"/gsettings");
+				return "g_entity/gsettings";
+			}
+			}
+			if(oldpassword=="" && newpassword!="") {
+				request.getSession().setAttribute("msg1", "Enter Old Password");
 				response.sendRedirect("/gov/" + id+"/gsettings");
 				return "g_entity/gsettings";
 			}

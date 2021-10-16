@@ -165,9 +165,14 @@ public class RootUserController {
 		String oldpassword=(String)request.getParameter("oldpassword");
 		EncryptPassword encrypt=new EncryptPassword();
 		
+		if(newpassword=="" && oldpassword=="") {
+			return "root_gov_entity/gsettings";
+		}
+		
 		
 		if( newpassword!=null ) {		// validate and set new password
-			if( encrypt.encryptPassword(oldpassword)!="" && encrypt.encryptPassword(oldpassword).equals(gov.getPassword())) {
+			if( oldpassword!="") {
+				if(encrypt.encryptPassword(oldpassword).equals(gov.getPassword())) {
 				if(encrypt.encryptPassword(newpassword)!="") {
 					gov.setPassword(encrypt.encryptPassword(newpassword));
 				}
@@ -177,6 +182,13 @@ public class RootUserController {
 				response.sendRedirect("/rootgov/" + id+"/gsettings");
 				return "root_gov_entity/gsettings";
 			}
+			}
+			if(oldpassword=="" && newpassword!="") {
+				request.getSession().setAttribute("msg1", "Enter Old Password");
+				response.sendRedirect("/rootgov/" + id+"/gsettings");
+				return "root_gov_entity/gsettings";
+			}
+
 		
 		gov_service.Update(gov);
 		request.getSession().setAttribute("msg1", "Updated Successfully");

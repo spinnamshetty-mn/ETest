@@ -72,11 +72,11 @@ String name=(String)request.getAttribute("name");
       <div class="form" style = "position:relative; left:15%;">
       
         <label for="name">Name      </label>
-        <input name="name" align="center" type="text" id="name" required><br>
+        <input name="name" align="center" type="text" id="name" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required><br>
         <br>
         
         <label for="city">City      </label>
-        <input name="city" type="text" id="city" required><br>
+        <input name="city" type="text" id="city" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required><br>
         <br>
         
         <label for="pincode">Pin Code  </label>
@@ -84,7 +84,7 @@ String name=(String)request.getAttribute("name");
         <br>
         
         <label for="state">State     </label>
-        <input name="state" type="text" id="state" required><br>
+        <input name="state" type="text" id="state" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required><br>
         <br>
         
          <label for="mobile">Mobile    </label>

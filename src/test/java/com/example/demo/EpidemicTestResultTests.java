@@ -26,6 +26,7 @@ import com.epidemic.model.TestRequest;
 import com.epidemic.model.TestResult;
 import com.epidemic.repositories.GovernmentRepo;
 import com.epidemic.repositories.LatestResultRepo;
+import com.epidemic.repositories.PatientRepo;
 import com.epidemic.repositories.TestRequestRepo;
 import com.epidemic.repositories.TestResultRepo;
 import com.epidemic.services.GovernmentService;
@@ -55,19 +56,27 @@ class EpidemicTestResultTests {
 	@MockBean
 	private LatestResultRepo latestResultRepo;
 	
+	@MockBean
+	private PatientRepo patientRepo;
+	
 	@Test
 	public void addTest() {
 		Date date1=new Date(12-9-1999);
 		TestResult testResult=new TestResult(11,101,21,"positive",date1,"nagar","telanagan",500001,"corona","pcr");
 		TestRequest tr=new TestRequest(11,21,"corona","pcr");
+		Patient p=new Patient("srija","pinnamshetty","srija@gmail.com","Modeln-123","9090909090","nagar","telangana",500001);
+		
+		//assertEquals(509004,patientService.searchPatient(11));
 		when(testRequestRepo.findById(101)).thenReturn(tr);
+		when(patientRepo.findByEmail("srija@gmail.com")).thenReturn(p);
+		when(patientService.searchPatient(11)).thenReturn(p);
 		when(testResultRepo.findByReportId(101)).thenReturn(testResult);
 		testResultService.add(101, "positive");
 		verify(testRequestRepo,times(1)).delete(tr);
 		verify(testResultRepo,times(1)).findByReportId(101);
 		verify(testResultRepo,times(1)).findByDate(101);
 	}
-
+	
 	@Test
 	public void findAllPatientResultTest() {
 		int pat_id=11;

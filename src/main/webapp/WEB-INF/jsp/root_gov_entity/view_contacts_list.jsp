@@ -53,10 +53,6 @@ else if(!session.getAttribute("username").equals(id1)){
       <tr>
       <td><h1><small> <%= state %>  </small></h1></td>
       <td>
-      <a href="/gov/users/export/pdf">
-          <button value="export"  id="export">Export</button>
-        </a>
-      
       <form action="logout" method="post">
       <button value="logout" id="logout" style="float:right;" >Logout</button>
       </form>
@@ -68,11 +64,17 @@ else if(!session.getAttribute("username").equals(id1)){
     </div>
     
     <div class="ex1">
-    
+    <h4>
+    <a href="/gov/users/export/pdf">
+          <button value="export"  id="export" style="float:right;">Export</button>
+        </a>
+        </h4>
+        <br>
+        <br>
     <table id="find_and_update_request">
     
     	<tr>
-    	<th>Submitted By Patient Id</th>
+    	<th>By Patient</th>
     	<th>Name</th>
     	<th>City</th>
     	<th>Pincode</th>

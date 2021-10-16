@@ -74,7 +74,7 @@ else if(!session.getAttribute("username").equals(id1)){
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-fn">Name/Organisation</label>
-                        <input class="form-control" type="text" id="name" name="name" placeholder=<%= name %> >
+                        <input class="form-control" type="text" id="name" name="name" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder=<%= name %> >
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -92,7 +92,7 @@ else if(!session.getAttribute("username").equals(id1)){
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-pass">Designation</label>
-                        <input class="form-control" type="text" id="type" name="type" value=<%= type %> disabled="">
+                        <input class="form-control" type="text" id="type" name="type" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" value=<%= type %> disabled="">
                     </div>
                 </div>
                  <div class="col-md-6">
@@ -104,13 +104,13 @@ else if(!session.getAttribute("username").equals(id1)){
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-confirm-pass">New Password</label>
-                        <input class="form-control" type="password" id="newpassword" name="newpassword">
+                        <input class="form-control" type="password" id="newpassword" name="newpassword" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="Please include at least 1 uppercase character, 1 lowercase character, and 1 number and one special character">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-pass">Confirm Password</label>
-                        <input class="form-control" type="password" id="confirmpassword" name="confirmpassword">
+                        <input class="form-control" type="password" id="confirmpassword" name="confirmpassword" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="Please include at least 1 uppercase character, 1 lowercase character, and 1 number and one special character">
                     </div>
                 </div>
                

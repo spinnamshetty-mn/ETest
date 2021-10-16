@@ -34,7 +34,7 @@
       <div class="top">
       <table id="head">
       <tr>
-      <td><h1><small>  HELLO   </small>   </h1></td>
+      <td><h1><small>  CENTRAL GOVERNMENT  </small>   </h1></td>
       <td>
       <form action="logout" method="post">
       <button value="logout" id="logout" style="float:right;" >Logout</button></form>

@@ -34,7 +34,7 @@
       <div class="top">
       <table id="head">
       <tr>
-      <td><h1><small>  HELLO   </small>   </h1></td>
+      <td><h1><small>  CENTRAL GOVERNMENT  </small>   </h1></td>
       <td>
       <form action="logout" method="post">
       <button value="logout" id="logout" style="float:right;" >Logout</button></form>
@@ -56,9 +56,9 @@
       	
       	%>
   	<label for="disease">Enter Disease:</label>
-  	<input type="text" id="disease" name="disease" required><br><br>
+  	<input type="text" id="disease" name="disease" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required><br><br>
   	<label for="test">Enter Test:</label>
-  	<input type="text" id="test" name="test" required><br><br>
+  	<input type="text" id="test" name="test" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required><br><br>
   	
   	<input type="submit" value="Submit"></form>
 

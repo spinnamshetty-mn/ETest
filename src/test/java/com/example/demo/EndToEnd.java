@@ -20,10 +20,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.epidemic.EpidemicApplication;
+import com.epidemic.model.Patient;
 import com.epidemic.model.TestRequest;
 import com.epidemic.model.TestResult;
+import com.epidemic.repositories.PatientRepo;
 import com.epidemic.repositories.TestRequestRepo;
 import com.epidemic.repositories.TestResultRepo;
+import com.epidemic.services.PatientService;
 import com.epidemic.services.TestRequestService;
 import com.epidemic.services.TestResultService;
 
@@ -45,12 +48,19 @@ class EndToEnd {
 	@MockBean
 	private TestResultRepo testResultRepo;
 	
+	@MockBean
+	private PatientRepo patientRepo;
+	
 	@Autowired
 	private TestResultService testResultService;
+	
+	@Autowired
+	private PatientService patientService;
 	
 	TestRequest testrequest=new TestRequest(11,21,"corona","pcr");
 	Date date=new Date(12-9-1999);
 	TestResult testResult=new TestResult(11,101,21,"positive",date,"nagar","telanagan",500001,"corona","pcr");
+	Patient p=new Patient("srija","pinnamshetty","srija@gmail.com","Modeln-123","9090909090","nagar","telangana",500001);
 	int pat_id=11;
 	
 	
@@ -61,6 +71,7 @@ class EndToEnd {
 		verify(testRequestRepo,times(1)).save(testrequest);
 		
 		when(testRequestRepo.findById(101)).thenReturn(testrequest);
+		when(patientRepo.findById(11)).thenReturn(p);
 		when(testResultRepo.findByReportId(101)).thenReturn(testResult);
 		testResultService.add(101, "positive");
 		verify(testRequestRepo,times(1)).delete(testrequest);

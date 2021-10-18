@@ -1,7 +1,6 @@
 package com.epidemic.controller;
 
 import java.io.IOException;
-import java.net.http.HttpResponse;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;

@@ -25,9 +25,8 @@ pipeline{
     }
       post {
         always {
-        mail to: 'pkushwaha@modeln.com,sgunturu@modeln.com,spinnamshetty@modeln.com',
-             subject: " Pipeline: ${currentBuild.fullDisplayName}",
-             body: "Build was done for ${env.BUILD_URL}"
+            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+        }
     }
 }
     

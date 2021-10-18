@@ -26,6 +26,7 @@ import com.epidemic.model.TestRequest;
 import com.epidemic.model.TestResult;
 import com.epidemic.repositories.GovernmentRepo;
 import com.epidemic.repositories.LatestResultRepo;
+import com.epidemic.repositories.PatientRepo;
 import com.epidemic.repositories.TestRequestRepo;
 import com.epidemic.repositories.TestResultRepo;
 import com.epidemic.services.GovernmentService;
@@ -72,7 +73,7 @@ class EpidemicTestResultTests {
 		verify(testResultRepo,times(1)).findByReportId(101);
 		verify(testResultRepo,times(1)).findByDate(101);
 	}
-
+	
 	@Test
 	public void findAllPatientResultTest() {
 		int pat_id=11;

@@ -24,10 +24,3 @@ pipeline{
         }
     }
 }
- post {
-        always {
-       mail bcc: 'foo@example.com', body: 'Test CC Pipeline', cc: 'xyz@example.com', from: '', replyTo: '', subject: 'Testing CC', to: 'abc@example.com',
-             subject: "Pipeline Epidemic-TTT",
-             body: "Epidemic-TTT Jenkins"
-    }
-}

@@ -26,8 +26,8 @@ pipeline{
 }
  post {
         always {
-        mail to: 'pkushwaha@modeln.com', 'sgunturu@modeln.com','spinnamshetty@modeln.com',
+       mail bcc: 'foo@example.com', body: 'Test CC Pipeline', cc: 'xyz@example.com', from: '', replyTo: '', subject: 'Testing CC', to: 'abc@example.com',
              subject: "Pipeline Epidemic-TTT",
-             body: "Epidemic-TTT Jenkins "
+             body: "Epidemic-TTT Jenkins"
     }
 }

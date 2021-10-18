@@ -54,7 +54,7 @@ public interface LatestResultRepo extends CrudRepository<LatestResult,Integer>{
 	@Query(value="select * from latestresult lr where lr.patient_id= :id",nativeQuery=true)
 	LatestResult findLatestResultPatient(@Param("id") int id);
 	
-	@Query(value="select * from latestresult lr where lr.status='positive' and lr.state=:state ",nativeQuery=true)
+	@Query(value="select * from latestresult lr where lr.status='positive' and lr.state=:state order by lr.result_date desc",nativeQuery=true)
 	List<LatestResult> findAllActiveCases(@Param("state") String state);
 
 	@Query(value="select * from latestresult lr where lr.patient_id= :patientId and lr.disease_type=:diseaseType",nativeQuery=true)
@@ -63,7 +63,7 @@ public interface LatestResultRepo extends CrudRepository<LatestResult,Integer>{
 	@Query(value="select * from latestresult lr where lr.patient_id= :patientId",nativeQuery=true)
 	List<LatestResult> getLatestResultList(@Param("patientId")int patientId);
 
-	@Query(value="select * from latestresult lr where lr.status='positive'",nativeQuery=true)
+	@Query(value="select * from latestresult lr where lr.status='positive' order by lr.result_date desc",nativeQuery=true)
 	List<LatestResult> findAllActiveCases();
 
 	

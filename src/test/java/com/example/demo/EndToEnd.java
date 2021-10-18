@@ -57,15 +57,17 @@ class EndToEnd {
 	@Autowired
 	private PatientService patientService;
 	
-	TestRequest testrequest=new TestRequest(11,21,"corona","pcr");
-	Date date=new Date(12-9-1999);
-	TestResult testResult=new TestResult(11,101,21,"positive",date,"nagar","telanagan",500001,"corona","pcr");
-	Patient p=new Patient("srija","pinnamshetty","srija@gmail.com","Modeln-123","9090909090","nagar","telangana",500001);
-	int pat_id=11;
+	
 	
 	
 	@RepeatedTest(10)
 	void endToEndTesting() {
+		
+		TestRequest testrequest=new TestRequest(11,21,"corona","pcr");
+		Date date=new Date(12-9-1999);
+		TestResult testResult=new TestResult(11,101,21,"positive",date,"nagar","telangana",500001,"corona","pcr");
+		Patient p=new Patient("srija","pinnamshetty","srija@gmail.com","Modeln-123","9090909090","nagar","telangana",500001);
+		int pat_id=11;
 		
 		testRequestService.add(testrequest);
 		verify(testRequestRepo,times(1)).save(testrequest);

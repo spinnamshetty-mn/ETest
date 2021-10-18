@@ -24,7 +24,7 @@ public interface TestRequestRepo extends CrudRepository<TestRequest,Long> {
 	//@Query(" select new com.epidemic.joinclass(t.patient_id, t.report_id, p.name) from testrequest t join t.Patient p ")
 	List<TestRequest> findByHwId(int hwId); 
 	
-	@Query(" SELECT new com.epidemic.joinclass(t.patientId, t.id, p.firstName ,p.lastName , t.hwId,t.diseaseType, t.testType) FROM TestRequest t JOIN t.patient p WHERE t.hwId= :id  ")
+	@Query(" SELECT new com.epidemic.joinclass(t.patientId, t.id, p.firstName ,p.lastName , t.hwId,t.diseaseType, t.testType) FROM TestRequest t JOIN t.patient p WHERE t.hwId= :id ")
 	public List<joinclass> getInfo(@Param("id") int id);
 	
 	@Query(" SELECT new com.epidemic.joinclass(t.patientId, t.id, p.firstName ,p.lastName ,t.hwId,t.diseaseType, t.testType) FROM TestRequest t JOIN t.patient p")
@@ -37,7 +37,7 @@ public interface TestRequestRepo extends CrudRepository<TestRequest,Long> {
 	@Query(value="select count(*) from testrequest tq where tq.hw_id= :hwid",nativeQuery=true)
 	int pendingByHw(@Param("hwid") int hwid);
 
-	@Query(value="select * from testrequest tq ",nativeQuery=true)
+	@Query(value="select * from testrequest tq order by tq.report_id desc",nativeQuery=true)
 	List<TestRequest> displayAllRequest();
 
 	@Query(" SELECT new com.epidemic.joinclass(t.patientId, t.id,t.hwId,t.diseaseType, t.testType) FROM TestRequest t JOIN t.patient p where p.state=:state ")

@@ -14,13 +14,13 @@ import com.epidemic.model.TestResult;
 public interface TestResultRepo extends CrudRepository<TestResult,Integer> {
 	
 	//--------------------------------------find result by some condition--------------------------------
-	@Query(value="select * from testresult tr where tr.patient_id= :patientId order by tr.report_id desc",nativeQuery=true)
+	@Query(value="select * from testresult tr where tr.patient_id= :patientId order by tr.result_date desc",nativeQuery=true)
 	List<TestResult> findAllByPatient(@Param("patientId") int patientId);
 	
-	@Query(value="select * from (select * from testresult tr where tr.patient_id= :patientId order by tr.report_id desc) where rownum=1",nativeQuery=true)
+	@Query(value="select * from (select * from testresult tr where tr.patient_id= :patientId order by tr.result_date desc) where rownum=1",nativeQuery=true)
 	TestResult findByPatient(@Param("patientId") int patientId);
 	
-	@Query(" SELECT new com.epidemic.UpdatedResult(tr.patientId,tr.reportId,p.firstName,p.lastName,tr.status,tr.date,tr.state,tr.city,tr.pincode,tr.diseaseType,tr.testType) FROM TestResult tr JOIN tr.patient p WHERE tr.hwId= :hwId  ")
+	@Query(" SELECT new com.epidemic.UpdatedResult(tr.patientId,tr.reportId,p.firstName,p.lastName,tr.status,tr.date,tr.state,tr.city,tr.pincode,tr.diseaseType,tr.testType) FROM TestResult tr JOIN tr.patient p WHERE tr.hwId= :hwId order by tr.date desc ")
 	List<UpdatedResult> findByOrderByHwIdDesc(@Param("hwId") int hwId);
 	
 	@Query(value="select distinct(tr.state) from testresult tr",nativeQuery=true)
@@ -38,10 +38,10 @@ public interface TestResultRepo extends CrudRepository<TestResult,Integer> {
 	@Query(value="select tr.result_date from testresult tr where tr.report_id= :report_id",nativeQuery=true)
 	Date findByDate(@Param("report_id") long report_id);
 	
-	@Query(value="select * from testresult tr order by tr.report_id desc",nativeQuery=true)
+	@Query(value="select * from testresult tr order by tr.result_date desc",nativeQuery=true)
 	List<TestResult> displayAll();
 	
-	@Query(value="select * from testresult tr where tr.state=:state order by tr.report_id desc",nativeQuery=true)
+	@Query(value="select * from testresult tr where tr.state=:state order by tr.result_date desc",nativeQuery=true)
 	List<TestResult> displayAll(@Param("state") String state);
 
 	//----------------------------------------------count results by some condition------------------------

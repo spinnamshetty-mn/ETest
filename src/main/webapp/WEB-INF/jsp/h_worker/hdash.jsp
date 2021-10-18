@@ -70,17 +70,13 @@
     </tr>
      <tr class ="blank_row"></tr>
     <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
     <tr>
     	 <td><b>Type :</b> <%= type %></td>  
     </tr>
     <tr class ="blank_row"></tr>
     <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
-    <tr class ="blank_row"></tr>
     <tr>
-    	 <td><b>Location :</b> <%= city %>,<%= state %><%= pincode %>,</td>   
+    	 <td><b>Location :</b> <%= city %>,<%= state %>,<%= pincode %></td>   
     </tr>
 </table>
       </div>

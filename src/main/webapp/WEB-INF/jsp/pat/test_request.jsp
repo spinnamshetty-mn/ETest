@@ -57,15 +57,11 @@ String name=(String)request.getAttribute("name");
 		String msg=(String)request.getAttribute("msg1");
 		if(msg==null){
 			msg="";
-		
 		}
 		%>
       </td>
       </tr>
       <tr><td><h1><%= msg %></h1></td></tr>
-      <% 
-      if(msg.length()!=0){
-      response.setHeader("Refresh", "2;url=test_request");} %>
       </table>
      </div>
       <hr>
@@ -80,8 +76,6 @@ String name=(String)request.getAttribute("name");
         <option value="${hw.id}">HW name: ${hw.name} and HW id : ${hw.id}</option>
     </c:forEach>
       </select>	
-	
-      
       </h4>
       </div>
       <br>

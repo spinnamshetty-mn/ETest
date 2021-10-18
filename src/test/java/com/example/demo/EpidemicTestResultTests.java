@@ -55,6 +55,9 @@ class EpidemicTestResultTests {
 	@MockBean
 	private LatestResultRepo latestResultRepo;
 	
+	@MockBean
+	private PatientRepo patientRepo;
+	
 	@Test
 	public void addTest() {
 		Date date1=new Date(12-9-1999);

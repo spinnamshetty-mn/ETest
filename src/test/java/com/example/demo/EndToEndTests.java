@@ -32,7 +32,7 @@ import com.epidemic.services.TestResultService;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes= {EpidemicApplication.class})
-class EndToEnd {
+class EndToEndTests {
 
 	
 	//test request

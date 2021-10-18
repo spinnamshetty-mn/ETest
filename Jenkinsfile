@@ -18,9 +18,19 @@ pipeline{
         stage("Deploying"){
             steps{
                 
-                    echo "diploying to server"
+                    echo "deploying to server"
                 
             }
         }
     }
+      post {
+        always {
+        mail to: 'pkushwaha@modeln.com,sgunturu@modeln.com,spinnamshetty@modeln.com',
+             subject: " Pipeline: ${currentBuild.fullDisplayName}",
+             body: "Build was done for ${env.BUILD_URL}"
+    }
 }
+    
+}
+
+
